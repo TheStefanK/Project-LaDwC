@@ -14,15 +14,17 @@
                 </div>
 
                 <div class="responseOne">
-                    <button class="responseBtn" @click="nextProgress(storyLine[ProgressStatus].firstOption.next)">
+                    <button v-if="this.storyLine[this.ProgressStatus].question !== undefined" class="responseBtn" @click="nextProgress(storyLine[ProgressStatus].firstOption.next)">
                         {{storyLine[this.ProgressStatus].firstOption.response}}
                     </button>
-
                 </div>
-                <div class="responseTwo">
+
+                <div v-if="this.storyLine[this.ProgressStatus].question !== undefined">
                     <button class="responseBtn" @click="nextProgress(storyLine[ProgressStatus].firstOption.next)">
                         {{storyLine[this.ProgressStatus].SecandOption.response}}
                     </button>
+
+
 
                 </div>
                 <div class="score">
@@ -30,9 +32,6 @@
                 </div>
             </div>
 
-            <div v-if="this.storyLine[this.ProgressStatus].question === undefined">
-                <p>Storlyine Question is Undefind</p>
-            </div>
 
 
         </div>

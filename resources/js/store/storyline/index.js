@@ -20,7 +20,15 @@ const state = {
   },
   '1.1': {
     video: VideoPath + '1.1' + VideoType,
-    question: undefined,
+    question: '..',
+    firstOption: {
+      next: '2',
+      response: 'Weiter'
+    },
+    SecandOption: {
+      next: '2',
+      response: 'Weiter'
+    },
     ContinueStory: {
       next: '2',
       response: 'Weiter'
@@ -29,7 +37,7 @@ const state = {
   '1.2': {
     video: VideoPath + '1.2' + VideoType,
     question: undefined,
-    ContinueStory: {
+    continueStory: {
       next: '2',
       response: 'Weiter'
     }

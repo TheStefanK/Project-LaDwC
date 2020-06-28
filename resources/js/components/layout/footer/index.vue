@@ -23,17 +23,5 @@
 </script>
 
 <style scoped>
-    .site-footer {
-        background-color: pink;
-        padding: 20px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
-    .info-box{
-        text-align: right;
-    }
-    ul{
-        list-style: none;
-    }
 
 </style>

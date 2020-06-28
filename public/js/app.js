@@ -17066,23 +17066,23 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 __webpack_require__.r(__webpack_exports__);
 //Layout Import
 var header = function header() {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ../../components/layout/header/index */ "./resources/js/components/layout/header/index.vue"));
+  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../../components/layout/header/index */ "./resources/js/components/layout/header/index.vue"));
 };
 
 var footer = function footer() {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ../../components/layout/footer/index */ "./resources/js/components/layout/footer/index.vue"));
+  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../../components/layout/footer/index */ "./resources/js/components/layout/footer/index.vue"));
 };
 
 var start = function start() {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! ../../components/start/index */ "./resources/js/components/start/index.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(5), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ../../components/start/index */ "./resources/js/components/start/index.vue"));
 };
 
 var score = function score() {
-  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../../components/game/score */ "./resources/js/components/game/score.vue"));
+  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../../components/game/score */ "./resources/js/components/game/score.vue"));
 };
 
 var story_01 = function story_01() {
-  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../../components/game/index */ "./resources/js/components/game/index.vue"));
+  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../../components/game/index */ "./resources/js/components/game/index.vue"));
 }; // import start from '../../components/start/index'
 
 
@@ -17165,7 +17165,15 @@ var state = {
   },
   '1.1': {
     video: VideoPath + '1.1' + VideoType,
-    question: undefined,
+    question: '..',
+    firstOption: {
+      next: '2',
+      response: 'Weiter'
+    },
+    SecandOption: {
+      next: '2',
+      response: 'Weiter'
+    },
     ContinueStory: {
       next: '2',
       response: 'Weiter'
@@ -17174,7 +17182,7 @@ var state = {
   '1.2': {
     video: VideoPath + '1.2' + VideoType,
     question: undefined,
-    ContinueStory: {
+    continueStory: {
       next: '2',
       response: 'Weiter'
     }
@@ -17438,8 +17446,8 @@ var actions = {};
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\100_Development\MiniGame\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\100_Development\MiniGame\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\100_Development\Project-LaDwC\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\100_Development\Project-LaDwC\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
