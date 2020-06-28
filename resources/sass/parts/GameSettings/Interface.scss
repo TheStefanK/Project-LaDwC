@@ -1,0 +1,39 @@
+img {
+  display: block;
+}
+// Scoreboard
+.score-board {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "infected statistics dead";
+  color: white;
+  font-size: 40px;
+
+  .infected {
+    grid-area: infected;
+    justify-self: start;
+    margin-left: 20px;
+  }
+
+  .statistics {
+    align-self: end;
+    grid-area: statistics;
+    justify-self: center;
+  }
+
+  .dead {
+    grid-area: dead;
+    justify-self: right;
+    margin-right: 20px;
+  }
+
+  span {
+    display: block;
+    background-color: #222;
+    padding: 5px 10px;
+  }
+
+
+}
+

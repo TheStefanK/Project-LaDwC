@@ -1,0 +1,12 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+
+// Variables
+@import 'variables';
+
+// Parts
+@import "parts/settings";
+@import "parts/start";
+
+@import "parts/GameSettings/collection"; // Game Settings Collection [All Game Styles]
