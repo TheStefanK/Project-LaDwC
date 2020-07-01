@@ -23,8 +23,5 @@
 </script>
 
 <style scoped>
-.wrapper-start{
-    width: 100vw;
-    overflow: hidden;
-}
+
 </style>

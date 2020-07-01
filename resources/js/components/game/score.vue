@@ -21,7 +21,7 @@
     data() {
       return {
         Infizierte: 1,
-        Tote: null,
+        Tote: 0,
         elapsedTime: 0,
         timer: undefined
 
@@ -46,13 +46,13 @@
         this.Infizierte = setInterval(() => {
           let x = Math.round(Math.random() * 10);
           console.log(x);
-          this.Infizierte += x;
-        }, 5000);
+          this.Infizierte += 1;
+        }, 100);
       },
       startDeath() {
         this.Tote = setInterval(() => {
           this.Tote += 1;
-        }, 10000);
+        }, 3000);
       },
       startTimer() {
         this.timer = setInterval(() => {

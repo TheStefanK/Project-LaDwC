@@ -220,7 +220,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
   computed: {
@@ -721,15 +720,7 @@ var render = function() {
     [
       _c("router-view", { attrs: { name: "header" } }),
       _vm._v(" "),
-      _c(
-        "div",
-        [
-          _c("router-view", { attrs: { name: "score" } }),
-          _vm._v(" "),
-          _c("router-view", { attrs: { name: "story" } })
-        ],
-        1
-      ),
+      _c("div", [_c("router-view", { attrs: { name: "story" } })], 1),
       _vm._v(" "),
       _c("router-view", { attrs: { name: "footer" } })
     ],
@@ -17066,7 +17057,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 __webpack_require__.r(__webpack_exports__);
 //Layout Import
 var header = function header() {
-  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../../components/layout/header/index */ "./resources/js/components/layout/header/index.vue"));
+  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../../components/layout/header/index */ "./resources/js/components/layout/header/index.vue"));
 };
 
 var footer = function footer() {
@@ -17074,15 +17065,11 @@ var footer = function footer() {
 };
 
 var start = function start() {
-  return Promise.all(/*! import() */[__webpack_require__.e(5), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ../../components/start/index */ "./resources/js/components/start/index.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(4), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ../../components/start/index */ "./resources/js/components/start/index.vue"));
 };
 
-var score = function score() {
-  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../../components/game/score */ "./resources/js/components/game/score.vue"));
-};
-
-var story_01 = function story_01() {
-  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../../components/game/index */ "./resources/js/components/game/index.vue"));
+var game = function game() {
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ../../components/game/index */ "./resources/js/components/game/index.vue"));
 }; // import start from '../../components/start/index'
 
 
@@ -17101,7 +17088,7 @@ var story_01 = function story_01() {
   name: 'game',
   path: '/game',
   components: {
-    story: story_01
+    story: game
   }
 }]);
 
@@ -17158,23 +17145,14 @@ var state = {
       next: 1.1,
       response: 'Handeln'
     },
-    SecandOption: {
+    secondOption: {
       next: 1.2,
       response: 'Abwarten'
     }
   },
   '1.1': {
     video: VideoPath + '1.1' + VideoType,
-    question: '..',
-    firstOption: {
-      next: '2',
-      response: 'Weiter'
-    },
-    SecandOption: {
-      next: '2',
-      response: 'Weiter'
-    },
-    ContinueStory: {
+    continueStory: {
       next: '2',
       response: 'Weiter'
     }
@@ -17195,7 +17173,7 @@ var state = {
       next: '2.1',
       response: 'Ja'
     },
-    SecandOption: {
+    secondOption: {
       next: '2.2',
       response: 'Nein'
     }
@@ -17203,7 +17181,7 @@ var state = {
   '2.1': {
     video: VideoPath + 2.1 + VideoType,
     question: undefined,
-    ContinueStory: {
+    continueStory: {
       next: 3,
       response: 'Weiter'
     }
@@ -17211,7 +17189,7 @@ var state = {
   '2.2': {
     video: VideoPath + 2.2 + VideoType,
     question: undefined,
-    ContinueStory: {
+    continueStory: {
       next: 4,
       response: 'Weiter'
     }
@@ -17224,7 +17202,7 @@ var state = {
       next: 3.1,
       response: 'Bis Ostern (ca. 2 Wochen)'
     },
-    SecandOption: {
+    secondOption: {
       next: 4,
       response: 'Solange bis ein Impfmittel erhältlich ist'
     }
@@ -17233,24 +17211,19 @@ var state = {
     video: VideoPath + 3.1 + VideoType,
     question: 'Hilfpaket für Unternehmmerinnen und Unternehmer',
     firstOption: {
-      next: 5,
+      next: '3.1.1',
       response: 'Ja'
     },
-    SecandOption: {
-      next: 5,
+    secondOption: {
+      next: '3.1.1',
       response: 'Nein'
     }
   },
   '3.1.1': {
     video: VideoPath + 3.1 + VideoType,
-    question: 'Hilfpaket für Unternehmmerinnen und Unternehmer',
-    firstOption: {
-      next: 5,
-      response: 'Ja'
-    },
-    SecandOption: {
-      next: 5,
-      response: 'Nein'
+    continueStory: {
+      next: '1',
+      response: 'Ende'
     }
   },
   '3.1.2': {
@@ -17260,7 +17233,7 @@ var state = {
       next: 5,
       response: 'Ja'
     },
-    SecandOption: {
+    secondOption: {
       next: 5,
       response: 'Nein'
     }
@@ -17273,7 +17246,7 @@ var state = {
       next: '3.2.1',
       response: 'Abwarten und Deeskalieren'
     },
-    SecandOption: {
+    secondOption: {
       next: '3.2.2',
       response: 'Polizeieinsatz'
     }
@@ -17285,7 +17258,7 @@ var state = {
       next: 5,
       response: 'Ja'
     },
-    SecandOption: {
+    secondOption: {
       next: 5,
       response: 'Nein'
     }
@@ -17297,7 +17270,7 @@ var state = {
       next: 5,
       response: 'Ja'
     },
-    SecandOption: {
+    secondOption: {
       next: 5,
       response: 'Nein'
     }
@@ -17310,7 +17283,7 @@ var state = {
       next: '4.1',
       response: 'Ja'
     },
-    SecandOption: {
+    secondOption: {
       next: '4.2',
       response: 'Nein'
     }
@@ -17322,7 +17295,7 @@ var state = {
       next: '4.1.1',
       response: 'Ja'
     },
-    SecandOption: {
+    secondOption: {
       next: '4.1.2',
       response: 'Nein'
     }
@@ -17334,7 +17307,7 @@ var state = {
       next: 3.1,
       response: 'Bis Ostern (ca. 2 Wochen)'
     },
-    SecandOption: {
+    secondOption: {
       next: 4,
       response: 'Solange bis ein Impfmittel erhältlich ist'
     }
@@ -17346,7 +17319,7 @@ var state = {
       next: 3.1,
       response: 'Bis Ostern (ca. 2 Wochen)'
     },
-    SecandOption: {
+    secondOption: {
       next: 4,
       response: 'Solange bis ein Impfmittel erhältlich ist'
     }
@@ -17358,7 +17331,7 @@ var state = {
       next: '4.2.1',
       response: 'Ja'
     },
-    SecandOption: {
+    secondOption: {
       next: '4.2.2',
       response: 'Nein'
     }
@@ -17370,7 +17343,7 @@ var state = {
       next: '4.2.1.1',
       response: 'Ja'
     },
-    SecandOption: {
+    secondOption: {
       next: '4.2.1.2',
       response: 'Nein'
     }
@@ -17382,7 +17355,7 @@ var state = {
       next: 3.1,
       response: 'Bis Ostern (ca. 2 Wochen)'
     },
-    SecandOption: {
+    secondOption: {
       next: 4,
       response: 'Solange bis ein Impfmittel erhältlich ist'
     }
@@ -17394,7 +17367,7 @@ var state = {
       next: 3.1,
       response: 'Bis Ostern (ca. 2 Wochen)'
     },
-    SecandOption: {
+    secondOption: {
       next: 4,
       response: 'Solange bis ein Impfmittel erhältlich ist'
     }
@@ -17406,7 +17379,7 @@ var state = {
       next: 3.1,
       response: 'Bis Ostern (ca. 2 Wochen)'
     },
-    SecandOption: {
+    secondOption: {
       next: 4,
       response: 'Solange bis ein Impfmittel erhältlich ist'
     }

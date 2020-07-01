@@ -13,23 +13,14 @@ const state = {
       next: 1.1,
       response: 'Handeln'
     },
-    SecandOption: {
+    secondOption: {
       next: 1.2,
       response: 'Abwarten'
     },
   },
   '1.1': {
     video: VideoPath + '1.1' + VideoType,
-    question: '..',
-    firstOption: {
-      next: '2',
-      response: 'Weiter'
-    },
-    SecandOption: {
-      next: '2',
-      response: 'Weiter'
-    },
-    ContinueStory: {
+    continueStory: {
       next: '2',
       response: 'Weiter'
     }
@@ -50,7 +41,7 @@ const state = {
       next: '2.1',
       response: 'Ja'
     },
-    SecandOption: {
+    secondOption: {
       next: '2.2',
       response: 'Nein'
     },
@@ -58,7 +49,7 @@ const state = {
   '2.1': {
     video: VideoPath + 2.1 + VideoType,
     question: undefined,
-    ContinueStory: {
+    continueStory: {
       next: 3,
       response: 'Weiter'
     }
@@ -66,7 +57,7 @@ const state = {
   '2.2': {
     video: VideoPath + 2.2 + VideoType,
     question: undefined,
-    ContinueStory: {
+    continueStory: {
       next: 4,
       response: 'Weiter'
     }
@@ -79,7 +70,7 @@ const state = {
       next: 3.1,
       response: 'Bis Ostern (ca. 2 Wochen)'
     },
-    SecandOption: {
+    secondOption: {
       next: 4,
       response: 'Solange bis ein Impfmittel erhältlich ist'
     }
@@ -88,24 +79,19 @@ const state = {
     video: VideoPath + 3.1 + VideoType,
     question: 'Hilfpaket für Unternehmmerinnen und Unternehmer',
     firstOption: {
-      next: 5,
+      next: '3.1.1',
       response: 'Ja'
     },
-    SecandOption: {
-      next: 5,
+    secondOption: {
+      next: '3.1.1',
       response: 'Nein'
     }
   },
   '3.1.1': {
     video: VideoPath + 3.1 + VideoType,
-    question: 'Hilfpaket für Unternehmmerinnen und Unternehmer',
-    firstOption: {
-      next: 5,
-      response: 'Ja'
-    },
-    SecandOption: {
-      next: 5,
-      response: 'Nein'
+    continueStory: {
+      next: '1',
+      response: 'Ende'
     }
   },
   '3.1.2': {
@@ -115,7 +101,7 @@ const state = {
       next: 5,
       response: 'Ja'
     },
-    SecandOption: {
+    secondOption: {
       next: 5,
       response: 'Nein'
     }
@@ -128,7 +114,7 @@ const state = {
       next: '3.2.1',
       response: 'Abwarten und Deeskalieren'
     },
-    SecandOption: {
+    secondOption: {
       next: '3.2.2',
       response: 'Polizeieinsatz'
     }
@@ -140,7 +126,7 @@ const state = {
       next: 5,
       response: 'Ja'
     },
-    SecandOption: {
+    secondOption: {
       next: 5,
       response: 'Nein'
     }
@@ -152,7 +138,7 @@ const state = {
       next: 5,
       response: 'Ja'
     },
-    SecandOption: {
+    secondOption: {
       next: 5,
       response: 'Nein'
     }
@@ -165,7 +151,7 @@ const state = {
       next: '4.1',
       response: 'Ja'
     },
-    SecandOption: {
+    secondOption: {
       next: '4.2',
       response: 'Nein'
     }
@@ -177,7 +163,7 @@ const state = {
       next: '4.1.1',
       response: 'Ja'
     },
-    SecandOption: {
+    secondOption: {
       next: '4.1.2',
       response: 'Nein'
     }
@@ -189,7 +175,7 @@ const state = {
       next: 3.1,
       response: 'Bis Ostern (ca. 2 Wochen)'
     },
-    SecandOption: {
+    secondOption: {
       next: 4,
       response: 'Solange bis ein Impfmittel erhältlich ist'
     }
@@ -201,7 +187,7 @@ const state = {
       next: 3.1,
       response: 'Bis Ostern (ca. 2 Wochen)'
     },
-    SecandOption: {
+    secondOption: {
       next: 4,
       response: 'Solange bis ein Impfmittel erhältlich ist'
     }
@@ -213,7 +199,7 @@ const state = {
       next: '4.2.1',
       response: 'Ja'
     },
-    SecandOption: {
+    secondOption: {
       next: '4.2.2',
       response: 'Nein'
     }
@@ -225,7 +211,7 @@ const state = {
       next: '4.2.1.1',
       response: 'Ja'
     },
-    SecandOption: {
+    secondOption: {
       next: '4.2.1.2',
       response: 'Nein'
     }
@@ -237,7 +223,7 @@ const state = {
       next: 3.1,
       response: 'Bis Ostern (ca. 2 Wochen)'
     },
-    SecandOption: {
+    secondOption: {
       next: 4,
       response: 'Solange bis ein Impfmittel erhältlich ist'
     }
@@ -249,7 +235,7 @@ const state = {
       next: 3.1,
       response: 'Bis Ostern (ca. 2 Wochen)'
     },
-    SecandOption: {
+    secondOption: {
       next: 4,
       response: 'Solange bis ein Impfmittel erhältlich ist'
     }
@@ -261,7 +247,7 @@ const state = {
       next: 3.1,
       response: 'Bis Ostern (ca. 2 Wochen)'
     },
-    SecandOption: {
+    secondOption: {
       next: 4,
       response: 'Solange bis ein Impfmittel erhältlich ist'
     }

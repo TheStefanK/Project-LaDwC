@@ -5,8 +5,7 @@ const footer = () => import('../../components/layout/footer/index');
 
 
 const start = () => import('../../components/start/index');
-const score = () => import('../../components/game/score');
-const story_01 = () => import('../../components/game/index');
+const game = () => import('../../components/game/index');
 
 // import start from '../../components/start/index'
 export default [
@@ -24,7 +23,7 @@ export default [
     name: 'game',
     path: '/game',
     components: {
-      story: story_01,
+      story: game,
     },
   }
 ]

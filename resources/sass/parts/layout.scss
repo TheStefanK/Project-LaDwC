@@ -5,8 +5,8 @@
   gap: 20px;
   padding: 0 20px;
   height: 70px;
-  background-color: pink;
-  border-bottom: 2px solid #222;
+  background-color: #000000;
+  //border-bottom: 1px solid #f2f2ff;
   /*Logo*/
   .site-logo{
     display: block;
@@ -27,7 +27,7 @@
     margin: 0;
     padding: 0;
     align-self: center;
-    color: #000000;
+    color: $white;
   }
   .site-logo-img{
     width: 50px;
@@ -37,6 +37,11 @@
   /*Navigation*/
   .site-navigation {
     text-align: right;
+    align-self: center;
+  }
+  a{
+    color: $white;
+    text-decoration: none;
   }
   .navigation-list{
     list-style: none;
@@ -45,14 +50,15 @@
   }
   .navigation-list-item{
     display: block;
-    padding: 0 5px;
+    padding: 0 12px;
   }
 }
 
 
 //Footer
 .site-footer {
-  background-color: pink;
+  background-color: #000000;
+  color: white;
   padding: 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -61,6 +67,9 @@
   }
   ul{
     list-style: none;
+  }
+  a{
+    color: white;
   }
 }
 

@@ -2,7 +2,6 @@
 <div id="app">
     <router-view name="header"></router-view>
     <div>
-        <router-view name="score"></router-view>
         <router-view name="story"></router-view>
     </div>
     <router-view name="footer"></router-view>

@@ -89,173 +89,173 @@ body {
 
 @-webkit-keyframes glitch-effect {
   0% {
-    clip: rect(80px, 9999px, 22px, 0);
+    clip: rect(85px, 9999px, 48px, 0);
   }
 
   5% {
-    clip: rect(34px, 9999px, 64px, 0);
+    clip: rect(51px, 9999px, 58px, 0);
   }
 
   10% {
-    clip: rect(54px, 9999px, 84px, 0);
+    clip: rect(26px, 9999px, 76px, 0);
   }
 
   15% {
-    clip: rect(31px, 9999px, 10px, 0);
+    clip: rect(77px, 9999px, 72px, 0);
   }
 
   20% {
-    clip: rect(57px, 9999px, 9px, 0);
+    clip: rect(81px, 9999px, 51px, 0);
   }
 
   25% {
-    clip: rect(92px, 9999px, 91px, 0);
+    clip: rect(30px, 9999px, 89px, 0);
   }
 
   30% {
-    clip: rect(96px, 9999px, 18px, 0);
+    clip: rect(69px, 9999px, 52px, 0);
   }
 
   35% {
-    clip: rect(2px, 9999px, 12px, 0);
+    clip: rect(5px, 9999px, 28px, 0);
   }
 
   40% {
-    clip: rect(28px, 9999px, 100px, 0);
+    clip: rect(25px, 9999px, 63px, 0);
   }
 
   45% {
-    clip: rect(53px, 9999px, 97px, 0);
+    clip: rect(29px, 9999px, 36px, 0);
   }
 
   50% {
-    clip: rect(9px, 9999px, 34px, 0);
+    clip: rect(90px, 9999px, 21px, 0);
   }
 
   55% {
-    clip: rect(79px, 9999px, 42px, 0);
+    clip: rect(96px, 9999px, 93px, 0);
   }
 
   60% {
-    clip: rect(7px, 9999px, 15px, 0);
+    clip: rect(86px, 9999px, 44px, 0);
   }
 
   65% {
-    clip: rect(92px, 9999px, 87px, 0);
+    clip: rect(47px, 9999px, 4px, 0);
   }
 
   70% {
-    clip: rect(27px, 9999px, 18px, 0);
+    clip: rect(66px, 9999px, 93px, 0);
   }
 
   75% {
-    clip: rect(38px, 9999px, 45px, 0);
+    clip: rect(81px, 9999px, 77px, 0);
   }
 
   80% {
-    clip: rect(14px, 9999px, 81px, 0);
+    clip: rect(74px, 9999px, 9px, 0);
   }
 
   85% {
-    clip: rect(40px, 9999px, 77px, 0);
+    clip: rect(75px, 9999px, 62px, 0);
   }
 
   90% {
-    clip: rect(79px, 9999px, 4px, 0);
+    clip: rect(79px, 9999px, 9px, 0);
   }
 
   95% {
-    clip: rect(90px, 9999px, 64px, 0);
+    clip: rect(40px, 9999px, 12px, 0);
   }
 
   100% {
-    clip: rect(1px, 9999px, 60px, 0);
+    clip: rect(59px, 9999px, 20px, 0);
   }
 }
 
 @keyframes glitch-effect {
   0% {
-    clip: rect(80px, 9999px, 22px, 0);
+    clip: rect(85px, 9999px, 48px, 0);
   }
 
   5% {
-    clip: rect(34px, 9999px, 64px, 0);
+    clip: rect(51px, 9999px, 58px, 0);
   }
 
   10% {
-    clip: rect(54px, 9999px, 84px, 0);
+    clip: rect(26px, 9999px, 76px, 0);
   }
 
   15% {
-    clip: rect(31px, 9999px, 10px, 0);
+    clip: rect(77px, 9999px, 72px, 0);
   }
 
   20% {
-    clip: rect(57px, 9999px, 9px, 0);
+    clip: rect(81px, 9999px, 51px, 0);
   }
 
   25% {
-    clip: rect(92px, 9999px, 91px, 0);
+    clip: rect(30px, 9999px, 89px, 0);
   }
 
   30% {
-    clip: rect(96px, 9999px, 18px, 0);
+    clip: rect(69px, 9999px, 52px, 0);
   }
 
   35% {
-    clip: rect(2px, 9999px, 12px, 0);
+    clip: rect(5px, 9999px, 28px, 0);
   }
 
   40% {
-    clip: rect(28px, 9999px, 100px, 0);
+    clip: rect(25px, 9999px, 63px, 0);
   }
 
   45% {
-    clip: rect(53px, 9999px, 97px, 0);
+    clip: rect(29px, 9999px, 36px, 0);
   }
 
   50% {
-    clip: rect(9px, 9999px, 34px, 0);
+    clip: rect(90px, 9999px, 21px, 0);
   }
 
   55% {
-    clip: rect(79px, 9999px, 42px, 0);
+    clip: rect(96px, 9999px, 93px, 0);
   }
 
   60% {
-    clip: rect(7px, 9999px, 15px, 0);
+    clip: rect(86px, 9999px, 44px, 0);
   }
 
   65% {
-    clip: rect(92px, 9999px, 87px, 0);
+    clip: rect(47px, 9999px, 4px, 0);
   }
 
   70% {
-    clip: rect(27px, 9999px, 18px, 0);
+    clip: rect(66px, 9999px, 93px, 0);
   }
 
   75% {
-    clip: rect(38px, 9999px, 45px, 0);
+    clip: rect(81px, 9999px, 77px, 0);
   }
 
   80% {
-    clip: rect(14px, 9999px, 81px, 0);
+    clip: rect(74px, 9999px, 9px, 0);
   }
 
   85% {
-    clip: rect(40px, 9999px, 77px, 0);
+    clip: rect(75px, 9999px, 62px, 0);
   }
 
   90% {
-    clip: rect(79px, 9999px, 4px, 0);
+    clip: rect(79px, 9999px, 9px, 0);
   }
 
   95% {
-    clip: rect(90px, 9999px, 64px, 0);
+    clip: rect(40px, 9999px, 12px, 0);
   }
 
   100% {
-    clip: rect(1px, 9999px, 60px, 0);
+    clip: rect(59px, 9999px, 20px, 0);
   }
 }
 
@@ -267,8 +267,7 @@ body {
   gap: 20px;
   padding: 0 20px;
   height: 70px;
-  background-color: pink;
-  border-bottom: 2px solid #222;
+  background-color: #000000;
   /*Logo*/
   /*Navigation*/
 }
@@ -294,7 +293,7 @@ body {
   margin: 0;
   padding: 0;
   align-self: center;
-  color: #000000;
+  color: #f2f2ff;
 }
 
 .site-header .site-logo-img {
@@ -305,6 +304,12 @@ body {
 
 .site-header .site-navigation {
   text-align: right;
+  align-self: center;
+}
+
+.site-header a {
+  color: #f2f2ff;
+  text-decoration: none;
 }
 
 .site-header .navigation-list {
@@ -315,11 +320,12 @@ body {
 
 .site-header .navigation-list-item {
   display: block;
-  padding: 0 5px;
+  padding: 0 12px;
 }
 
 .site-footer {
-  background-color: pink;
+  background-color: #000000;
+  color: white;
   padding: 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -331,6 +337,10 @@ body {
 
 .site-footer ul {
   list-style: none;
+}
+
+.site-footer a {
+  color: white;
 }
 
 .container-video {
@@ -345,19 +355,6 @@ body {
   height: 100%;
 }
 
-.grid-container {
-  position: absolute;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  max-height: 100%;
-  background-color: rgba(0, 0, 0, 0.95);
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: repeat(3, 33%);
-  grid-template-areas: "question question" "responseOne responseTwo" "score score";
-}
-
 .question {
   grid-area: question;
   color: #f2f2f2;
@@ -366,14 +363,14 @@ body {
   text-align: center;
   justify-self: center;
   align-self: center;
+  text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
 }
 
 .responseOne,
 .responseTwo {
   display: inline-block;
-  margin: 0 auto;
-  justify-self: center;
   align-self: center;
+  margin: 0 40px;
 }
 
 .responseOne {
@@ -384,22 +381,240 @@ body {
   grid-area: responseTwo;
 }
 
-.score {
-  grid-area: score;
-  align-self: end;
-  padding: 20px;
-}
-
 .responseBtn {
-  background-color: black;
-  color: white;
-  font-size: 30px;
+  cursor: pointer;
+  display: inline;
+  position: relative;
   padding: 20px 40px;
-  border: white 1px solid;
+  border: 1px solid white;
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+  font-size: 18px;
+  font-family: "Open Sans", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  -webkit-font-smoothing: antialiased;
 }
 
 .responseBtn:hover {
-  border: #00dcff 1px solid;
+  border: none;
+}
+
+.responseBtn:hover .line-1 {
+  -webkit-animation: move1 1500ms infinite ease;
+          animation: move1 1500ms infinite ease;
+}
+
+.responseBtn:hover .line-2 {
+  -webkit-animation: move2 1500ms infinite ease;
+          animation: move2 1500ms infinite ease;
+}
+
+.responseBtn:hover .line-3 {
+  -webkit-animation: move3 1500ms infinite ease;
+          animation: move3 1500ms infinite ease;
+}
+
+.responseBtn:hover .line-4 {
+  -webkit-animation: move4 1500ms infinite ease;
+          animation: move4 1500ms infinite ease;
+}
+
+.line-1 {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 1px;
+  background-color: white;
+  left: 0;
+  bottom: 0;
+}
+
+.line-2 {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 1px;
+  background-color: white;
+  left: 0;
+  top: 0;
+}
+
+.line-3 {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 1px;
+  background-color: white;
+  right: 0;
+  top: 0;
+}
+
+.line-4 {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 1px;
+  background-color: white;
+  right: 0;
+  bottom: 0;
+}
+
+@-webkit-keyframes move1 {
+  0% {
+    height: 100%;
+    bottom: 0;
+  }
+
+  54% {
+    height: 0;
+    bottom: 100%;
+  }
+
+  55% {
+    height: 0;
+    bottom: 0;
+  }
+
+  100% {
+    height: 100%;
+    bottom: 0;
+  }
+}
+
+@keyframes move1 {
+  0% {
+    height: 100%;
+    bottom: 0;
+  }
+
+  54% {
+    height: 0;
+    bottom: 100%;
+  }
+
+  55% {
+    height: 0;
+    bottom: 0;
+  }
+
+  100% {
+    height: 100%;
+    bottom: 0;
+  }
+}
+
+@-webkit-keyframes move2 {
+  0% {
+    width: 0;
+    left: 0;
+  }
+
+  50% {
+    width: 100%;
+    left: 0;
+  }
+
+  100% {
+    width: 0;
+    left: 100%;
+  }
+}
+
+@keyframes move2 {
+  0% {
+    width: 0;
+    left: 0;
+  }
+
+  50% {
+    width: 100%;
+    left: 0;
+  }
+
+  100% {
+    width: 0;
+    left: 100%;
+  }
+}
+
+@-webkit-keyframes move3 {
+  0% {
+    height: 100%;
+    top: 0;
+  }
+
+  54% {
+    height: 0;
+    top: 100%;
+  }
+
+  55% {
+    height: 0;
+    top: 0;
+  }
+
+  100% {
+    height: 100%;
+    top: 0;
+  }
+}
+
+@keyframes move3 {
+  0% {
+    height: 100%;
+    top: 0;
+  }
+
+  54% {
+    height: 0;
+    top: 100%;
+  }
+
+  55% {
+    height: 0;
+    top: 0;
+  }
+
+  100% {
+    height: 100%;
+    top: 0;
+  }
+}
+
+@-webkit-keyframes move4 {
+  0% {
+    width: 0;
+    right: 0;
+  }
+
+  55% {
+    width: 100%;
+    right: 0;
+  }
+
+  100% {
+    width: 0;
+    right: 100%;
+  }
+}
+
+@keyframes move4 {
+  0% {
+    width: 0;
+    right: 0;
+  }
+
+  55% {
+    width: 100%;
+    right: 0;
+  }
+
+  100% {
+    width: 0;
+    right: 100%;
+  }
 }
 
 img {
