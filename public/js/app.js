@@ -17069,7 +17069,7 @@ var start = function start() {
 };
 
 var game = function game() {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ../../components/game/index */ "./resources/js/components/game/index.vue"));
+  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../../components/game/index */ "./resources/js/components/game/index.vue"));
 }; // import start from '../../components/start/index'
 
 
@@ -17139,7 +17139,7 @@ var VideoPath = '/video/';
 var VideoType = '.mp4';
 var state = {
   '1': {
-    video: VideoPath + 1 + VideoType,
+    video: VideoPath + '1' + VideoType,
     question: 'Soll die Regierung Vorsichtsmaßnahmen treffen oder abwarten',
     firstOption: {
       next: 1.1,
@@ -17179,36 +17179,36 @@ var state = {
     }
   },
   '2.1': {
-    video: VideoPath + 2.1 + VideoType,
+    video: VideoPath + '2.1' + VideoType,
     question: undefined,
     continueStory: {
-      next: 3,
+      next: '3',
       response: 'Weiter'
     }
   },
   '2.2': {
-    video: VideoPath + 2.2 + VideoType,
+    video: VideoPath + '2.2' + VideoType,
     question: undefined,
     continueStory: {
-      next: 4,
+      next: '4',
       response: 'Weiter'
     }
   },
   // Progress Number 3
   '3': {
-    video: VideoPath + 3 + VideoType,
+    video: VideoPath + '3' + VideoType,
     question: 'Wie lange sollen die Geschäfte noch geschlossen bleiben?',
     firstOption: {
-      next: 3.1,
+      next: '3.1',
       response: 'Bis Ostern (ca. 2 Wochen)'
     },
     secondOption: {
-      next: 4,
+      next: '4',
       response: 'Solange bis ein Impfmittel erhältlich ist'
     }
   },
   '3.1': {
-    video: VideoPath + 3.1 + VideoType,
+    video: VideoPath + '3.1' + VideoType,
     question: 'Hilfpaket für Unternehmmerinnen und Unternehmer',
     firstOption: {
       next: '3.1.1',
@@ -17220,27 +17220,22 @@ var state = {
     }
   },
   '3.1.1': {
-    video: VideoPath + 3.1 + VideoType,
+    video: VideoPath + '3.1.1' + VideoType,
     continueStory: {
       next: '1',
       response: 'Ende'
     }
   },
   '3.1.2': {
-    video: VideoPath + 3.1 + VideoType,
-    question: 'Hilfpaket für Unternehmmerinnen und Unternehmer',
-    firstOption: {
-      next: 5,
-      response: 'Ja'
-    },
-    secondOption: {
-      next: 5,
-      response: 'Nein'
+    video: VideoPath + '3.1.2' + VideoType,
+    continueStory: {
+      next: '1',
+      response: 'Ende'
     }
   },
   // Next Story
   '3.2': {
-    video: VideoPath + 3.1 + VideoType,
+    video: VideoPath + '3.2' + VideoType,
     question: 'Illegale Demostrationen auflösen? Zur not mit Gewalt?',
     firstOption: {
       next: '3.2.1',
@@ -17252,32 +17247,24 @@ var state = {
     }
   },
   '3.2.1': {
-    video: VideoPath + 3.1 + VideoType,
+    video: VideoPath + '3.2.1' + VideoType,
     question: undefined,
-    firstOption: {
-      next: 5,
-      response: 'Ja'
-    },
-    secondOption: {
-      next: 5,
-      response: 'Nein'
+    continueStory: {
+      next: '1',
+      response: 'Ende'
     }
   },
   '3.2.2': {
-    video: VideoPath + 3.1 + VideoType,
+    video: VideoPath + '3.2.2' + VideoType,
     question: undefined,
-    firstOption: {
-      next: 5,
-      response: 'Ja'
-    },
-    secondOption: {
-      next: 5,
-      response: 'Nein'
+    continueStory: {
+      next: '1',
+      response: 'Ende'
     }
   },
   //  Progress Number 4
   '4': {
-    video: VideoPath + 3 + VideoType,
+    video: VideoPath + '4' + VideoType,
     question: 'Soll eine Ausgangssperre über die Risikogruppe und die Hauptüberträger verhängt werden?',
     firstOption: {
       next: '4.1',
@@ -17301,31 +17288,23 @@ var state = {
     }
   },
   '4.1.1': {
-    video: VideoPath + 3 + VideoType,
+    video: VideoPath + '4.1.1' + VideoType,
     question: undefined,
-    firstOption: {
-      next: 3.1,
-      response: 'Bis Ostern (ca. 2 Wochen)'
-    },
-    secondOption: {
-      next: 4,
-      response: 'Solange bis ein Impfmittel erhältlich ist'
+    continueStory: {
+      next: '1',
+      response: 'Ende'
     }
   },
   '4.1.2': {
-    video: VideoPath + 3 + VideoType,
+    video: VideoPath + '4.1.2' + VideoType,
     question: undefined,
-    firstOption: {
-      next: 3.1,
-      response: 'Bis Ostern (ca. 2 Wochen)'
-    },
-    secondOption: {
-      next: 4,
-      response: 'Solange bis ein Impfmittel erhältlich ist'
+    continueStory: {
+      next: '1',
+      response: 'Ende'
     }
   },
   '4.2': {
-    video: VideoPath + 3 + VideoType,
+    video: VideoPath + '4.2' + VideoType,
     question: 'Soll eine AUsgangsspeere über die Risikogruppe und die Hauptüberträger verhängt werden?',
     firstOption: {
       next: '4.2.1',
@@ -17337,7 +17316,7 @@ var state = {
     }
   },
   '4.2.1': {
-    video: VideoPath + 3 + VideoType,
+    video: VideoPath + '4.2.1' + VideoType,
     question: 'Hilfspaket für UnternehmerInnen',
     firstOption: {
       next: '4.2.1.1',
@@ -17349,39 +17328,27 @@ var state = {
     }
   },
   '4.2.1.1': {
-    video: VideoPath + 3 + VideoType,
+    video: VideoPath + '4.2.1.1' + VideoType,
     question: undefined,
-    firstOption: {
-      next: 3.1,
-      response: 'Bis Ostern (ca. 2 Wochen)'
-    },
-    secondOption: {
-      next: 4,
-      response: 'Solange bis ein Impfmittel erhältlich ist'
+    continueStory: {
+      next: '1',
+      response: 'Ende'
     }
   },
   '4.2.1.2': {
-    video: VideoPath + 3 + VideoType,
+    video: VideoPath + '4.2.1.2' + VideoType,
     question: undefined,
-    firstOption: {
-      next: 3.1,
-      response: 'Bis Ostern (ca. 2 Wochen)'
-    },
-    secondOption: {
-      next: 4,
-      response: 'Solange bis ein Impfmittel erhältlich ist'
+    continueStory: {
+      next: '1',
+      response: 'Ende'
     }
   },
   '4.2.2': {
-    video: VideoPath + 3 + VideoType,
+    video: VideoPath + '4.2.2' + VideoType,
     question: undefined,
-    firstOption: {
-      next: 3.1,
-      response: 'Bis Ostern (ca. 2 Wochen)'
-    },
-    secondOption: {
-      next: 4,
-      response: 'Solange bis ein Impfmittel erhältlich ist'
+    continueStory: {
+      next: '1',
+      response: 'Ende'
     }
   }
 };
