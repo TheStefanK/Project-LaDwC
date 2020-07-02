@@ -450,9 +450,7 @@ var render = function() {
       _c("span", [_vm._v("Infizierte: " + _vm._s(_vm.Infizierte))])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "statistics" }, [
-      _c("span", [_vm._v("Zeit: " + _vm._s(_vm.formattedElapsedTime))])
-    ]),
+    _c("div", { staticClass: "statistics" }),
     _vm._v(" "),
     _c("div", { staticClass: "dead" }, [
       _c("img", { attrs: { src: "images/demoMeter.png", alt: "Demo" } }),

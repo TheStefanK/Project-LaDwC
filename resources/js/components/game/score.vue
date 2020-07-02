@@ -5,7 +5,7 @@
                 <span>Infizierte: {{Infizierte}}</span>
             </div>
             <div class="statistics">
-                <span>Zeit: {{formattedElapsedTime}}</span>
+<!--                <span>Zeit: {{formattedElapsedTime}}</span>-->
 
             </div>
             <div class="dead">
