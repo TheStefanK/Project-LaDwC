@@ -11,7 +11,7 @@ const game = () => import('../../components/game/index');
 export default [
   {
     name: 'home',
-    path: '/story',
+    path: '/',
     components: {
       header: header,
       story: start,

@@ -17069,13 +17069,13 @@ var start = function start() {
 };
 
 var game = function game() {
-  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../../components/game/index */ "./resources/js/components/game/index.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ../../components/game/index */ "./resources/js/components/game/index.vue"));
 }; // import start from '../../components/start/index'
 
 
 /* harmony default export */ __webpack_exports__["default"] = ([{
   name: 'home',
-  path: '/story',
+  path: '/',
   components: {
     header: header,
     story: start,

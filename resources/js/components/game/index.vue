@@ -1,7 +1,7 @@
 <template>
     <div class="container-video">
         <video id="Story-Line_Video" ref="videoRef" controls="controls" autoplay @ended="OnEnd()" @pause="OnPause"
-               @play="OnStart">
+               @play="OnStart" :class="{'end-video': videoEnd}">
             <source :src="VideoSource">
         </video>
         <input type="hidden" v-model="ProgressStatus">
