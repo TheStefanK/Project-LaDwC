@@ -2,8 +2,8 @@
     <div class="score-board">
         <div class="infected">
             <div class="fuel">
-                <img class="test1" src="images/score/bg_fuel.svg" alt="Demo" width="300px">
-                <img class="test2" src="images/score/zeiger.svg" alt="Demo" height="150px" :style="tankFuel">
+                <img class="test1" src="images/score/bg_fuel2.svg" alt="Demo" width="300px">
+                <img class="test2" src="images/score/zeiger.svg" alt="Demo" height="130px" :style="tankFuel">
             </div>
 
             <span>Infizierte: {{infected}}</span>
@@ -45,7 +45,7 @@
         return utc.substr(utc.indexOf(":") - 2, 8);
       }, tankFuel() {
 
-        return {transform: 'rotate(' + this.testoo + 'grad) translate(-80%)'};
+        return {transform: 'rotate(' + this.testoo + 'grad) translate(-50%)'};
       },
     },
 

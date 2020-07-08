@@ -165,7 +165,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     tankFuel: function tankFuel() {
       return {
-        transform: 'rotate(' + this.testoo + 'grad) translate(-80%)'
+        transform: 'rotate(' + this.testoo + 'grad) translate(-50%)'
       };
     }
   },
@@ -534,7 +534,7 @@ var render = function() {
         _c("img", {
           staticClass: "test1",
           attrs: {
-            src: "images/score/bg_fuel.svg",
+            src: "images/score/bg_fuel2.svg",
             alt: "Demo",
             width: "300px"
           }
@@ -546,7 +546,7 @@ var render = function() {
           attrs: {
             src: "images/score/zeiger.svg",
             alt: "Demo",
-            height: "150px"
+            height: "130px"
           }
         })
       ]),
