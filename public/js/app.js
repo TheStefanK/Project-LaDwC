@@ -720,7 +720,7 @@ var render = function() {
     [
       _c("router-view", { attrs: { name: "header" } }),
       _vm._v(" "),
-      _c("div", [_c("router-view", { attrs: { name: "story" } })], 1),
+      _c("div", [_c("router-view", { attrs: { name: "content" } })], 1),
       _vm._v(" "),
       _c("router-view", { attrs: { name: "footer" } })
     ],
@@ -16996,8 +16996,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_4__["default"]);
-console.log('JavaScript on');
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_4__["default"]); // console.log('JavaScript on');
+
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   store: _store_index__WEBPACK_IMPORTED_MODULE_2__["default"],
   router: _routes_index__WEBPACK_IMPORTED_MODULE_3__["default"],
@@ -17064,12 +17064,16 @@ var footer = function footer() {
   return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../../components/layout/footer/index */ "./resources/js/components/layout/footer/index.vue"));
 };
 
-var start = function start() {
-  return Promise.all(/*! import() */[__webpack_require__.e(4), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ../../components/start/index */ "./resources/js/components/start/index.vue"));
+var home = function home() {
+  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../../views/Home/index */ "./resources/js/views/Home/index.vue"));
 };
 
 var game = function game() {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ../../components/game/index */ "./resources/js/components/game/index.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(6), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ../../components/game/index */ "./resources/js/components/game/index.vue"));
+};
+
+var leaderboard = function leaderboard() {
+  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../../views/Leaderboard/index.vue */ "./resources/js/views/Leaderboard/index.vue"));
 }; // import start from '../../components/start/index'
 
 
@@ -17078,7 +17082,7 @@ var game = function game() {
   path: '/',
   components: {
     header: header,
-    story: start,
+    content: home,
     footer: footer
   },
   meta: {
@@ -17088,7 +17092,15 @@ var game = function game() {
   name: 'game',
   path: '/game',
   components: {
-    story: game
+    content: game
+  }
+}, {
+  name: 'leaderboard',
+  path: '/leaderboard',
+  components: {
+    header: header,
+    content: leaderboard,
+    footer: footer
   }
 }]);
 
@@ -17107,9 +17119,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _storyline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./storyline */ "./resources/js/store/storyline/index.js");
+/* harmony import */ var _score__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./score */ "./resources/js/store/score/index.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]); //modules imports
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
@@ -17118,9 +17132,106 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   mutations: {},
   actions: {},
   modules: {
-    storyline: _storyline__WEBPACK_IMPORTED_MODULE_2__["default"]
+    storyline: _storyline__WEBPACK_IMPORTED_MODULE_2__["default"],
+    score: _score__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 }));
+
+/***/ }),
+
+/***/ "./resources/js/store/score/index.js":
+/*!*******************************************!*\
+  !*** ./resources/js/store/score/index.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var state = {
+  // infected people and infected pointer
+  infected: 4,
+  infectedPointer: -90,
+  // dead people and dead pointer
+  dead: 0,
+  deadPointer: -90,
+  // time spend
+  elapsedTime: 0,
+  timer: undefined,
+  //multiplier
+  infectedMultiplier: 0.01,
+  deadMultiplier: 0.1,
+  intervalTimer: 1000
+};
+var getters = {
+  // All Stats
+  getScoreStats: function getScoreStats(state) {
+    return state;
+  },
+  // Infected People Getters
+  getInfected: function getInfected(state) {
+    return state.infected;
+  },
+  getInfectedPointer: function getInfectedPointer(state) {
+    return state.infectedPointer;
+  },
+  getInfectedCalc: function getInfectedCalc(state) {
+    return state.infected - state.dead;
+  },
+  // Dead People Getters
+  getDead: function getDead(state) {
+    return state.dead;
+  },
+  getDeadPointer: function getDeadPointer(state) {
+    return state.deadPointer;
+  },
+  // Multiplier Getters
+  getInfectedMultiplier: function getInfectedMultiplier(state) {
+    return state.infectedMultiplier;
+  },
+  getDeadMultiplier: function getDeadMultiplier(state) {
+    return state.deadMultiplier;
+  }
+};
+var mutations = {
+  // Set the new infected value
+  setInfectedValue: function setInfectedValue(state, value) {
+    state.infected = value;
+  },
+  // Set the new dead value
+  setDeadValue: function setDeadValue(state, value) {
+    state.dead = value;
+  },
+  // Set Pointer value
+  setInfectedPointer: function setInfectedPointer(state, value) {
+    state.infectedPointer = value;
+  },
+  setDeadPointer: function setDeadPointer(state, value) {
+    state.deadPointer = value;
+  }
+};
+var actions = {
+  // Handle changes of infected value
+  handleChangeInfectedValue: function handleChangeInfectedValue(_ref, payload) {
+    var commit = _ref.commit;
+    commit('setInfectedValue', payload);
+  },
+  // Handle changes of Pointer value
+  handleChangeInfectedPointer: function handleChangeInfectedPointer(_ref2, payload) {
+    var commit = _ref2.commit;
+    commit('setInfectedPointer', payload);
+  },
+  handleChangeDeadPointer: function handleChangeDeadPointer(_ref3, payload) {
+    var commit = _ref3.commit;
+    commit('setDeadPointer', payload);
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: state,
+  getters: getters,
+  mutations: mutations,
+  actions: actions
+});
 
 /***/ }),
 

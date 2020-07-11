@@ -4,8 +4,9 @@ const footer = () => import('../../components/layout/footer/index');
 
 
 
-const start = () => import('../../components/start/index');
+const home = () => import('../../views/Home/index');
 const game = () => import('../../components/game/index');
+const leaderboard = () => import('../../views/Leaderboard/index.vue');
 
 // import start from '../../components/start/index'
 export default [
@@ -14,7 +15,7 @@ export default [
     path: '/',
     components: {
       header: header,
-      story: start,
+      content: home,
       footer: footer,
     }, meta: {
       title: 'Home',
@@ -23,7 +24,15 @@ export default [
     name: 'game',
     path: '/game',
     components: {
-      story: game,
+      content: game,
+    },
+  } , {
+    name: 'leaderboard',
+    path: '/leaderboard',
+    components: {
+      header: header,
+      content: leaderboard,
+      footer: footer,
     },
   }
 ]

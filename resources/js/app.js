@@ -7,7 +7,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 
 
-console.log('JavaScript on');
+// console.log('JavaScript on');
 
 
  new Vue({

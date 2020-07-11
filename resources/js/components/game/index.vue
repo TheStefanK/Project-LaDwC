@@ -76,8 +76,9 @@
     }
     , computed: mapGetters({
       storyLine: 'getStoryLineList',
-    })
-    ,
+    }),
+    created(){ this.startInfection()},
+
     methods: {
       OnEnd() {
         this.videoEnd = true;
@@ -91,7 +92,28 @@
         this.VideoSource = this.storyLine[val].video;
         this.$refs.videoRef.load();
         this.videoEnd = false;
-      }
+      },
+    //  Start Timer for Infection and Dead People
+      startInfection() {
+        this.infectedInterval = setInterval(() => {
+          let inf = this.$store.getters.getInfected;  // Summe of all Infected People during the Game
+          let x = this.$store.getters.getInfectedCalc; // Summe of Infected People - Dead People
+          let y =  this.$store.getters.getInfectedMultiplier; // Infected Multiplier
+          if( inf >= 9800000){
+            clearInterval(this.infectedInterval);
+            alert('GAME OVER')
+            this.$store.dispatch('handleChangeInfectedValue',9800000 )
+          } else{
+          let z = Math.round(x * y); // Summe of Infected People * Multiplier
+          // console.log('inf:'+inf+' x:'+x+' y:'+y+' z:'+z);
+          let OptionOne = inf + 1; // Option One if the Value is smaller than 1
+          let  OptionTwo = inf + z; // Option Two Value is 1 or more
+
+            (z < 1) ? this.$store.dispatch('handleChangeInfectedValue',OptionOne ) : this.$store.dispatch('handleChangeInfectedValue',OptionTwo );
+          }
+        }, 100);
+      },
+
     }
   }
 </script>

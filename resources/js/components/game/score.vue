@@ -3,109 +3,80 @@
         <div class="infected">
             <div class="fuel">
                 <img class="test1" src="images/score/bg_fuel2.svg" alt="Demo" width="300px">
-                <img class="test2" src="images/score/zeiger.svg" alt="Demo" height="130px" :style="tankFuel">
+                <img class="test2" src="images/score/zeiger.svg" alt="Demo" height="130px"
+                     :style="infectedPointerStyle">
             </div>
-
-            <span>Infizierte: {{infected}}</span>
+            <span>{{numberWithDot(InfectedCalc)}}</span>
+            <span>Infizierte:</span>
         </div>
         <div class="statistics">
             <!--                <span>Zeit: {{formattedElapsedTime}}</span>-->
+            <!--            <span>{{formattedElapsedTime(timer)}}</span>-->
 
+            <div>
+                {{helloWorld('hello World')}}
+            </div>
         </div>
         <div class="dead">
-            <img src="images/demoMeter.png" alt="Demo">
-            <span>Tote: {{Tote}}</span>
+            <div class="fuel">
+                <img class="test1" src="images/score/bg_fuel2.svg" alt="Demo" width="300px">
+                <img class="test2" src="images/score/zeiger.svg" alt="Demo" height="130px" :style="deadPointerStyle">
+            </div>
+            <span>Tote: {{numberWithDot(Dead)}}</span>
         </div>
     </div>
 </template>
 
 <script>
+  import {scoreMixins} from '../../utility/mixins'
   export default {
     name: "score",
-    data() {
-      return {
-        infected: 1,
-        Tote: 0,
-        elapsedTime: 0,
-        timer: undefined,
-        testoo: -90,
-      }
-    },
-    mounted() {
-      this.startTimer();
-      this.startInfection();
-      this.startDeath();
-      // this.fuealStrk();
-    },
+    mixins: [scoreMixins],
     computed: {
-      formattedElapsedTime() {
-        const date = new Date(null);
-        date.setSeconds(this.elapsedTime / 1000);
-        const utc = date.toUTCString();
-        return utc.substr(utc.indexOf(":") - 2, 8);
-      }, tankFuel() {
-
-        return {transform: 'rotate(' + this.testoo + 'grad) translate(-50%)'};
+      Infected() {
+        return this.$store.getters.getInfected;
       },
+      InfectedCalc() {
+        return this.$store.getters.getInfectedCalc;
+      },
+      Dead() {
+        return this.$store.getters.getDead;
+      },
+      // infected Pointer rotate
+      infectedPointerStyle() {
+        return {transform: 'rotate(' + this.$store.getters.getInfectedPointer + 'grad) translate(-50%)'};
+      },
+      // dead Pointer rotate
+      deadPointerStyle() {
+        return {transform: 'rotate(' + this.$store.getters.getDeadPointer + 'grad) translate(-50%)'};
+      },
+
     },
-
     watch: {
-      infected() {
-        if (this.infected >= 200) {
-          this.testoo = 50;
-          console.log('rank3')
-        } else
-        if (this.infected > 99) {
-          this.testoo = -30;
-          console.log('rank2')
-        } else
-        if (this.infected < 100) {
-          this.testoo = -80;
-          console.log('rank1')
-        } else
-          console.log('not found')
-      }
+      InfectedCalc(){
+        let x = this.InfectedCalc;
+        let pointerValue = scoreMixins.methods.indicatorPointer(x, 250);
+        console.log(pointerValue + ' CHANGGEGGG');
+        this.$store.dispatch('handleChangeInfectedPointer',pointerValue )
+      },
+      dead() {
+        let pointerValue = scoreMixins.methods.indicatorPointer(this.Dead, 50);
+        this.$store.dispatch('handleChangeDeadPointer',pointerValue )
+      },
     }, methods: {
-
-      // fuealStrk() {
-      //   setTimeout(() => {
-      //     this.testoo = 90;
-      //     this.fuealStrkS();
-      //   }, 3000)
-      // },
-      // fuealStrkS() {
-      //   setTimeout(() => {
-      //     this.testoo = 30
-      //   }, 3000)
-      // },
-
-      startInfection() {
-        setInterval(() => {
-          let x = Math.round(Math.random() * 10);
-          // console.log(x);
-          this.infected += 1;
-        }, 100);
-      }
-      ,
-      startDeath() {
-        this.Tote = setInterval(() => {
-          this.Tote += 1;
-        }, 3000);
-      }
-      ,
       startTimer() {
         this.timer = setInterval(() => {
           this.elapsedTime += 1000;
         }, 2000);
-      }
-      ,
+      },
       stopTimer() {
         clearInterval(this.timer);
-      }
-      ,
+      },
       resetTimer() {
         this.elapsedTime = 0;
-      }
+      },
+    }, destroyed() {
+      clearInterval(this.startInfection);
     }
   }
 </script>
@@ -120,9 +91,8 @@
         position: absolute;
         bottom: 0;
         left: 50%;
-        transform: rotate(70deg);
         transform-origin: left bottom;
-        transform: rotate(-64grad) translateX(-50%);
+        transform: rotate(-90grad) translateX(-50%);
         margin: 0;
         padding: 0;
         display: block;

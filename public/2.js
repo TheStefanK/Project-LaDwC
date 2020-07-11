@@ -57,44 +57,73 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("header", { staticClass: "site-header" }, [
+    _c(
+      "div",
+      { staticClass: "site-logo" },
+      [
+        _c(
+          "router-link",
+          { staticClass: "site-logo-link", attrs: { to: { name: "home" } } },
+          [
+            _c("img", {
+              staticClass: "site-logo-img",
+              attrs: { src: "/images/Logo.png", alt: "" }
+            }),
+            _vm._v(" "),
+            _c("h1", [_vm._v("Life and Death with Corona")])
+          ]
+        )
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "site-navigation" }, [
+      _c("ul", { staticClass: "navigation-list" }, [
+        _c(
+          "li",
+          { staticClass: "navigation-list-item" },
+          [
+            _c("router-link", { attrs: { to: { name: "home" } } }, [
+              _vm._v("Home")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "navigation-list-item" },
+          [
+            _c("router-link", { attrs: { to: { name: "leaderboard" } } }, [
+              _vm._v("Leaderboard")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1)
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("header", { staticClass: "site-header" }, [
-      _c("div", { staticClass: "site-logo" }, [
-        _c("a", { staticClass: "site-logo-link", attrs: { href: "#" } }, [
-          _c("img", {
-            staticClass: "site-logo-img",
-            attrs: { src: "/images/Logo.png", alt: "" }
-          }),
-          _vm._v(" "),
-          _c("h1", [_vm._v("Life and Death with Corona")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "site-navigation" }, [
-        _c("ul", { staticClass: "navigation-list" }, [
-          _c("li", { staticClass: "navigation-list-item" }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Home")])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "navigation-list-item" }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Leaderboard")])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "navigation-list-item" }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Team")])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "navigation-list-item" }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Contact")])
-          ])
-        ])
-      ])
+    return _c("li", { staticClass: "navigation-list-item" }, [
+      _c("a", { attrs: { href: "#" } }, [_vm._v("Team")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "navigation-list-item" }, [
+      _c("a", { attrs: { href: "#" } }, [_vm._v("Contact")])
     ])
   }
 ]

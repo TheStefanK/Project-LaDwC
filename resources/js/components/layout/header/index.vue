@@ -1,20 +1,20 @@
 <template>
     <header class="site-header">
         <div class="site-logo">
-            <a href="#" class="site-logo-link">
+            <router-link :to="{name: 'home'}" class="site-logo-link">
                 <img class="site-logo-img" src="/images/Logo.png" alt="">
 
                 <h1>Life and Death with Corona</h1>
-            </a>
+            </router-link>
         </div>
         <div class="site-navigation">
 
             <ul class="navigation-list">
                 <li class="navigation-list-item">
-                    <a href="#">Home</a>
+                    <router-link :to="{name: 'home'}">Home</router-link>
                 </li>  <li class="navigation-list-item">
-                    <a href="#">Leaderboard</a>
-                </li>  <li class="navigation-list-item">
+                <router-link :to="{name: 'leaderboard'}">Leaderboard</router-link>
+            </li>  <li class="navigation-list-item">
                     <a href="#">Team</a>
                 </li>
                 <li class="navigation-list-item">

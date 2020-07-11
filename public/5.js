@@ -89,6 +89,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
     storyLine: 'getStoryLineList'
   }),
+  created: function created() {
+    this.startInfection();
+  },
   methods: {
     OnEnd: function OnEnd() {
       this.videoEnd = true;
@@ -104,6 +107,34 @@ __webpack_require__.r(__webpack_exports__);
       this.VideoSource = this.storyLine[val].video;
       this.$refs.videoRef.load();
       this.videoEnd = false;
+    },
+    //  Start Timer for Infection and Dead People
+    startInfection: function startInfection() {
+      var _this = this;
+
+      this.infectedInterval = setInterval(function () {
+        var inf = _this.$store.getters.getInfected; // Summe of all Infected People during the Game
+
+        var x = _this.$store.getters.getInfectedCalc; // Summe of Infected People - Dead People
+
+        var y = _this.$store.getters.getInfectedMultiplier; // Infected Multiplier
+
+        if (inf >= 9800000) {
+          clearInterval(_this.infectedInterval);
+          alert('GAME OVER');
+
+          _this.$store.dispatch('handleChangeInfectedValue', 9800000);
+        } else {
+          var z = Math.round(x * y); // Summe of Infected People * Multiplier
+          // console.log('inf:'+inf+' x:'+x+' y:'+y+' z:'+z);
+
+          var OptionOne = inf + 1; // Option One if the Value is smaller than 1
+
+          var OptionTwo = inf + z; // Option Two Value is 1 or more
+
+          z < 1 ? _this.$store.dispatch('handleChangeInfectedValue', OptionOne) : _this.$store.dispatch('handleChangeInfectedValue', OptionTwo);
+        }
+      }, 100);
     }
   }
 });
@@ -119,6 +150,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utility_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utility/mixins */ "./resources/js/utility/mixins.js");
 //
 //
 //
@@ -140,82 +172,59 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "score",
-  data: function data() {
-    return {
-      infected: 1,
-      Tote: 0,
-      elapsedTime: 0,
-      timer: undefined,
-      testoo: -90
-    };
-  },
-  mounted: function mounted() {
-    this.startTimer();
-    this.startInfection();
-    this.startDeath(); // this.fuealStrk();
-  },
+  mixins: [_utility_mixins__WEBPACK_IMPORTED_MODULE_0__["scoreMixins"]],
   computed: {
-    formattedElapsedTime: function formattedElapsedTime() {
-      var date = new Date(null);
-      date.setSeconds(this.elapsedTime / 1000);
-      var utc = date.toUTCString();
-      return utc.substr(utc.indexOf(":") - 2, 8);
+    Infected: function Infected() {
+      return this.$store.getters.getInfected;
     },
-    tankFuel: function tankFuel() {
+    InfectedCalc: function InfectedCalc() {
+      return this.$store.getters.getInfectedCalc;
+    },
+    Dead: function Dead() {
+      return this.$store.getters.getDead;
+    },
+    // infected Pointer rotate
+    infectedPointerStyle: function infectedPointerStyle() {
       return {
-        transform: 'rotate(' + this.testoo + 'grad) translate(-50%)'
+        transform: 'rotate(' + this.$store.getters.getInfectedPointer + 'grad) translate(-50%)'
+      };
+    },
+    // dead Pointer rotate
+    deadPointerStyle: function deadPointerStyle() {
+      return {
+        transform: 'rotate(' + this.$store.getters.getDeadPointer + 'grad) translate(-50%)'
       };
     }
   },
   watch: {
-    infected: function infected() {
-      if (this.infected >= 200) {
-        this.testoo = 50;
-        console.log('rank3');
-      } else if (this.infected > 99) {
-        this.testoo = -30;
-        console.log('rank2');
-      } else if (this.infected < 100) {
-        this.testoo = -80;
-        console.log('rank1');
-      } else console.log('not found');
+    InfectedCalc: function InfectedCalc() {
+      var x = this.InfectedCalc;
+      var pointerValue = _utility_mixins__WEBPACK_IMPORTED_MODULE_0__["scoreMixins"].methods.indicatorPointer(x, 250);
+      console.log(pointerValue + ' CHANGGEGGG');
+      this.$store.dispatch('handleChangeInfectedPointer', pointerValue);
+    },
+    dead: function dead() {
+      var pointerValue = _utility_mixins__WEBPACK_IMPORTED_MODULE_0__["scoreMixins"].methods.indicatorPointer(this.Dead, 50);
+      this.$store.dispatch('handleChangeDeadPointer', pointerValue);
     }
   },
   methods: {
-    // fuealStrk() {
-    //   setTimeout(() => {
-    //     this.testoo = 90;
-    //     this.fuealStrkS();
-    //   }, 3000)
-    // },
-    // fuealStrkS() {
-    //   setTimeout(() => {
-    //     this.testoo = 30
-    //   }, 3000)
-    // },
-    startInfection: function startInfection() {
+    startTimer: function startTimer() {
       var _this = this;
 
-      setInterval(function () {
-        var x = Math.round(Math.random() * 10); // console.log(x);
-
-        _this.infected += 1;
-      }, 100);
-    },
-    startDeath: function startDeath() {
-      var _this2 = this;
-
-      this.Tote = setInterval(function () {
-        _this2.Tote += 1;
-      }, 3000);
-    },
-    startTimer: function startTimer() {
-      var _this3 = this;
-
       this.timer = setInterval(function () {
-        _this3.elapsedTime += 1000;
+        _this.elapsedTime += 1000;
       }, 2000);
     },
     stopTimer: function stopTimer() {
@@ -224,6 +233,9 @@ __webpack_require__.r(__webpack_exports__);
     resetTimer: function resetTimer() {
       this.elapsedTime = 0;
     }
+  },
+  destroyed: function destroyed() {
+    clearInterval(this.startInfection);
   }
 });
 
@@ -283,7 +295,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.fuel {\n    position: relative;\n    border-bottom: 10px solid black;\n}\n.test2 {\n    position: absolute;\n    bottom: 0;\n    left: 50%;\n    transform: rotate(70deg);\n    transform-origin: left bottom;\n    transform: rotate(-64grad) translateX(-50%);\n    margin: 0;\n    padding: 0;\n    display: block;\n    transition: 3s;\n}\n\n\n", ""]);
+exports.push([module.i, "\n.fuel {\n    position: relative;\n    border-bottom: 10px solid black;\n}\n.test2 {\n    position: absolute;\n    bottom: 0;\n    left: 50%;\n    transform-origin: left bottom;\n    transform: rotate(-90grad) translateX(-50%);\n    margin: 0;\n    padding: 0;\n    display: block;\n    transition: 3s;\n}\n\n\n", ""]);
 
 // exports
 
@@ -542,7 +554,7 @@ var render = function() {
         _vm._v(" "),
         _c("img", {
           staticClass: "test2",
-          style: _vm.tankFuel,
+          style: _vm.infectedPointerStyle,
           attrs: {
             src: "images/score/zeiger.svg",
             alt: "Demo",
@@ -551,15 +563,44 @@ var render = function() {
         })
       ]),
       _vm._v(" "),
-      _c("span", [_vm._v("Infizierte: " + _vm._s(_vm.infected))])
+      _c("span", [_vm._v(_vm._s(_vm.numberWithDot(_vm.InfectedCalc)))]),
+      _vm._v(" "),
+      _c("span", [_vm._v("Infizierte:")])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "statistics" }),
+    _c("div", { staticClass: "statistics" }, [
+      _c("div", [
+        _vm._v(
+          "\n            " +
+            _vm._s(_vm.helloWorld("hello World")) +
+            "\n        "
+        )
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "dead" }, [
-      _c("img", { attrs: { src: "images/demoMeter.png", alt: "Demo" } }),
+      _c("div", { staticClass: "fuel" }, [
+        _c("img", {
+          staticClass: "test1",
+          attrs: {
+            src: "images/score/bg_fuel2.svg",
+            alt: "Demo",
+            width: "300px"
+          }
+        }),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "test2",
+          style: _vm.deadPointerStyle,
+          attrs: {
+            src: "images/score/zeiger.svg",
+            alt: "Demo",
+            height: "130px"
+          }
+        })
+      ]),
       _vm._v(" "),
-      _c("span", [_vm._v("Tote: " + _vm._s(_vm.Tote))])
+      _c("span", [_vm._v("Tote: " + _vm._s(_vm.numberWithDot(_vm.Dead)))])
     ])
   ])
 }
@@ -585,44 +626,73 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("header", { staticClass: "site-header" }, [
+    _c(
+      "div",
+      { staticClass: "site-logo" },
+      [
+        _c(
+          "router-link",
+          { staticClass: "site-logo-link", attrs: { to: { name: "home" } } },
+          [
+            _c("img", {
+              staticClass: "site-logo-img",
+              attrs: { src: "/images/Logo.png", alt: "" }
+            }),
+            _vm._v(" "),
+            _c("h1", [_vm._v("Life and Death with Corona")])
+          ]
+        )
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "site-navigation" }, [
+      _c("ul", { staticClass: "navigation-list" }, [
+        _c(
+          "li",
+          { staticClass: "navigation-list-item" },
+          [
+            _c("router-link", { attrs: { to: { name: "home" } } }, [
+              _vm._v("Home")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "navigation-list-item" },
+          [
+            _c("router-link", { attrs: { to: { name: "leaderboard" } } }, [
+              _vm._v("Leaderboard")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1)
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("header", { staticClass: "site-header" }, [
-      _c("div", { staticClass: "site-logo" }, [
-        _c("a", { staticClass: "site-logo-link", attrs: { href: "#" } }, [
-          _c("img", {
-            staticClass: "site-logo-img",
-            attrs: { src: "/images/Logo.png", alt: "" }
-          }),
-          _vm._v(" "),
-          _c("h1", [_vm._v("Life and Death with Corona")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "site-navigation" }, [
-        _c("ul", { staticClass: "navigation-list" }, [
-          _c("li", { staticClass: "navigation-list-item" }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Home")])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "navigation-list-item" }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Leaderboard")])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "navigation-list-item" }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Team")])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "navigation-list-item" }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Contact")])
-          ])
-        ])
-      ])
+    return _c("li", { staticClass: "navigation-list-item" }, [
+      _c("a", { attrs: { href: "#" } }, [_vm._v("Team")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "navigation-list-item" }, [
+      _c("a", { attrs: { href: "#" } }, [_vm._v("Contact")])
     ])
   }
 ]
@@ -854,6 +924,108 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_05b05dcc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/utility/mixins.js":
+/*!****************************************!*\
+  !*** ./resources/js/utility/mixins.js ***!
+  \****************************************/
+/*! exports provided: scoreMixins */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scoreMixins", function() { return scoreMixins; });
+// Score component Mixins
+var scoreMixins = {
+  methods: {
+    helloWorld: function helloWorld(value) {
+      return value;
+    },
+    numberWithDot: function numberWithDot(value) {
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    },
+    // Time Formatter
+    formattedElapsedTime: function formattedElapsedTime() {
+      var date = new Date(null);
+      date.setSeconds(this.elapsedTime / 1000);
+      var utc = date.toUTCString();
+      return utc.substr(utc.indexOf(":") - 2, 8);
+    },
+    // indicator Pointer
+    indicatorPointer: function indicatorPointer(value, multiplier) {
+      switch (true) {
+        case value < multiplier:
+          //console.log(multiplier);
+          return '-90';
+          break;
+
+        case value < multiplier * 2 && value >= multiplier:
+          {
+            //console.log(multiplier * 2);
+            return '-70';
+            break;
+          }
+
+        case value < multiplier * 3 && value >= multiplier * 2:
+          {
+            //console.log(multiplier * 3);
+            return '-50';
+            break;
+          }
+
+        case value < multiplier * 4 && value >= multiplier * 3:
+          {
+            return '-30';
+            break;
+          }
+
+        case value < multiplier * 5 && value >= multiplier * 4:
+          {
+            return '-10';
+            break;
+          }
+
+        case value < multiplier * 6 && value >= multiplier * 5:
+          {
+            return '0';
+            break;
+          }
+
+        case value < multiplier * 7 && value >= multiplier * 6:
+          {
+            return '10';
+            break;
+          }
+
+        case value < multiplier * 8 && value >= multiplier * 7:
+          {
+            return '30';
+            break;
+          }
+
+        case value < multiplier * 9 && value >= multiplier * 8:
+          {
+            return '50';
+            break;
+          }
+
+        case value < multiplier * 10 && value >= multiplier * 9:
+          {
+            return '70';
+            break;
+          }
+
+        case value > multiplier * 10:
+          {
+            return '90';
+            break;
+          }
+      }
+    }
+  }
+};
 
 /***/ })
 

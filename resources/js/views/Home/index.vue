@@ -1,0 +1,26 @@
+<template>
+    <div class="wrapper-start">
+<!--        <video src="/video/bg_video.mp4" autoplay loop></video>-->
+        <div class="overlay">
+            <div class="intro">
+                <router-link :to="{name:'game'}"  class="glitch" data-text="PLAY">PLAY</router-link>
+                <span>Life and Death</span>
+                    <audio src="/audio/SCORE_II.wav" autoplay loop></audio>
+            </div>
+        </div>
+
+    </div>
+</template>
+
+<script>
+
+  export default {
+
+    name: "Home",
+
+  }
+</script>
+
+<style scoped>
+
+</style>
