@@ -8,18 +8,26 @@ const state = {
 
   '1': {
     video: VideoPath + '1' + VideoType,
-    question: 'Soll die Regierung Vorsichtsmaßnahmen treffen oder abwarten',
+    question: 'Soll die Regierung Vorsichtsmaßnahmen treffen oder abwarten?',
+    infectedMultiplier: 0.01,
+    deadMultiplier: 0.01,
+    infectedInterval: 5000,
+    deadInterval: 25000,
     firstOption: {
       next: 1.1,
-      response: 'Handeln'
+      response: 'Handeln',
     },
     secondOption: {
       next: 1.2,
-      response: 'Abwarten'
+      response: 'Abwarten',
     },
   },
   '1.1': {
     video: VideoPath + '1.1' + VideoType,
+    infectedMultiplier: 0.01,
+    deadMultiplier: 0.01,
+    infectedInterval: 5000,
+    deadInterval: 25000,
     continueStory: {
       next: '2',
       response: 'Weiter'
@@ -27,7 +35,10 @@ const state = {
   },
   '1.2': {
     video: VideoPath + '1.2' + VideoType,
-    question: undefined,
+    infectedMultiplier: 0.05,
+    deadMultiplier: 0.03,
+    infectedInterval: 5000,
+    deadInterval: 25000,
     continueStory: {
       next: '2',
       response: 'Weiter'
@@ -48,6 +59,8 @@ const state = {
   },
   '2.1': {
     video: VideoPath + '2.1' + VideoType,
+    infectedMultiplier: 0.45,
+    deadMultiplier: 0.45,
     question: undefined,
     continueStory: {
       next: '3',

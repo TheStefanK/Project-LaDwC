@@ -1,6 +1,81 @@
 img {
   display: block;
 }
+
+.video-container-grid {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 15% 1fr 1fr;
+  gap: 1px 1px;
+  grid-template-areas: "top" "middle" "bottom";
+  //background-color: rgba(0, 0, 0, 0.99);
+}
+.video-container-grid-end {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 15% 1fr 1fr;
+  gap: 1px 1px;
+  grid-template-areas: "top" "middle" "bottom";
+  background-color: rgba(0, 0, 0, 0.99);
+}
+
+.top {
+  grid-area: top;
+}
+
+.middle {
+  grid-area: middle;
+  display: grid;
+
+  .storyLineContinue {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+
+    .responseBtn {
+      width: max-content;
+      height: max-content;
+      justify-self: center;
+    }
+  }
+
+  .middle-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1px;
+    grid-template-areas: "question question" "responseOne responseTwo";
+  }
+
+  .question {
+    grid-area: question;
+  }
+
+  .responseOne {
+    grid-area: responseOne;
+    justify-self: end;
+  }
+
+  .responseTwo {
+    justify-self: start;
+    grid-area: responseTwo;
+  }
+}
+
+.bottom {
+  grid-area: bottom;
+  align-self: end;
+}
+
+
 // Scoreboard
 .score-board {
   display: grid;
@@ -34,6 +109,35 @@ img {
     padding: 5px 10px;
   }
 
-
 }
 
+//Gauge
+
+.fuel {
+  position: relative;
+  //border-bottom: 10px solid black;
+}
+.fuel-scala{
+
+}
+.fuel-needle {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform-origin: left bottom;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0;
+  display: block;
+  transition: 3s;
+}
+.gauge-bottem{
+  background: red;
+  width: 45px;
+  height: 45px;
+  position: absolute;
+  border-radius: 50px;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%);
+}

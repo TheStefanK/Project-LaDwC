@@ -11,7 +11,7 @@
 <body>
 <noscript>Your browser does not support JavaScript!</noscript>
 <div id="app">
-<h1>Hello</h1>
+
 </div>
 <script src="{{mix('js/app.js')}}"></script>
 </body>

@@ -5,7 +5,7 @@ const footer = () => import('../../components/layout/footer/index');
 
 
 const home = () => import('../../views/Home/index');
-const game = () => import('../../components/game/index');
+const game = () => import('../../views/Game/index');
 const leaderboard = () => import('../../views/Leaderboard/index.vue');
 
 // import start from '../../components/start/index'

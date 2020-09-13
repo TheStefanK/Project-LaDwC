@@ -90,173 +90,173 @@ body {
 
 @-webkit-keyframes glitch-effect {
   0% {
-    clip: rect(90px, 9999px, 33px, 0);
+    clip: rect(56px, 9999px, 64px, 0);
   }
 
   5% {
-    clip: rect(37px, 9999px, 64px, 0);
+    clip: rect(72px, 9999px, 91px, 0);
   }
 
   10% {
-    clip: rect(32px, 9999px, 100px, 0);
+    clip: rect(11px, 9999px, 11px, 0);
   }
 
   15% {
-    clip: rect(33px, 9999px, 83px, 0);
+    clip: rect(9px, 9999px, 26px, 0);
   }
 
   20% {
-    clip: rect(80px, 9999px, 39px, 0);
+    clip: rect(94px, 9999px, 53px, 0);
   }
 
   25% {
-    clip: rect(23px, 9999px, 78px, 0);
+    clip: rect(57px, 9999px, 35px, 0);
   }
 
   30% {
-    clip: rect(78px, 9999px, 99px, 0);
+    clip: rect(57px, 9999px, 90px, 0);
   }
 
   35% {
-    clip: rect(99px, 9999px, 68px, 0);
+    clip: rect(64px, 9999px, 60px, 0);
   }
 
   40% {
-    clip: rect(90px, 9999px, 89px, 0);
+    clip: rect(53px, 9999px, 78px, 0);
   }
 
   45% {
-    clip: rect(61px, 9999px, 88px, 0);
+    clip: rect(21px, 9999px, 20px, 0);
   }
 
   50% {
-    clip: rect(28px, 9999px, 11px, 0);
+    clip: rect(44px, 9999px, 54px, 0);
   }
 
   55% {
-    clip: rect(29px, 9999px, 21px, 0);
+    clip: rect(87px, 9999px, 94px, 0);
   }
 
   60% {
-    clip: rect(87px, 9999px, 59px, 0);
+    clip: rect(11px, 9999px, 63px, 0);
   }
 
   65% {
-    clip: rect(24px, 9999px, 6px, 0);
+    clip: rect(49px, 9999px, 54px, 0);
   }
 
   70% {
-    clip: rect(34px, 9999px, 97px, 0);
+    clip: rect(19px, 9999px, 10px, 0);
   }
 
   75% {
-    clip: rect(44px, 9999px, 17px, 0);
+    clip: rect(13px, 9999px, 51px, 0);
   }
 
   80% {
-    clip: rect(91px, 9999px, 61px, 0);
+    clip: rect(18px, 9999px, 79px, 0);
   }
 
   85% {
-    clip: rect(41px, 9999px, 87px, 0);
+    clip: rect(78px, 9999px, 97px, 0);
   }
 
   90% {
-    clip: rect(19px, 9999px, 86px, 0);
+    clip: rect(48px, 9999px, 34px, 0);
   }
 
   95% {
-    clip: rect(19px, 9999px, 65px, 0);
+    clip: rect(16px, 9999px, 94px, 0);
   }
 
   100% {
-    clip: rect(29px, 9999px, 52px, 0);
+    clip: rect(6px, 9999px, 27px, 0);
   }
 }
 
 @keyframes glitch-effect {
   0% {
-    clip: rect(90px, 9999px, 33px, 0);
+    clip: rect(56px, 9999px, 64px, 0);
   }
 
   5% {
-    clip: rect(37px, 9999px, 64px, 0);
+    clip: rect(72px, 9999px, 91px, 0);
   }
 
   10% {
-    clip: rect(32px, 9999px, 100px, 0);
+    clip: rect(11px, 9999px, 11px, 0);
   }
 
   15% {
-    clip: rect(33px, 9999px, 83px, 0);
+    clip: rect(9px, 9999px, 26px, 0);
   }
 
   20% {
-    clip: rect(80px, 9999px, 39px, 0);
+    clip: rect(94px, 9999px, 53px, 0);
   }
 
   25% {
-    clip: rect(23px, 9999px, 78px, 0);
+    clip: rect(57px, 9999px, 35px, 0);
   }
 
   30% {
-    clip: rect(78px, 9999px, 99px, 0);
+    clip: rect(57px, 9999px, 90px, 0);
   }
 
   35% {
-    clip: rect(99px, 9999px, 68px, 0);
+    clip: rect(64px, 9999px, 60px, 0);
   }
 
   40% {
-    clip: rect(90px, 9999px, 89px, 0);
+    clip: rect(53px, 9999px, 78px, 0);
   }
 
   45% {
-    clip: rect(61px, 9999px, 88px, 0);
+    clip: rect(21px, 9999px, 20px, 0);
   }
 
   50% {
-    clip: rect(28px, 9999px, 11px, 0);
+    clip: rect(44px, 9999px, 54px, 0);
   }
 
   55% {
-    clip: rect(29px, 9999px, 21px, 0);
+    clip: rect(87px, 9999px, 94px, 0);
   }
 
   60% {
-    clip: rect(87px, 9999px, 59px, 0);
+    clip: rect(11px, 9999px, 63px, 0);
   }
 
   65% {
-    clip: rect(24px, 9999px, 6px, 0);
+    clip: rect(49px, 9999px, 54px, 0);
   }
 
   70% {
-    clip: rect(34px, 9999px, 97px, 0);
+    clip: rect(19px, 9999px, 10px, 0);
   }
 
   75% {
-    clip: rect(44px, 9999px, 17px, 0);
+    clip: rect(13px, 9999px, 51px, 0);
   }
 
   80% {
-    clip: rect(91px, 9999px, 61px, 0);
+    clip: rect(18px, 9999px, 79px, 0);
   }
 
   85% {
-    clip: rect(41px, 9999px, 87px, 0);
+    clip: rect(78px, 9999px, 97px, 0);
   }
 
   90% {
-    clip: rect(19px, 9999px, 86px, 0);
+    clip: rect(48px, 9999px, 34px, 0);
   }
 
   95% {
-    clip: rect(19px, 9999px, 65px, 0);
+    clip: rect(16px, 9999px, 94px, 0);
   }
 
   100% {
-    clip: rect(29px, 9999px, 52px, 0);
+    clip: rect(6px, 9999px, 27px, 0);
   }
 }
 
@@ -618,7 +618,23 @@ body {
   }
 }
 
+img {
+  display: block;
+}
+
 .video-container-grid {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 15% 1fr 1fr;
+  gap: 1px 1px;
+  grid-template-areas: "top" "middle" "bottom";
+}
+
+.video-container-grid-end {
   position: absolute;
   top: 0;
   width: 100vw;
@@ -683,10 +699,6 @@ body {
   align-self: end;
 }
 
-img {
-  display: block;
-}
-
 .score-board {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -718,5 +730,99 @@ img {
   display: block;
   background-color: #222;
   padding: 5px 10px;
+}
+
+.fuel {
+  position: relative;
+}
+
+.fuel-needle {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform-origin: left bottom;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0;
+  display: block;
+  transition: 3s;
+}
+
+.gauge-bottem {
+  background: red;
+  width: 45px;
+  height: 45px;
+  position: absolute;
+  border-radius: 50px;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%);
+}
+
+.leaderboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.leaderboard-container h2 {
+  text-align: center;
+}
+
+.lb-table {
+  width: 960px;
+  margin: 0 auto;
+  table-layout: auto;
+  border: 1px solid #f2f2ff;
+  padding: 0;
+  border-spacing: 0;
+}
+
+.lb-table th {
+  font-family: "Shadows Into Light", cursive;
+  text-transform: uppercase;
+  color: #e3342f;
+  border-bottom: 2px solid #f2f2ff;
+  font-size: 18px;
+  padding: 5px 0;
+  background-color: #202020;
+}
+
+.lb-table td {
+  padding: 6px 0;
+  margin: 0;
+  text-align: center;
+  border-bottom: 1px solid #f2f2ff;
+}
+
+.lb-paginate {
+  display: flex;
+  justify-content: center;
+  margin: 10px auto 0;
+}
+
+.lb-paginate button {
+  cursor: pointer;
+  display: inline;
+  position: relative;
+  padding: 5px 10px;
+  margin: 3px;
+  border: 1px solid #f2f2ff;
+  font-weight: bolder;
+  color: #f2f2ff;
+  background-color: transparent;
+  text-decoration: none;
+  font-size: 19px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.lb-paginate :hover {
+  background-color: #f2f2ff;
+  color: #222222;
+}
+
+.lb-paginate :disabled {
+  background-color: rgba(158, 158, 158, 0.1);
+  color: rgba(158, 158, 158, 0.1);
 }
 

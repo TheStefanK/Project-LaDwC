@@ -2,25 +2,25 @@
     <div class="score-board">
         <div class="infected">
             <div class="fuel">
-                <img class="test1" src="images/score/bg_fuel2.svg" alt="Demo" width="300px">
-                <img class="test2" src="images/score/zeiger.svg" alt="Demo" height="130px"
-                     :style="infectedPointerStyle">
+                <img class="fuel-scala" src="images/score/bg_fuel2.svg" alt="Demo" width="300px">
+                <img class="fuel-needle" src="images/score/zeiger.svg" alt="Demo" height="130px" :style="">
+                <div class="gauge-bottem"></div>
             </div>
-            <span>{{numberWithDot(InfectedCalc)}}</span>
-            <span>Infizierte:</span>
+            <span>Infizierte: {{numberWithDot(Infected)}}</span>
         </div>
         <div class="statistics">
             <!--                <span>Zeit: {{formattedElapsedTime}}</span>-->
             <!--            <span>{{formattedElapsedTime(timer)}}</span>-->
 
             <div>
-                {{helloWorld('hello World')}}
+
             </div>
         </div>
         <div class="dead">
             <div class="fuel">
-                <img class="test1" src="images/score/bg_fuel2.svg" alt="Demo" width="300px">
-                <img class="test2" src="images/score/zeiger.svg" alt="Demo" height="130px" :style="deadPointerStyle">
+                <img class="fuel-scala" src="images/score/bg_fuel2.svg" alt="Demo" width="300px">
+                <img class="fuel-needle" src="images/score/zeiger.svg" alt="Demo" height="130px" :style="">
+                <div class="gauge-bottem"></div>
             </div>
             <span>Tote: {{numberWithDot(Dead)}}</span>
         </div>
@@ -35,9 +35,6 @@
     computed: {
       Infected() {
         return this.$store.getters.getInfected;
-      },
-      InfectedCalc() {
-        return this.$store.getters.getInfectedCalc;
       },
       Dead() {
         return this.$store.getters.getDead;
@@ -56,10 +53,9 @@
       InfectedCalc(){
         let x = this.InfectedCalc;
         let pointerValue = scoreMixins.methods.indicatorPointer(x, 250);
-        console.log(pointerValue + ' CHANGGEGGG');
         this.$store.dispatch('handleChangeInfectedPointer',pointerValue )
       },
-      dead() {
+      Dead() {
         let pointerValue = scoreMixins.methods.indicatorPointer(this.Dead, 50);
         this.$store.dispatch('handleChangeDeadPointer',pointerValue )
       },
@@ -80,24 +76,3 @@
     }
   }
 </script>
-<style>
-
-    .fuel {
-        position: relative;
-        border-bottom: 10px solid black;
-    }
-
-    .test2 {
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform-origin: left bottom;
-        transform: rotate(-90grad) translateX(-50%);
-        margin: 0;
-        padding: 0;
-        display: block;
-        transition: 3s;
-    }
-
-
-</style>
