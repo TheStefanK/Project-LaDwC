@@ -2,7 +2,7 @@
     <header class="site-header">
         <div class="site-logo">
             <router-link :to="{name: 'home'}" class="site-logo-link">
-                <img class="site-logo-img" src="/images/Logo.png" alt="">
+                <img class="site-logo-img" src="/images/logo.png" alt="Life and Death">
                 <h1>Life and Death with Corona</h1>
             </router-link>
         </div>

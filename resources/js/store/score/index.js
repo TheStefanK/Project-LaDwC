@@ -41,10 +41,10 @@ const getters = {
   },
   // Interval timer
   getInfectedInterval: state =>{
-    return state.InfectedInterval
+    return state.infectedInterval
   },
   getDeadInterval: state =>{
-    return state.DeadInterval
+    return state.deadInterval
   },
   // Multiplier Getters
   getInfectedMultiplier: state => {

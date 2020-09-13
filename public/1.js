@@ -201,6 +201,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -210,7 +222,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       videoEnd: false,
       videoPause: false,
-      ProgressStatus: 1,
+      ProgressStatus: "1",
       VideoSource: '/video/1.mp4',
       InfectedInterval: null,
       DeadInterval: null
@@ -248,6 +260,13 @@ __webpack_require__.r(__webpack_exports__);
         console.log(this.storyLine[val].infectedMultiplier);
       }
 
+      if (this.storyLine[val].infectedInterval !== undefined && this.storyLine[val].deadInterval !== undefined) {
+        console.log("multiplier Change");
+        this.$store.dispatch("handleChangeInfectedInterval", this.storyLine[val].infectedInterval);
+        this.$store.dispatch("handleChangeDeadInterval", this.storyLine[val].deadInterval);
+        console.log(this.storyLine[val].infectedInterval);
+      }
+
       setTimeout(function () {
         _this.ProgressStatus = val;
         _this.VideoSource = _this.storyLine[val].video;
@@ -261,38 +280,44 @@ __webpack_require__.r(__webpack_exports__);
     startInfectionTimer: function startInfectionTimer() {
       var _this2 = this;
 
+      var interval = this.$store.getters.getInfectedInterval; // Infected Interval Timer
+
       this.InfectedInterval = setInterval(function () {
         var inf = _this2.$store.getters.getInfected; // Summe of all Infected People during the Game
 
-        var y = _this2.$store.getters.getInfectedMultiplier; // Infected Multiplier
+        var multi = _this2.$store.getters.getInfectedMultiplier; // Infected Multiplier
 
-        var z = Math.round(inf * y); // Summe of Infected People * Multiplier
+        var z = Math.round(inf * multi); // Summe of Infected People * Multiplier
 
         var OptionOne = inf + 1; // Option One if the Value is smaller than 1
 
         var OptionTwo = inf + z; // Option Two Value is 1 or more
 
         z < 1 ? _this2.$store.dispatch('handleChangeInfectedValue', OptionOne) : _this2.$store.dispatch('handleChangeInfectedValue', OptionTwo);
-      }, 9000);
+      }, interval);
     },
     startDeadTimer: function startDeadTimer() {
       var _this3 = this;
 
+      var interval = this.$store.getters.getDeadInterval; // Dead Interval Timer
+
+      console.log('Dead Interval ' + interval);
       this.DeadInterval = setInterval(function () {
         var inf = _this3.$store.getters.getInfected; // Summe of all Infected People during the Game
 
         var dead = _this3.$store.getters.getDead; // Summe of all Infected People during the Game
 
-        var y = _this3.$store.getters.getInfectedMultiplier; // Infected Multiplier
+        var multi = _this3.$store.getters.getInfectedMultiplier; // Infected Multiplier
 
-        var z = Math.round(inf * y / 3); // Summe of Infected People * Multiplier
+        var z = Math.round(inf * multi / 3); // Summe of Infected People * Multiplier
 
-        var OptionOne = inf + 1; // Option One if the Value is smaller than 1
+        var OptionOne = dead + 1; // Option One if the Value is smaller than 1
 
         var OptionTwo = dead + z; // Option Two Value is 1 or more
 
+        console.log(OptionOne, ' <-1   2-> ', OptionTwo);
         z < 1 ? _this3.$store.dispatch('handleChangeDeadValue', OptionOne) : _this3.$store.dispatch('handleChangeDeadValue', OptionTwo);
-      }, 30000);
+      }, interval);
     }
   },
   destroyed: function destroyed() {
@@ -415,7 +440,7 @@ var render = function() {
           [
             _c("img", {
               staticClass: "site-logo-img",
-              attrs: { src: "/images/Logo.png", alt: "" }
+              attrs: { src: "/images/logo.png", alt: "Life and Death" }
             }),
             _vm._v(" "),
             _c("h1", [_vm._v("Life and Death with Corona")])
@@ -528,125 +553,147 @@ var render = function() {
         _vm._v(" "),
         _vm.videoEnd
           ? _c("div", { staticClass: "middle" }, [
-              this.storyLine[this.ProgressStatus].question
-                ? _c("div", { staticClass: "middle-container" }, [
-                    _c("div", { staticClass: "question" }, [
-                      _c("p", [
+              _vm.storyLine[_vm.ProgressStatus].type === "question"
+                ? _c("div", { staticClass: "story-line_question" }, [
+                    _c("div", [
+                      _c("p", { staticClass: "question" }, [
                         _vm._v(
                           _vm._s(this.storyLine[this.ProgressStatus].question)
                         )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "options" }, [
+                        _c("div", { staticClass: "option_one" }, [
+                          _c("div", [
+                            this.storyLine[this.ProgressStatus].question !==
+                            undefined
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "responseBtn",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.nextProgress(
+                                          _vm.storyLine[_vm.ProgressStatus]
+                                            .firstOption.next
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                   " +
+                                        _vm._s(
+                                          _vm.storyLine[this.ProgressStatus]
+                                            .firstOption.response
+                                        ) +
+                                        "\n                                   "
+                                    ),
+                                    _c("span", { staticClass: "line-1" }),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "line-2" }),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "line-3" }),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "line-4" })
+                                  ]
+                                )
+                              : _vm._e()
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "option_two" }, [
+                          _c("div", [
+                            this.storyLine[this.ProgressStatus].question !==
+                            undefined
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "responseBtn",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.nextProgress(
+                                          _vm.storyLine[_vm.ProgressStatus]
+                                            .secondOption.next
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                   " +
+                                        _vm._s(
+                                          _vm.storyLine[this.ProgressStatus]
+                                            .secondOption.response
+                                        ) +
+                                        "\n                                   "
+                                    ),
+                                    _c("span", { staticClass: "line-1" }),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "line-2" }),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "line-3" }),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "line-4" })
+                                  ]
+                                )
+                              : _vm._e()
+                          ])
+                        ])
                       ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "responseOne" }, [
-                      this.storyLine[this.ProgressStatus].question !== undefined
-                        ? _c(
-                            "button",
-                            {
-                              staticClass: "responseBtn",
-                              on: {
-                                click: function($event) {
-                                  return _vm.nextProgress(
-                                    _vm.storyLine[_vm.ProgressStatus]
-                                      .firstOption.next
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                        " +
-                                  _vm._s(
-                                    _vm.storyLine[this.ProgressStatus]
-                                      .firstOption.response
-                                  ) +
-                                  "\n                        "
-                              ),
-                              _c("span", { staticClass: "line-1" }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "line-2" }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "line-3" }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "line-4" })
-                            ]
-                          )
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "responseTwo" }, [
-                      this.storyLine[this.ProgressStatus].question !== undefined
-                        ? _c(
-                            "button",
-                            {
-                              staticClass: "responseBtn",
-                              on: {
-                                click: function($event) {
-                                  return _vm.nextProgress(
-                                    _vm.storyLine[_vm.ProgressStatus]
-                                      .secondOption.next
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                        " +
-                                  _vm._s(
-                                    _vm.storyLine[this.ProgressStatus]
-                                      .secondOption.response
-                                  ) +
-                                  "\n                        "
-                              ),
-                              _c("span", { staticClass: "line-1" }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "line-2" }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "line-3" }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "line-4" })
-                            ]
-                          )
-                        : _vm._e()
                     ])
                   ])
                 : _vm._e(),
               _vm._v(" "),
-              !this.storyLine[this.ProgressStatus].question
-                ? _c("div", { staticClass: "storyLineContinue" }, [
-                    _c("div"),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "responseBtn",
-                        on: {
-                          click: function($event) {
-                            return _vm.nextProgress(
-                              _vm.storyLine[_vm.ProgressStatus].continueStory
-                                .next
-                            )
+              _vm.storyLine[_vm.ProgressStatus].type === "continue"
+                ? _c("div", { staticClass: "story-line_continue" }, [
+                    _c("div", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "responseBtn",
+                          on: {
+                            click: function($event) {
+                              return _vm.nextProgress(
+                                _vm.storyLine[_vm.ProgressStatus].continueStory
+                                  .next
+                              )
+                            }
                           }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(
-                              _vm.storyLine[this.ProgressStatus].continueStory
-                                .response
-                            ) +
-                            "\n                    "
-                        ),
-                        _c("span", { staticClass: "line-1" }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "line-2" }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "line-3" }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "line-4" })
-                      ]
-                    )
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(
+                                _vm.storyLine[this.ProgressStatus].continueStory
+                                  .response
+                              ) +
+                              "\n                        "
+                          ),
+                          _c("span", { staticClass: "line-1" }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "line-2" }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "line-3" }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "line-4" })
+                        ]
+                      )
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.storyLine[_vm.ProgressStatus].type === "end"
+                ? _c("div", { staticClass: "story-line_end" }, [
+                    _c("input", {
+                      attrs: {
+                        type: "text",
+                        name: "name",
+                        placeholder: "Dein Name"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("button", [_vm._v("Senden")])
                   ])
                 : _vm._e()
             ])

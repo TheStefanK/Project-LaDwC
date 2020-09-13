@@ -62,7 +62,7 @@ var render = function() {
           [
             _c("img", {
               staticClass: "site-logo-img",
-              attrs: { src: "/images/Logo.png", alt: "" }
+              attrs: { src: "/images/logo.png", alt: "Life and Death" }
             }),
             _vm._v(" "),
             _c("h1", [_vm._v("Life and Death with Corona")])

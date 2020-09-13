@@ -1,6 +1,5 @@
 <template>
     <div class="wrapper-start">
-<!--        <video src="/video/bg_video.mp4" autoplay loop></video>-->
         <div class="overlay">
             <div class="intro">
                 <router-link :to="{name:'game'}"  class="glitch" data-text="PLAY">PLAY</router-link>

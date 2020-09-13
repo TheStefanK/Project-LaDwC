@@ -11,11 +11,6 @@ export default {
   name: "gauge",
   props: ["tankpointer"],
   methods: {
-    name() {
-      for(i,i++,i<5){
-
-      };
-    }
   },
 };
 </script>

@@ -14,6 +14,7 @@ img {
   grid-template-areas: "top" "middle" "bottom";
   //background-color: rgba(0, 0, 0, 0.99);
 }
+
 .video-container-grid-end {
   position: absolute;
   top: 0;
@@ -33,41 +34,7 @@ img {
 
 .middle {
   grid-area: middle;
-  display: grid;
 
-  .storyLineContinue {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-
-    .responseBtn {
-      width: max-content;
-      height: max-content;
-      justify-self: center;
-    }
-  }
-
-  .middle-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 1px;
-    grid-template-areas: "question question" "responseOne responseTwo";
-  }
-
-  .question {
-    grid-area: question;
-  }
-
-  .responseOne {
-    grid-area: responseOne;
-    justify-self: end;
-  }
-
-  .responseTwo {
-    justify-self: start;
-    grid-area: responseTwo;
-  }
 }
 
 .bottom {
@@ -83,7 +50,7 @@ img {
   grid-template-rows: 1fr;
   grid-template-areas: "infected statistics dead";
   color: white;
-  font-size: 40px;
+  font-size: 18px;
 
   .infected {
     grid-area: infected;
@@ -117,9 +84,11 @@ img {
   position: relative;
   //border-bottom: 10px solid black;
 }
-.fuel-scala{
+
+.fuel-scala {
 
 }
+
 .fuel-needle {
   position: absolute;
   bottom: 0;
@@ -131,7 +100,8 @@ img {
   display: block;
   transition: 3s;
 }
-.gauge-bottem{
+
+.gauge-bottem {
   background: red;
   width: 45px;
   height: 45px;
@@ -141,3 +111,65 @@ img {
   bottom: 0;
   transform: translate(-50%);
 }
+
+// Story Line Questions
+
+.story-line_question {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1px 1px;
+  grid-template-areas: "question" "options";
+
+  .question {
+    grid-area: question;
+  }
+
+  .options {
+    grid-area: options;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 1px 10px;
+    grid-template-areas: "option_one option_two";
+
+    .option_one {
+      grid-area: option_one;
+      display: grid;
+      justify-self: end;
+
+      .option_one div {
+        justify-self: end;
+        justify-items: center;
+      }
+    }
+
+    .option_two {
+      grid-area: option_two;
+      display: grid;
+      justify-self: start;
+
+      .option_two div {
+        justify-self: start;
+        justify-items: center;
+      }
+    }
+
+  }
+
+
+}
+
+// Story Line Continue
+.story-line_continue {
+  display: grid;
+  align-self: center;
+  justify-self: center;
+  height: 100%;
+
+  div {
+    justify-self: center;
+    align-self: center;
+  }
+}
+

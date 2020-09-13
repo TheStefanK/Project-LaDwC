@@ -17471,10 +17471,10 @@ var getters = {
   },
   // Interval timer
   getInfectedInterval: function getInfectedInterval(state) {
-    return state.InfectedInterval;
+    return state.infectedInterval;
   },
   getDeadInterval: function getDeadInterval(state) {
-    return state.DeadInterval;
+    return state.deadInterval;
   },
   // Multiplier Getters
   getInfectedMultiplier: function getInfectedMultiplier(state) {
@@ -17577,11 +17577,8 @@ var VideoType = '.mp4';
 var state = {
   '1': {
     video: VideoPath + '1' + VideoType,
+    type: "question",
     question: 'Soll die Regierung Vorsichtsmaßnahmen treffen oder abwarten?',
-    infectedMultiplier: 0.01,
-    deadMultiplier: 0.01,
-    infectedInterval: 5000,
-    deadInterval: 25000,
     firstOption: {
       next: 1.1,
       response: 'Handeln'
@@ -17589,33 +17586,43 @@ var state = {
     secondOption: {
       next: 1.2,
       response: 'Abwarten'
-    }
-  },
-  '1.1': {
-    video: VideoPath + '1.1' + VideoType,
+    },
+    // Setting for Score
     infectedMultiplier: 0.01,
     deadMultiplier: 0.01,
     infectedInterval: 5000,
-    deadInterval: 25000,
+    deadInterval: 25000
+  },
+  '1.1': {
+    video: VideoPath + '1.1' + VideoType,
+    type: "continue",
     continueStory: {
       next: '2',
       response: 'Weiter'
-    }
+    },
+    // Setting for Score
+    infectedMultiplier: 0.01,
+    deadMultiplier: 0.01,
+    infectedInterval: 5000,
+    deadInterval: 25000
   },
   '1.2': {
     video: VideoPath + '1.2' + VideoType,
-    infectedMultiplier: 0.05,
-    deadMultiplier: 0.03,
-    infectedInterval: 5000,
-    deadInterval: 25000,
+    type: "continue",
     continueStory: {
       next: '2',
       response: 'Weiter'
-    }
+    },
+    // Setting for Score
+    infectedMultiplier: 0.01,
+    deadMultiplier: 0.01,
+    infectedInterval: 5000,
+    deadInterval: 25000
   },
   // Progress Number 2
   '2': {
     video: VideoPath + '2' + VideoType,
+    type: "question",
     question: 'Alle Geschäfte des nicht alltäglichen Gebrauchs schließen und Ausgangsbeschänkungen?',
     firstOption: {
       next: '2.1',
@@ -17624,29 +17631,43 @@ var state = {
     secondOption: {
       next: '2.2',
       response: 'Nein'
-    }
+    },
+    // Setting for Score
+    infectedMultiplier: 0.01,
+    deadMultiplier: 0.01,
+    infectedInterval: 5000,
+    deadInterval: 25000
   },
   '2.1': {
     video: VideoPath + '2.1' + VideoType,
-    infectedMultiplier: 0.45,
-    deadMultiplier: 0.45,
-    question: undefined,
+    type: "continue",
     continueStory: {
       next: '3',
       response: 'Weiter'
-    }
+    },
+    // Setting for Score
+    infectedMultiplier: 0.01,
+    deadMultiplier: 0.01,
+    infectedInterval: 5000,
+    deadInterval: 25000
   },
   '2.2': {
     video: VideoPath + '2.2' + VideoType,
-    question: undefined,
+    type: "continue",
     continueStory: {
       next: '4',
       response: 'Weiter'
-    }
+    },
+    // Setting for Score
+    infectedMultiplier: 0.01,
+    deadMultiplier: 0.01,
+    infectedInterval: 5000,
+    deadInterval: 25000
   },
   // Progress Number 3
   '3': {
     video: VideoPath + '3' + VideoType,
+    type: "question",
     question: 'Wie lange sollen die Geschäfte noch geschlossen bleiben?',
     firstOption: {
       next: '3.1',
@@ -17655,10 +17676,16 @@ var state = {
     secondOption: {
       next: '4',
       response: 'Solange bis ein Impfmittel erhältlich ist'
-    }
+    },
+    // Setting for Score
+    infectedMultiplier: 0.01,
+    deadMultiplier: 0.01,
+    infectedInterval: 5000,
+    deadInterval: 25000
   },
   '3.1': {
     video: VideoPath + '3.1' + VideoType,
+    type: "question",
     question: 'Hilfpaket für Unternehmmerinnen und Unternehmer',
     firstOption: {
       next: '3.1.1',
@@ -17667,25 +17694,25 @@ var state = {
     secondOption: {
       next: '3.1.1',
       response: 'Nein'
-    }
+    },
+    // Setting for Score
+    infectedMultiplier: 0.01,
+    deadMultiplier: 0.01,
+    infectedInterval: 5000,
+    deadInterval: 25000
   },
   '3.1.1': {
     video: VideoPath + '3.1.1' + VideoType,
-    continueStory: {
-      next: '1',
-      response: 'Ende'
-    }
+    type: "end"
   },
   '3.1.2': {
     video: VideoPath + '3.1.2' + VideoType,
-    continueStory: {
-      next: '1',
-      response: 'Ende'
-    }
+    type: "end"
   },
   // Next Story
   '3.2': {
     video: VideoPath + '3.2' + VideoType,
+    type: "question",
     question: 'Illegale Demostrationen auflösen? Zur not mit Gewalt?',
     firstOption: {
       next: '3.2.1',
@@ -17698,23 +17725,16 @@ var state = {
   },
   '3.2.1': {
     video: VideoPath + '3.2.1' + VideoType,
-    question: undefined,
-    continueStory: {
-      next: '1',
-      response: 'Ende'
-    }
+    type: "end"
   },
   '3.2.2': {
     video: VideoPath + '3.2.2' + VideoType,
-    question: undefined,
-    continueStory: {
-      next: '1',
-      response: 'Ende'
-    }
+    type: "end"
   },
   //  Progress Number 4
   '4': {
     video: VideoPath + '4' + VideoType,
+    type: "question",
     question: 'Soll eine Ausgangssperre über die Risikogruppe und die Hauptüberträger verhängt werden?',
     firstOption: {
       next: '4.1',
@@ -17727,6 +17747,7 @@ var state = {
   },
   '4.1': {
     video: VideoPath + '4.1' + VideoType,
+    type: "question",
     question: 'Hilfspaket für UnternehmerInnen',
     firstOption: {
       next: '4.1.1',
@@ -17739,7 +17760,7 @@ var state = {
   },
   '4.1.1': {
     video: VideoPath + '4.1.1' + VideoType,
-    question: undefined,
+    type: "continue",
     continueStory: {
       next: '1',
       response: 'Ende'
@@ -17747,7 +17768,7 @@ var state = {
   },
   '4.1.2': {
     video: VideoPath + '4.1.2' + VideoType,
-    question: undefined,
+    type: "continue",
     continueStory: {
       next: '1',
       response: 'Ende'
@@ -17755,6 +17776,7 @@ var state = {
   },
   '4.2': {
     video: VideoPath + '4.2' + VideoType,
+    type: "question",
     question: 'Soll eine AUsgangsspeere über die Risikogruppe und die Hauptüberträger verhängt werden?',
     firstOption: {
       next: '4.2.1',
@@ -17767,6 +17789,7 @@ var state = {
   },
   '4.2.1': {
     video: VideoPath + '4.2.1' + VideoType,
+    type: "question",
     question: 'Hilfspaket für UnternehmerInnen',
     firstOption: {
       next: '4.2.1.1',
@@ -17779,27 +17802,15 @@ var state = {
   },
   '4.2.1.1': {
     video: VideoPath + '4.2.1.1' + VideoType,
-    question: undefined,
-    continueStory: {
-      next: '1',
-      response: 'Ende'
-    }
+    type: "end"
   },
   '4.2.1.2': {
     video: VideoPath + '4.2.1.2' + VideoType,
-    question: undefined,
-    continueStory: {
-      next: '1',
-      response: 'Ende'
-    }
+    type: "end"
   },
   '4.2.2': {
     video: VideoPath + '4.2.2' + VideoType,
-    question: undefined,
-    continueStory: {
-      next: '1',
-      response: 'Ende'
-    }
+    type: "end"
   }
 };
 var getters = {

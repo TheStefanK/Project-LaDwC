@@ -10,26 +10,44 @@
                 <app-header></app-header>
             </div>
             <div class="middle" v-if="videoEnd">
-                <div class="middle-container" v-if="this.storyLine[this.ProgressStatus].question">
-                    <div class="question">
-                        <p>{{this.storyLine[this.ProgressStatus].question}}</p>
+                <div class="story-line_question" v-if="storyLine[ProgressStatus].type === 'question'">
+                    <div>
+                        <p class="question">{{this.storyLine[this.ProgressStatus].question}}</p>
+                        <div class="options">
+                            <div class="option_one">
+                               <div>
+                                   <button v-if="this.storyLine[this.ProgressStatus].question !== undefined"
+                                           class="responseBtn"
+                                           @click="nextProgress(storyLine[ProgressStatus].firstOption.next)">
+                                       {{storyLine[this.ProgressStatus].firstOption.response}}
+                                       <span class="line-1"></span>
+                                       <span class="line-2"></span>
+                                       <span class="line-3"></span>
+                                       <span class="line-4"></span>
+                                   </button>
+                               </div>
+                            </div>
+                            <div class="option_two">
+                               <div>
+                                   <button v-if="this.storyLine[this.ProgressStatus].question !== undefined"
+                                           class="responseBtn"
+                                           @click="nextProgress(storyLine[ProgressStatus].secondOption.next)">
+                                       {{storyLine[this.ProgressStatus].secondOption.response}}
+                                       <span class="line-1"></span>
+                                       <span class="line-2"></span>
+                                       <span class="line-3"></span>
+                                       <span class="line-4"></span>
+                                   </button>
+                               </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="responseOne">
-                        <button v-if="this.storyLine[this.ProgressStatus].question !== undefined"
-                                class="responseBtn"
-                                @click="nextProgress(storyLine[ProgressStatus].firstOption.next)">
-                            {{storyLine[this.ProgressStatus].firstOption.response}}
-                            <span class="line-1"></span>
-                            <span class="line-2"></span>
-                            <span class="line-3"></span>
-                            <span class="line-4"></span>
-                        </button>
-                    </div>
-                    <div class="responseTwo">
-                        <button v-if="this.storyLine[this.ProgressStatus].question !== undefined"
-                                class="responseBtn"
-                                @click="nextProgress(storyLine[ProgressStatus].secondOption.next)">
-                            {{storyLine[this.ProgressStatus].secondOption.response}}
+
+                </div>
+                <div class="story-line_continue" v-if="storyLine[ProgressStatus].type === 'continue'">
+                    <div>
+                        <button class="responseBtn" @click="nextProgress(storyLine[ProgressStatus].continueStory.next)">
+                            {{storyLine[this.ProgressStatus].continueStory.response}}
                             <span class="line-1"></span>
                             <span class="line-2"></span>
                             <span class="line-3"></span>
@@ -37,15 +55,9 @@
                         </button>
                     </div>
                 </div>
-                <div class="storyLineContinue" v-if="!this.storyLine[this.ProgressStatus].question">
-                    <div></div>
-                    <button class="responseBtn" @click="nextProgress(storyLine[ProgressStatus].continueStory.next)">
-                        {{storyLine[this.ProgressStatus].continueStory.response}}
-                        <span class="line-1"></span>
-                        <span class="line-2"></span>
-                        <span class="line-3"></span>
-                        <span class="line-4"></span>
-                    </button>
+                <div class="story-line_end" v-if="storyLine[ProgressStatus].type === 'end'">
+                    <input type="text" name="name" placeholder="Dein Name">
+                    <button>Senden</button>
                 </div>
             </div>
             <div class="bottom">
@@ -66,18 +78,16 @@
       return {
         videoEnd: false,
         videoPause: false,
-        ProgressStatus: 1,
+        ProgressStatus: "1",
         VideoSource: '/video/1.mp4',
         InfectedInterval: null,
         DeadInterval: null,
-
       }
     },
     components: {
       'app-score': score,
       'app-header': header,
-    }
-    , computed: mapGetters({
+    }, computed: mapGetters({
       storyLine: 'getStoryLineList',
     }),
     created() {
@@ -100,6 +110,13 @@
           this.$store.dispatch("handleChangeDeadMultiplier", this.storyLine[val].deadMultiplier);
           console.log(this.storyLine[val].infectedMultiplier);
         }
+        if (this.storyLine[val].infectedInterval !== undefined && this.storyLine[val].deadInterval !== undefined) {
+          console.log("multiplier Change");
+          this.$store.dispatch("handleChangeInfectedInterval", this.storyLine[val].infectedInterval);
+          this.$store.dispatch("handleChangeDeadInterval", this.storyLine[val].deadInterval);
+          console.log(this.storyLine[val].infectedInterval);
+        }
+
         setTimeout(() => {
           this.ProgressStatus = val;
           this.VideoSource = this.storyLine[val].video;
@@ -109,32 +126,35 @@
       },
       //  Start Timer for Infection and Dead People
       startInfectionTimer() {
+        let interval = this.$store.getters.getInfectedInterval; // Infected Interval Timer
         this.InfectedInterval = setInterval(() => {
           let inf = this.$store.getters.getInfected;  // Summe of all Infected People during the Game
-          let y = this.$store.getters.getInfectedMultiplier; // Infected Multiplier
-          let z = Math.round(inf * y); // Summe of Infected People * Multiplier
+          let multi = this.$store.getters.getInfectedMultiplier; // Infected Multiplier
+          let z = Math.round(inf * multi); // Summe of Infected People * Multiplier
           let OptionOne = inf + 1; // Option One if the Value is smaller than 1
           let OptionTwo = inf + z; // Option Two Value is 1 or more
           (z < 1) ? this.$store.dispatch('handleChangeInfectedValue', OptionOne) : this.$store.dispatch('handleChangeInfectedValue', OptionTwo);
-        }, 9000);
+        }, interval);
       },
       startDeadTimer() {
+        let interval = this.$store.getters.getDeadInterval; // Dead Interval Timer
+        console.log('Dead Interval ' + interval);
         this.DeadInterval = setInterval(() => {
           let inf = this.$store.getters.getInfected;  // Summe of all Infected People during the Game
           let dead = this.$store.getters.getDead;  // Summe of all Infected People during the Game
-          let y = this.$store.getters.getInfectedMultiplier; // Infected Multiplier
-          let z = Math.round((inf * y) / 3); // Summe of Infected People * Multiplier
-          let OptionOne = inf + 1; // Option One if the Value is smaller than 1
+          let multi = this.$store.getters.getInfectedMultiplier; // Infected Multiplier
+          let z = Math.round((inf * multi) / 3); // Summe of Infected People * Multiplier
+          let OptionOne = dead + 1; // Option One if the Value is smaller than 1
           let OptionTwo = dead + z; // Option Two Value is 1 or more
+          console.log(OptionOne, ' <-1   2-> ', OptionTwo);
           (z < 1) ? this.$store.dispatch('handleChangeDeadValue', OptionOne) : this.$store.dispatch('handleChangeDeadValue', OptionTwo);
-        }, 30000);
+        }, interval);
       },
     },
-
     destroyed() {
       //clear Game
       this.$store.dispatch('handleChangeInfectedValue', 0);
-      this.$store.dispatch('handleChangeDeadValue',0);
+      this.$store.dispatch('handleChangeDeadValue', 0);
       clearInterval(this.InfectedInterval);
       clearInterval(this.DeadInterval);
     }
