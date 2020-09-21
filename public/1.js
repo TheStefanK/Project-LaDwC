@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/game/score.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/game/gauge.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/game/score.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/game/gauge.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -22,6 +22,70 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "gauge",
+  mixins: [_utility_mixins__WEBPACK_IMPORTED_MODULE_0__["scoreMixins"]],
+  props: {
+    name: String,
+    number: Number,
+    degSkala: Array
+  },
+  data: function data() {
+    return {
+      style: ""
+    };
+  },
+  methods: {},
+  watch: {
+    number: function number(newValue, oldValue) {
+      console.log(this.degSkala[0]);
+      console.log(newValue, oldValue);
+      var RotateValue;
+
+      if (newValue < 5) {
+        RotateValue = -90;
+      }
+
+      if (newValue < this.degSkala[0]) {
+        RotateValue = -90;
+      }
+
+      if (newValue >= this.degSkala[1]) {
+        RotateValue = -45;
+      }
+
+      if (newValue >= this.degSkala[2]) {
+        RotateValue = 0;
+      }
+
+      this.style = " transform: rotate(" + RotateValue + "deg);";
+    }
+  },
+  created: function created() {
+    if (this.number < 5) {
+      this.style = " transform: rotate(" + -90 + "deg);";
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/game/score.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/game/score.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utility_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utility/mixins */ "./resources/js/utility/mixins.js");
+/* harmony import */ var _gauge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gauge */ "./resources/js/components/game/gauge.vue");
+//
+//
+//
+//
 //
 //
 //
@@ -40,6 +104,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "score",
   mixins: [_utility_mixins__WEBPACK_IMPORTED_MODULE_0__["scoreMixins"]],
@@ -49,31 +114,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     Dead: function Dead() {
       return this.$store.getters.getDead;
-    },
-    // infected Pointer rotate
-    infectedPointerStyle: function infectedPointerStyle() {
-      return {
-        transform: 'rotate(' + this.$store.getters.getInfectedPointer + 'grad) translate(-50%)'
-      };
-    },
-    // dead Pointer rotate
-    deadPointerStyle: function deadPointerStyle() {
-      return {
-        transform: 'rotate(' + this.$store.getters.getDeadPointer + 'grad) translate(-50%)'
-      };
     }
   },
-  watch: {
-    InfectedCalc: function InfectedCalc() {
-      var x = this.InfectedCalc;
-      var pointerValue = _utility_mixins__WEBPACK_IMPORTED_MODULE_0__["scoreMixins"].methods.indicatorPointer(x, 250);
-      this.$store.dispatch('handleChangeInfectedPointer', pointerValue);
-    },
-    Dead: function Dead() {
-      var pointerValue = _utility_mixins__WEBPACK_IMPORTED_MODULE_0__["scoreMixins"].methods.indicatorPointer(this.Dead, 50);
-      this.$store.dispatch('handleChangeDeadPointer', pointerValue);
-    }
+  components: {
+    "v-gauge": _gauge__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  watch: {},
   methods: {
     startTimer: function startTimer() {
       var _this = this;
@@ -144,6 +190,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _components_game_score__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/game/score */ "./resources/js/components/game/score.vue");
 /* harmony import */ var _components_layout_header_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/layout/header/index */ "./resources/js/components/layout/header/index.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 //
 //
 //
@@ -213,6 +261,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -225,7 +283,8 @@ __webpack_require__.r(__webpack_exports__);
       ProgressStatus: "1",
       VideoSource: '/video/1.mp4',
       InfectedInterval: null,
-      DeadInterval: null
+      DeadInterval: null,
+      PlayerName: null
     };
   },
   components: {
@@ -318,6 +377,34 @@ __webpack_require__.r(__webpack_exports__);
         console.log(OptionOne, ' <-1   2-> ', OptionTwo);
         z < 1 ? _this3.$store.dispatch('handleChangeDeadValue', OptionOne) : _this3.$store.dispatch('handleChangeDeadValue', OptionTwo);
       }, interval);
+    },
+    Submit_Player: function Submit_Player() {
+      var _this4 = this;
+
+      if (this.PlayerName !== null) {
+        console.log("Name OK");
+        var data = {
+          "name": this.PlayerName,
+          "infected": this.$store.getters.getInfected,
+          "deceased": this.$store.getters.getDead
+        };
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("api/score/create", data).then(function (response) {
+          console.log(response);
+
+          if (response.status === 200) {
+            _this4.$router.push({
+              name: "leaderboard"
+            });
+          }
+        })["catch"](function (error) {
+          console.error(error);
+        });
+      } else {
+        console.error("Name not OK");
+      }
+    },
+    Cheat: function Cheat() {
+      this.videoEnd = true;
     }
   },
   destroyed: function destroyed() {
@@ -328,6 +415,55 @@ __webpack_require__.r(__webpack_exports__);
     clearInterval(this.DeadInterval);
   }
 });
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/game/gauge.vue?vue&type=template&id=67b751b2&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/game/gauge.vue?vue&type=template&id=67b751b2& ***!
+  \*************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "fuel" }, [
+      _c("img", {
+        staticClass: "fuel-scala",
+        attrs: { src: "images/score/bg_fuel2.svg", alt: "Demo", width: "300px" }
+      }),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "fuel-needle",
+        style: _vm.style,
+        attrs: { src: "images/score/zeiger.svg", alt: "Demo", height: "130px" }
+      })
+    ]),
+    _vm._v(" "),
+    _c("span", [
+      _vm._v(
+        " " +
+          _vm._s(_vm.name) +
+          " " +
+          _vm._s(_vm.numberWithDot(_vm.number)) +
+          "\n    "
+      )
+    ]),
+    _vm._v(" "),
+    _c("p")
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
 
 /***/ }),
 
@@ -347,67 +483,32 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "score-board" }, [
-    _c("div", { staticClass: "infected" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("span", [
-        _vm._v("Infizierte: " + _vm._s(_vm.numberWithDot(_vm.Infected)))
-      ])
-    ]),
+    _c(
+      "div",
+      { staticClass: "infected" },
+      [
+        _c("v-gauge", {
+          attrs: {
+            name: "Infizierte",
+            number: _vm.Infected,
+            degSkala: [5, 10, 20]
+          }
+        })
+      ],
+      1
+    ),
     _vm._v(" "),
-    _vm._m(1),
+    _c("div", { staticClass: "statistics" }),
     _vm._v(" "),
-    _c("div", { staticClass: "dead" }, [
-      _vm._m(2),
-      _vm._v(" "),
-      _c("span", [_vm._v("Tote: " + _vm._s(_vm.numberWithDot(_vm.Dead)))])
-    ])
+    _c(
+      "div",
+      { staticClass: "dead" },
+      [_c("v-gauge", { attrs: { name: "Tote:", number: _vm.Dead } })],
+      1
+    )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "fuel" }, [
-      _c("img", {
-        staticClass: "fuel-scala",
-        attrs: { src: "images/score/bg_fuel2.svg", alt: "Demo", width: "300px" }
-      }),
-      _vm._v(" "),
-      _c("img", {
-        staticClass: "fuel-needle",
-        attrs: { src: "images/score/zeiger.svg", alt: "Demo", height: "130px" }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "gauge-bottem" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "statistics" }, [_c("div")])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "fuel" }, [
-      _c("img", {
-        staticClass: "fuel-scala",
-        attrs: { src: "images/score/bg_fuel2.svg", alt: "Demo", width: "300px" }
-      }),
-      _vm._v(" "),
-      _c("img", {
-        staticClass: "fuel-needle",
-        attrs: { src: "images/score/zeiger.svg", alt: "Demo", height: "130px" }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "gauge-bottem" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -547,9 +648,16 @@ var render = function() {
         }
       },
       [
-        _vm.videoEnd
-          ? _c("div", { staticClass: "top" }, [_c("app-header")], 1)
-          : _vm._e(),
+        _c(
+          "div",
+          { staticClass: "top" },
+          [
+            _vm.videoEnd ? _c("app-header") : _vm._e(),
+            _vm._v(" "),
+            _c("button", { on: { click: _vm.Cheat } }, [_vm._v("Cheat")])
+          ],
+          1
+        ),
         _vm._v(" "),
         _vm.videoEnd
           ? _c("div", { staticClass: "middle" }, [
@@ -582,12 +690,12 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                   " +
+                                      "\n                                    " +
                                         _vm._s(
                                           _vm.storyLine[this.ProgressStatus]
                                             .firstOption.response
                                         ) +
-                                        "\n                                   "
+                                        "\n                                    "
                                     ),
                                     _c("span", { staticClass: "line-1" }),
                                     _vm._v(" "),
@@ -621,12 +729,12 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                   " +
+                                      "\n                                    " +
                                         _vm._s(
                                           _vm.storyLine[this.ProgressStatus]
                                             .secondOption.response
                                         ) +
-                                        "\n                                   "
+                                        "\n                                    "
                                     ),
                                     _c("span", { staticClass: "line-1" }),
                                     _vm._v(" "),
@@ -685,15 +793,54 @@ var render = function() {
               _vm._v(" "),
               _vm.storyLine[_vm.ProgressStatus].type === "end"
                 ? _c("div", { staticClass: "story-line_end" }, [
+                    _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+                    _vm._v(" "),
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.PlayerName,
+                          expression: "PlayerName"
+                        }
+                      ],
+                      staticClass: "input_end_name",
                       attrs: {
                         type: "text",
                         name: "name",
+                        id: "name",
                         placeholder: "Dein Name"
+                      },
+                      domProps: { value: _vm.PlayerName },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.PlayerName = $event.target.value
+                        }
                       }
                     }),
                     _vm._v(" "),
-                    _c("button", [_vm._v("Senden")])
+                    _c(
+                      "button",
+                      {
+                        staticClass: "responseBtn",
+                        on: { click: _vm.Submit_Player }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    Senden\n                    "
+                        ),
+                        _c("span", { staticClass: "line-1" }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "line-2" }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "line-3" }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "line-4" })
+                      ]
+                    )
                   ])
                 : _vm._e()
             ])
@@ -706,6 +853,75 @@ var render = function() {
 }
 var staticRenderFns = []
 render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/game/gauge.vue":
+/*!************************************************!*\
+  !*** ./resources/js/components/game/gauge.vue ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _gauge_vue_vue_type_template_id_67b751b2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gauge.vue?vue&type=template&id=67b751b2& */ "./resources/js/components/game/gauge.vue?vue&type=template&id=67b751b2&");
+/* harmony import */ var _gauge_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gauge.vue?vue&type=script&lang=js& */ "./resources/js/components/game/gauge.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _gauge_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _gauge_vue_vue_type_template_id_67b751b2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _gauge_vue_vue_type_template_id_67b751b2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/game/gauge.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/game/gauge.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/game/gauge.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_gauge_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./gauge.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/game/gauge.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_gauge_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/game/gauge.vue?vue&type=template&id=67b751b2&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/game/gauge.vue?vue&type=template&id=67b751b2& ***!
+  \*******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_gauge_vue_vue_type_template_id_67b751b2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./gauge.vue?vue&type=template&id=67b751b2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/game/gauge.vue?vue&type=template&id=67b751b2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_gauge_vue_vue_type_template_id_67b751b2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_gauge_vue_vue_type_template_id_67b751b2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -875,65 +1091,9 @@ var scoreMixins = {
       var utc = date.toUTCString();
       return utc.substr(utc.indexOf(":") - 2, 8);
     },
-    // indicator Pointer
-    indicatorPointer: function indicatorPointer(value, multiplier) {
-      switch (true) {
-        case value < multiplier:
-          //console.log(multiplier);
-          return "-90";
-
-        case value < multiplier * 2 && value >= multiplier:
-          {
-            //console.log(multiplier * 2);
-            return "-70";
-          }
-
-        case value < multiplier * 3 && value >= multiplier * 2:
-          {
-            //console.log(multiplier * 3);
-            return "-50";
-          }
-
-        case value < multiplier * 4 && value >= multiplier * 3:
-          {
-            return "-30";
-          }
-
-        case value < multiplier * 5 && value >= multiplier * 4:
-          {
-            return "-10";
-          }
-
-        case value < multiplier * 6 && value >= multiplier * 5:
-          {
-            return "0";
-          }
-
-        case value < multiplier * 7 && value >= multiplier * 6:
-          {
-            return "10";
-          }
-
-        case value < multiplier * 8 && value >= multiplier * 7:
-          {
-            return "30";
-          }
-
-        case value < multiplier * 9 && value >= multiplier * 8:
-          {
-            return "50";
-          }
-
-        case value < multiplier * 10 && value >= multiplier * 9:
-          {
-            return "70";
-          }
-
-        case value > multiplier * 10:
-          {
-            return "90";
-          }
-      }
+    randomIntFromInterval: function randomIntFromInterval(min, max) {
+      // min and max included
+      return Math.floor(Math.random() * (max - min + 1) + min);
     }
   }
 };

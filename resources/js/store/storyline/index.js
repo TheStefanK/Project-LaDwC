@@ -19,10 +19,12 @@ const state = {
       response: 'Abwarten',
     },
     // Setting for Score
-    infectedMultiplier: 0.01,
-    deadMultiplier: 0.01,
+    infectedMultiplier: 0.00,
+    deadMultiplier: 0.00,
     infectedInterval: 5000,
     deadInterval: 25000,
+    limit:10000,
+    MinMaxInfected: [0,0]
   },
   '1.1': {
     video: VideoPath + '1.1' + VideoType,

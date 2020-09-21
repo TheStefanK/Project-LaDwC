@@ -6,8 +6,9 @@
         </video>
         <input type="hidden" v-model="ProgressStatus">
         <div :class="{'video-container-grid-end':videoEnd, 'video-container-grid':!videoEnd}">
-            <div class="top" v-if="videoEnd">
-                <app-header></app-header>
+            <div class="top">
+                <app-header v-if="videoEnd"></app-header>
+                <button @click="Cheat">Cheat</button>
             </div>
             <div class="middle" v-if="videoEnd">
                 <div class="story-line_question" v-if="storyLine[ProgressStatus].type === 'question'">
@@ -15,30 +16,30 @@
                         <p class="question">{{this.storyLine[this.ProgressStatus].question}}</p>
                         <div class="options">
                             <div class="option_one">
-                               <div>
-                                   <button v-if="this.storyLine[this.ProgressStatus].question !== undefined"
-                                           class="responseBtn"
-                                           @click="nextProgress(storyLine[ProgressStatus].firstOption.next)">
-                                       {{storyLine[this.ProgressStatus].firstOption.response}}
-                                       <span class="line-1"></span>
-                                       <span class="line-2"></span>
-                                       <span class="line-3"></span>
-                                       <span class="line-4"></span>
-                                   </button>
-                               </div>
+                                <div>
+                                    <button v-if="this.storyLine[this.ProgressStatus].question !== undefined"
+                                            class="responseBtn"
+                                            @click="nextProgress(storyLine[ProgressStatus].firstOption.next)">
+                                        {{storyLine[this.ProgressStatus].firstOption.response}}
+                                        <span class="line-1"></span>
+                                        <span class="line-2"></span>
+                                        <span class="line-3"></span>
+                                        <span class="line-4"></span>
+                                    </button>
+                                </div>
                             </div>
                             <div class="option_two">
-                               <div>
-                                   <button v-if="this.storyLine[this.ProgressStatus].question !== undefined"
-                                           class="responseBtn"
-                                           @click="nextProgress(storyLine[ProgressStatus].secondOption.next)">
-                                       {{storyLine[this.ProgressStatus].secondOption.response}}
-                                       <span class="line-1"></span>
-                                       <span class="line-2"></span>
-                                       <span class="line-3"></span>
-                                       <span class="line-4"></span>
-                                   </button>
-                               </div>
+                                <div>
+                                    <button v-if="this.storyLine[this.ProgressStatus].question !== undefined"
+                                            class="responseBtn"
+                                            @click="nextProgress(storyLine[ProgressStatus].secondOption.next)">
+                                        {{storyLine[this.ProgressStatus].secondOption.response}}
+                                        <span class="line-1"></span>
+                                        <span class="line-2"></span>
+                                        <span class="line-3"></span>
+                                        <span class="line-4"></span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -56,8 +57,16 @@
                     </div>
                 </div>
                 <div class="story-line_end" v-if="storyLine[ProgressStatus].type === 'end'">
-                    <input type="text" name="name" placeholder="Dein Name">
-                    <button>Senden</button>
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" placeholder="Dein Name" class="input_end_name"
+                           v-model="PlayerName">
+                    <button class="responseBtn"  @click="Submit_Player">
+                        Senden
+                        <span class="line-1"></span>
+                        <span class="line-2"></span>
+                        <span class="line-3"></span>
+                        <span class="line-4"></span>
+                    </button>
                 </div>
             </div>
             <div class="bottom">
@@ -71,6 +80,7 @@
   import {mapGetters} from 'vuex'
   import score from '../../components/game/score'
   import header from '../../components/layout/header/index'
+  import axios from "axios"
 
   export default {
     name: "Game",
@@ -82,6 +92,7 @@
         VideoSource: '/video/1.mp4',
         InfectedInterval: null,
         DeadInterval: null,
+        PlayerName: null,
       }
     },
     components: {
@@ -150,6 +161,31 @@
           (z < 1) ? this.$store.dispatch('handleChangeDeadValue', OptionOne) : this.$store.dispatch('handleChangeDeadValue', OptionTwo);
         }, interval);
       },
+      Submit_Player() {
+
+        if (this.PlayerName !== null) {
+          console.log("Name OK");
+          let data = {
+            "name": this.PlayerName,
+            "infected": this.$store.getters.getInfected,
+            "deceased": this.$store.getters.getDead,
+          };
+          axios.post("api/score/create", data).then(response => {
+            console.log(response);
+            if (response.status === 200){
+              this.$router.push({name: "leaderboard"})
+            }
+          }).catch(error => {
+            console.error(error);
+          })
+        }else {
+          console.error("Name not OK")
+        }
+
+      },
+      Cheat() {
+        this.videoEnd = true;
+      }
     },
     destroyed() {
       //clear Game

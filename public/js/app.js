@@ -17352,7 +17352,7 @@ var home = function home() {
 };
 
 var game = function game() {
-  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../../views/Game/index */ "./resources/js/views/Game/index.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ../../views/Game/index */ "./resources/js/views/Game/index.vue"));
 };
 
 var leaderboard = function leaderboard() {
@@ -17436,12 +17436,10 @@ var state = {
   infected: 4,
   infectedMultiplier: 0.01,
   infectedInterval: 5000,
-  infectedPointer: -90,
   // dead people and dead pointer
   dead: 0,
   deadMultiplier: 0.1,
   deadInterval: 25000,
-  deadPointer: -90,
   // time spend
   elapsedTime: 0,
   timer: undefined //multiplier
@@ -17588,10 +17586,12 @@ var state = {
       response: 'Abwarten'
     },
     // Setting for Score
-    infectedMultiplier: 0.01,
-    deadMultiplier: 0.01,
+    infectedMultiplier: 0.00,
+    deadMultiplier: 0.00,
     infectedInterval: 5000,
-    deadInterval: 25000
+    deadInterval: 25000,
+    limit: 10000,
+    MinMaxInfected: [0, 0]
   },
   '1.1': {
     video: VideoPath + '1.1' + VideoType,
