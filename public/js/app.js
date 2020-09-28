@@ -17433,13 +17433,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 __webpack_require__.r(__webpack_exports__);
 var state = {
   // infected people and infected pointer
-  infected: 4,
-  infectedMultiplier: 0.01,
-  infectedInterval: 5000,
+  infected: 0,
+  // infectedMultiplier: 0.01,
+  // infectedInterval: 5000,
   // dead people and dead pointer
   dead: 0,
-  deadMultiplier: 0.1,
-  deadInterval: 25000,
+  // deadMultiplier: 0.1,
+  // deadInterval: 25000,
   // time spend
   elapsedTime: 0,
   timer: undefined //multiplier
@@ -17574,7 +17574,7 @@ var VideoPath = '/video/';
 var VideoType = '.mp4';
 var state = {
   '1': {
-    video: VideoPath + '1' + VideoType,
+    video: VideoPath + 'Akt_01' + VideoType,
     type: "question",
     question: 'Soll die Regierung Vorsichtsmaßnahmen treffen oder abwarten?',
     firstOption: {
@@ -17585,26 +17585,19 @@ var state = {
       next: 1.2,
       response: 'Abwarten'
     },
-    // Setting for Score
-    infectedMultiplier: 0.00,
-    deadMultiplier: 0.00,
-    infectedInterval: 5000,
-    deadInterval: 25000,
-    limit: 10000,
-    MinMaxInfected: [0, 0]
+    MinMaxInfected: [0, 0],
+    MinMaxDead: [0, 0],
+    Overlay: 22
   },
   '1.1': {
-    video: VideoPath + '1.1' + VideoType,
+    video: VideoPath + 'Akt_01_1' + VideoType,
     type: "continue",
     continueStory: {
       next: '2',
       response: 'Weiter'
     },
-    // Setting for Score
-    infectedMultiplier: 0.01,
-    deadMultiplier: 0.01,
-    infectedInterval: 5000,
-    deadInterval: 25000
+    MinMaxInfected: [0, 0],
+    MinMaxDead: [0, 0]
   },
   '1.2': {
     video: VideoPath + '1.2' + VideoType,
@@ -17613,15 +17606,12 @@ var state = {
       next: '2',
       response: 'Weiter'
     },
-    // Setting for Score
-    infectedMultiplier: 0.01,
-    deadMultiplier: 0.01,
-    infectedInterval: 5000,
-    deadInterval: 25000
+    MinMaxInfected: [0, 0],
+    MinMaxDead: [0, 0]
   },
   // Progress Number 2
   '2': {
-    video: VideoPath + '2' + VideoType,
+    video: VideoPath + 'Akt_02' + VideoType,
     type: "question",
     question: 'Alle Geschäfte des nicht alltäglichen Gebrauchs schließen und Ausgangsbeschänkungen?',
     firstOption: {
@@ -17633,84 +17623,80 @@ var state = {
       response: 'Nein'
     },
     // Setting for Score
-    infectedMultiplier: 0.01,
-    deadMultiplier: 0.01,
-    infectedInterval: 5000,
-    deadInterval: 25000
+    MinMaxInfected: [1, 1],
+    MinMaxDead: [0, 0],
+    InfectedDelay: 20000,
+    Overlay: 22
   },
   '2.1': {
-    video: VideoPath + '2.1' + VideoType,
+    video: VideoPath + 'Akt_02_Ja' + VideoType,
     type: "continue",
     continueStory: {
-      next: '3',
+      next: '3.1',
       response: 'Weiter'
     },
-    // Setting for Score
-    infectedMultiplier: 0.01,
-    deadMultiplier: 0.01,
-    infectedInterval: 5000,
-    deadInterval: 25000
+    MinMaxInfected: [4500, 5500],
+    MinMaxDead: [3, 5]
   },
   '2.2': {
-    video: VideoPath + '2.2' + VideoType,
+    video: VideoPath + 'Akt_02_Nein' + VideoType,
     type: "continue",
     continueStory: {
-      next: '4',
+      next: '3.2',
       response: 'Weiter'
     },
-    // Setting for Score
-    infectedMultiplier: 0.01,
-    deadMultiplier: 0.01,
-    infectedInterval: 5000,
-    deadInterval: 25000
+    MinMaxInfected: [9000, 11000],
+    MinMaxDead: [10, 15]
   },
   // Progress Number 3
-  '3': {
-    video: VideoPath + '3' + VideoType,
-    type: "question",
-    question: 'Wie lange sollen die Geschäfte noch geschlossen bleiben?',
-    firstOption: {
-      next: '3.1',
-      response: 'Bis Ostern (ca. 2 Wochen)'
-    },
-    secondOption: {
-      next: '4',
-      response: 'Solange bis ein Impfmittel erhältlich ist'
-    },
-    // Setting for Score
-    infectedMultiplier: 0.01,
-    deadMultiplier: 0.01,
-    infectedInterval: 5000,
-    deadInterval: 25000
-  },
   '3.1': {
     video: VideoPath + '3.1' + VideoType,
     type: "question",
-    question: 'Hilfpaket für Unternehmmerinnen und Unternehmer',
+    question: 'Wie lange sollen die Geschäfte noch geschlossen bleiben?',
     firstOption: {
       next: '3.1.1',
-      response: 'Ja'
+      response: 'Bis Ostern (ca. 2 Wochen)'
     },
     secondOption: {
-      next: '3.1.1',
-      response: 'Nein'
+      next: '3.2',
+      response: 'Solange bis ein Impfmittel erhältlich ist'
     },
-    // Setting for Score
-    infectedMultiplier: 0.01,
-    deadMultiplier: 0.01,
-    infectedInterval: 5000,
-    deadInterval: 25000
+    MinMaxInfected: [12000, 13000],
+    MinMaxDead: [90, 110],
+    Overlay: 22
   },
   '3.1.1': {
     video: VideoPath + '3.1.1' + VideoType,
-    type: "end"
+    type: "question",
+    question: 'Hilfpaket für Unternehmmerinnen und Unternehmer',
+    firstOption: {
+      next: '3.1.1.1',
+      response: 'Ja'
+    },
+    secondOption: {
+      next: '3.1.1.2',
+      response: 'Nein'
+    },
+    // Setting for Score
+    MinMaxInfected: [13000, 14000],
+    MinMaxDead: [200, 220],
+    Overlay: 22
   },
-  '3.1.2': {
-    video: VideoPath + '3.1.2' + VideoType,
-    type: "end"
+  // End from 3.1.1.X
+  '3.1.1.1': {
+    video: VideoPath + '3.1.1.1' + VideoType,
+    type: "end",
+    MinMaxInfected: [0, 0],
+    MinMaxDead: [384, 400]
+  },
+  '3.1.1.2': {
+    video: VideoPath + '3.1.1.1' + VideoType,
+    type: "end",
+    MinMaxInfected: [0, 0],
+    MinMaxDead: [640, 660]
   },
   // Next Story
-  '3.2': {
+  '3.1.2': {
     video: VideoPath + '3.2' + VideoType,
     type: "question",
     question: 'Illegale Demostrationen auflösen? Zur not mit Gewalt?',
@@ -17721,96 +17707,117 @@ var state = {
     secondOption: {
       next: '3.2.2',
       response: 'Polizeieinsatz'
-    }
+    },
+    MinMaxInfected: [2850, 2950],
+    MinMaxDead: [390, 410],
+    Overlay: 22
   },
-  '3.2.1': {
+  //End from 3.1.2.X
+  '3.1.2.1': {
     video: VideoPath + '3.2.1' + VideoType,
-    type: "end"
+    type: "end",
+    MinMaxInfected: [0, 0],
+    MinMaxDead: [650, 660]
   },
-  '3.2.2': {
+  '3.1.2.2': {
     video: VideoPath + '3.2.2' + VideoType,
-    type: "end"
+    type: "end",
+    MinMaxInfected: [0, 0],
+    MinMaxDead: [650, 660]
   },
   //  Progress Number 4
-  '4': {
-    video: VideoPath + '4' + VideoType,
+  '3.2': {
+    video: VideoPath + '3.2' + VideoType,
     type: "question",
     question: 'Soll eine Ausgangssperre über die Risikogruppe und die Hauptüberträger verhängt werden?',
     firstOption: {
-      next: '4.1',
+      next: '3.2.1',
       response: 'Ja'
     },
     secondOption: {
-      next: '4.2',
+      next: '3.2.2',
       response: 'Nein'
-    }
+    },
+    MinMaxInfected: [33000, 3500],
+    MinMaxDead: [650, 660],
+    Overlay: 22
   },
-  '4.1': {
+  '3.2.1': {
     video: VideoPath + '4.1' + VideoType,
     type: "question",
     question: 'Hilfspaket für UnternehmerInnen',
     firstOption: {
-      next: '4.1.1',
+      next: '3.2.1.1',
       response: 'Ja'
     },
     secondOption: {
-      next: '4.1.2',
+      next: '3.2.1.2',
       response: 'Nein'
-    }
+    },
+    MinMaxInfected: [56000, 57000],
+    MinMaxDead: [1150, 1250]
   },
-  '4.1.1': {
-    video: VideoPath + '4.1.1' + VideoType,
-    type: "continue",
-    continueStory: {
-      next: '1',
-      response: 'Ende'
-    }
+  //End from 3.2.1.X
+  '3.2.1.1': {
+    video: VideoPath + '3.2.1.1' + VideoType,
+    type: "end",
+    MinMaxInfected: [0, 0],
+    MinMaxDead: [1580, 1700]
   },
-  '4.1.2': {
+  '3.2.1.2': {
     video: VideoPath + '4.1.2' + VideoType,
-    type: "continue",
-    continueStory: {
-      next: '1',
-      response: 'Ende'
-    }
+    type: "end",
+    MinMaxInfected: [0, 0],
+    MinMaxDead: [1580, 1760]
   },
-  '4.2': {
+  '3.2.2': {
     video: VideoPath + '4.2' + VideoType,
     type: "question",
-    question: 'Soll eine AUsgangsspeere über die Risikogruppe und die Hauptüberträger verhängt werden?',
+    question: 'Soll eine Ausgangsspeere über die Risikogruppe und die Hauptüberträger verhängt werden?',
     firstOption: {
-      next: '4.2.1',
-      response: 'Ja'
+      next: '3.2.2.1',
+      response: 'Nein'
     },
     secondOption: {
-      next: '4.2.2',
-      response: 'Nein'
-    }
+      next: '3.2.2.2',
+      response: 'Ja'
+    },
+    MinMaxInfected: [42000000, 430000000],
+    MinMaxDead: [26000, 260600]
   },
-  '4.2.1': {
+  '3.2.2.1': {
+    video: VideoPath + '3.2.2.1' + VideoType,
+    type: "end",
+    MinMaxInfected: [0, 0],
+    MinMaxDead: [3000000, 31450000],
+    AKW: 0
+  },
+  '3.2.2.2': {
     video: VideoPath + '4.2.1' + VideoType,
     type: "question",
     question: 'Hilfspaket für UnternehmerInnen',
     firstOption: {
-      next: '4.2.1.1',
+      next: '3.2.2.2.1',
       response: 'Ja'
     },
     secondOption: {
-      next: '4.2.1.2',
+      next: '3.2.2.2.2',
       response: 'Nein'
-    }
+    },
+    MinMaxInfected: [7000000, 7010000],
+    MinMaxDead: [380000, 388500]
   },
-  '4.2.1.1': {
-    video: VideoPath + '4.2.1.1' + VideoType,
-    type: "end"
-  },
-  '4.2.1.2': {
+  '3.2.2.2.1': {
     video: VideoPath + '4.2.1.2' + VideoType,
-    type: "end"
+    type: "end",
+    MinMaxInfected: [0, 0],
+    MinMaxDead: [400000, 430500]
   },
-  '4.2.2': {
+  '3.2.2.2.2': {
     video: VideoPath + '4.2.2' + VideoType,
-    type: "end"
+    type: "end",
+    MinMaxInfected: [0, 0],
+    MinMaxDead: [400000, 430500]
   }
 };
 var getters = {

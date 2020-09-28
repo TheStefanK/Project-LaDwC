@@ -75,6 +75,8 @@ img {
     display: block;
     background-color: #222;
     padding: 5px 10px;
+    margin: -2px 0 0;
+
   }
 
 }
@@ -84,6 +86,7 @@ img {
 .fuel {
   position: relative;
   //border-bottom: 10px solid black;
+
 }
 
 .fuel-scala {
@@ -97,7 +100,7 @@ img {
   margin: 0;
   padding: 0;
   display: block;
-  transition: 3s;
+  transition: 5s;
 }
 
 .gauge-bottem {
@@ -174,11 +177,12 @@ img {
 
 // Story Line End .. Submit Name
 .story-line_end {
-  label{
+  label {
     display: block;
     text-align: center;
     font-size: 20px;
   }
+
   .input_end_name {
     padding: 20px;
     display: block;
@@ -186,7 +190,8 @@ img {
     width: 400px;
     font-size: 20px;
   }
-  .responseBtn{
+
+  .responseBtn {
     display: block;
     margin: 0 auto;
   }
@@ -195,8 +200,9 @@ img {
 .fuel-needle {
   animation-name: needle;
   animation-duration: 15.5s;
-  transform-origin: center 115.25px ;
+  transform-origin: center 115.25px;
 }
+
 //@keyframes needle {
 //  0% {
 //    transform: rotate(0deg );

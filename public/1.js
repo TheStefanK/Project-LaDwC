@@ -20,8 +20,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "gauge",
@@ -33,18 +31,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      style: ""
+      style: "",
+      CounterNumber: 0
     };
   },
-  methods: {},
   watch: {
     number: function number(newValue, oldValue) {
-      console.log(this.degSkala[0]);
-      console.log(newValue, oldValue);
+      // console.log(this.number + typeof (this.number) + ' Number Gauge')
+      // console.log(this.degSkala[0]);
+      // console.log(newValue, oldValue);
       var RotateValue;
 
-      if (newValue < 5) {
-        RotateValue = -90;
+      if (newValue <= 0) {
+        RotateValue = -95;
       }
 
       if (newValue < this.degSkala[0]) {
@@ -59,12 +58,52 @@ __webpack_require__.r(__webpack_exports__);
         RotateValue = 0;
       }
 
+      this.counter(oldValue, newValue, 3); //250000 Max = 90
+
       this.style = " transform: rotate(" + RotateValue + "deg);";
     }
   },
   created: function created() {
-    if (this.number < 5) {
-      this.style = " transform: rotate(" + -90 + "deg);";
+    if (this.number <= 0) {
+      this.style = " transform: rotate(" + -95 + "deg);";
+    }
+  },
+  methods: {
+    counter: function counter(start, end, duration) {
+      var _this = this;
+
+      var current = start;
+      var range = end - start;
+      var increment = end > start ? 1 : -1;
+
+      if (range > 1000) {
+        increment = end > start ? 11 : -11;
+      }
+
+      if (range > 10000) {
+        increment = end > start ? 111 : -111;
+      }
+
+      if (range > 100000) {
+        increment = end > start ? 1111 : -1111;
+      }
+
+      if (range > 1000000) {
+        increment = end > start ? 111111 : -111111;
+      }
+
+      console.log('range', range);
+      var step = Math.abs(Math.floor(duration / range));
+      console.log('Steps', step);
+      var timer = setInterval(function () {
+        current += increment;
+        _this.CounterNumber = current;
+
+        if (current === end || current >= end) {
+          clearInterval(timer);
+          _this.CounterNumber = end;
+        }
+      }, step);
     }
   }
 });
@@ -107,6 +146,12 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "score",
+  data: function data() {
+    return {
+      InfectedSkala: [],
+      DeadSkala: []
+    };
+  },
   mixins: [_utility_mixins__WEBPACK_IMPORTED_MODULE_0__["scoreMixins"]],
   computed: {
     Infected: function Infected() {
@@ -192,6 +237,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_layout_header_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/layout/header/index */ "./resources/js/components/layout/header/index.vue");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _utility_mixins__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utility/mixins */ "./resources/js/utility/mixins.js");
 //
 //
 //
@@ -270,21 +316,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Game",
+  mixins: [_utility_mixins__WEBPACK_IMPORTED_MODULE_4__["scoreMixins"]],
   data: function data() {
     return {
       videoEnd: false,
       videoPause: false,
       ProgressStatus: "1",
-      VideoSource: '/video/1.mp4',
+      VideoSource: '/video/vid_1.mp4',
       InfectedInterval: null,
       DeadInterval: null,
-      PlayerName: null
+      PlayerName: null,
+      VideoCurrentTime: null
     };
   },
   components: {
@@ -294,9 +343,12 @@ __webpack_require__.r(__webpack_exports__);
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
     storyLine: 'getStoryLineList'
   }),
+  watch: {
+    VideoCurrentTime: function VideoCurrentTime(newValue, oldValue) {// console.log(newValue,oldValue);
+    }
+  },
   created: function created() {
-    this.startInfectionTimer();
-    this.startDeadTimer();
+    this.VideoSource = this.storyLine[this.ProgressStatus].video;
   },
   methods: {
     OnEnd: function OnEnd() {
@@ -308,23 +360,29 @@ __webpack_require__.r(__webpack_exports__);
     OnStart: function OnStart() {
       this.videoEnd = false;
     },
+    updateVideoTime: function updateVideoTime() {
+      var Video = this.$refs.videoRef;
+      var VideoDuration = this.$refs.videoRef.duration - this.storyLine[this.ProgressStatus].Overlay;
+      var CurrentTime = this.$refs.videoRef.currentTime;
+      var VideoType = this.storyLine[this.ProgressStatus].type;
+      console.log(VideoType);
+
+      if (VideoType === "question") {
+        if (VideoDuration < CurrentTime) {
+          console.log("Start Event");
+          this.videoEnd = true;
+        }
+      } else {
+        if (Video.duration === CurrentTime) {
+          this.videoEnd = true;
+        }
+      }
+
+      this.VideoCurrentTime = this.$refs.videoRef.currentTime;
+    },
     // Next Step Story Line
     nextProgress: function nextProgress(val) {
       var _this = this;
-
-      if (this.storyLine[val].infectedMultiplier !== undefined && this.storyLine[val].deadMultiplier !== undefined) {
-        console.log("multiplier Change");
-        this.$store.dispatch("handleChangeInfectedMultiplier", this.storyLine[val].infectedMultiplier);
-        this.$store.dispatch("handleChangeDeadMultiplier", this.storyLine[val].deadMultiplier);
-        console.log(this.storyLine[val].infectedMultiplier);
-      }
-
-      if (this.storyLine[val].infectedInterval !== undefined && this.storyLine[val].deadInterval !== undefined) {
-        console.log("multiplier Change");
-        this.$store.dispatch("handleChangeInfectedInterval", this.storyLine[val].infectedInterval);
-        this.$store.dispatch("handleChangeDeadInterval", this.storyLine[val].deadInterval);
-        console.log(this.storyLine[val].infectedInterval);
-      }
 
       setTimeout(function () {
         _this.ProgressStatus = val;
@@ -334,52 +392,34 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.videoEnd = false;
       }, 500);
+      console.log(this.storyLine[val].InfectedDelay);
+
+      if (this.storyLine[val].InfectedDelay) {
+        console.log("If");
+        setTimeout(function () {
+          _this.CalculateInfectionAndDead(val);
+        }, this.storyLine[val].InfectedDelay);
+      } else {
+        console.log("else");
+        this.CalculateInfectionAndDead(val);
+      }
     },
-    //  Start Timer for Infection and Dead People
-    startInfectionTimer: function startInfectionTimer() {
-      var _this2 = this;
-
-      var interval = this.$store.getters.getInfectedInterval; // Infected Interval Timer
-
-      this.InfectedInterval = setInterval(function () {
-        var inf = _this2.$store.getters.getInfected; // Summe of all Infected People during the Game
-
-        var multi = _this2.$store.getters.getInfectedMultiplier; // Infected Multiplier
-
-        var z = Math.round(inf * multi); // Summe of Infected People * Multiplier
-
-        var OptionOne = inf + 1; // Option One if the Value is smaller than 1
-
-        var OptionTwo = inf + z; // Option Two Value is 1 or more
-
-        z < 1 ? _this2.$store.dispatch('handleChangeInfectedValue', OptionOne) : _this2.$store.dispatch('handleChangeInfectedValue', OptionTwo);
-      }, interval);
+    // Calcutlate Infected People and Dead People Base of Min/Max Values
+    CalculateInfectionAndDead: function CalculateInfectionAndDead(val) {
+      var inf = this.storyLine[val].MinMaxInfected;
+      var dead = this.storyLine[val].MinMaxDead;
+      var InfectedPeople = this.RandomMinMaxNumber(inf[0], inf[1]);
+      var DeadPeople = this.RandomMinMaxNumber(dead[0], dead[1]);
+      this.$store.dispatch('handleChangeInfectedValue', InfectedPeople);
+      this.$store.dispatch('handleChangeDeadValue', DeadPeople);
     },
-    startDeadTimer: function startDeadTimer() {
-      var _this3 = this;
-
-      var interval = this.$store.getters.getDeadInterval; // Dead Interval Timer
-
-      console.log('Dead Interval ' + interval);
-      this.DeadInterval = setInterval(function () {
-        var inf = _this3.$store.getters.getInfected; // Summe of all Infected People during the Game
-
-        var dead = _this3.$store.getters.getDead; // Summe of all Infected People during the Game
-
-        var multi = _this3.$store.getters.getInfectedMultiplier; // Infected Multiplier
-
-        var z = Math.round(inf * multi / 3); // Summe of Infected People * Multiplier
-
-        var OptionOne = dead + 1; // Option One if the Value is smaller than 1
-
-        var OptionTwo = dead + z; // Option Two Value is 1 or more
-
-        console.log(OptionOne, ' <-1   2-> ', OptionTwo);
-        z < 1 ? _this3.$store.dispatch('handleChangeDeadValue', OptionOne) : _this3.$store.dispatch('handleChangeDeadValue', OptionTwo);
-      }, interval);
+    RandomMinMaxNumber: function RandomMinMaxNumber(min, max) {
+      // min and max included
+      var x = Math.floor(Math.random() * (max - min + 1) + min);
+      return x;
     },
     Submit_Player: function Submit_Player() {
-      var _this4 = this;
+      var _this2 = this;
 
       if (this.PlayerName !== null) {
         console.log("Name OK");
@@ -392,7 +432,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(response);
 
           if (response.status === 200) {
-            _this4.$router.push({
+            _this2.$router.push({
               name: "leaderboard"
             });
           }
@@ -408,7 +448,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   destroyed: function destroyed() {
-    //clear Game
     this.$store.dispatch('handleChangeInfectedValue', 0);
     this.$store.dispatch('handleChangeDeadValue', 0);
     clearInterval(this.InfectedInterval);
@@ -452,12 +491,10 @@ var render = function() {
         " " +
           _vm._s(_vm.name) +
           " " +
-          _vm._s(_vm.numberWithDot(_vm.number)) +
-          "\n    "
+          _vm._s(_vm.numberWithDot(_vm.CounterNumber)) +
+          " "
       )
-    ]),
-    _vm._v(" "),
-    _c("p")
+    ])
   ])
 }
 var staticRenderFns = []
@@ -503,7 +540,11 @@ var render = function() {
     _c(
       "div",
       { staticClass: "dead" },
-      [_c("v-gauge", { attrs: { name: "Tote:", number: _vm.Dead } })],
+      [
+        _c("v-gauge", {
+          attrs: { name: "Tote:", number: _vm.Dead, degSkala: [5, 10, 20] }
+        })
+      ],
       1
     )
   ])
@@ -612,7 +653,8 @@ var render = function() {
             return _vm.OnEnd()
           },
           pause: _vm.OnPause,
-          play: _vm.OnStart
+          play: _vm.OnStart,
+          timeupdate: _vm.updateVideoTime
         }
       },
       [_c("source", { attrs: { src: _vm.VideoSource } })]

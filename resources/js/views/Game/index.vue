@@ -1,7 +1,7 @@
 <template>
     <div class="container-video">
         <video id="Story-Line_Video" ref="videoRef" autoplay @ended="OnEnd()" @pause="OnPause"
-               @play="OnStart" :class="{'end-video': videoEnd}">
+               @play="OnStart" :class="{'end-video': videoEnd}" @timeupdate="updateVideoTime">
             <source :src="VideoSource">
         </video>
         <input type="hidden" v-model="ProgressStatus">
@@ -81,19 +81,22 @@
   import score from '../../components/game/score'
   import header from '../../components/layout/header/index'
   import axios from "axios"
+  import {scoreMixins} from '../../utility/mixins'
 
   export default {
     name: "Game",
+    mixins: [scoreMixins],
     data() {
       return {
         videoEnd: false,
         videoPause: false,
         ProgressStatus: "1",
-        VideoSource: '/video/1.mp4',
+        VideoSource: '/video/vid_1.mp4',
         InfectedInterval: null,
         DeadInterval: null,
         PlayerName: null,
-      }
+        VideoCurrentTime: null,
+          }
     },
     components: {
       'app-score': score,
@@ -101,9 +104,13 @@
     }, computed: mapGetters({
       storyLine: 'getStoryLineList',
     }),
-    created() {
-      this.startInfectionTimer();
-      this.startDeadTimer()
+    watch: {
+      VideoCurrentTime(newValue, oldValue) {
+
+        // console.log(newValue,oldValue);
+      }
+    },created(){
+      this.VideoSource = this.storyLine[this.ProgressStatus].video;
     },
     methods: {
       OnEnd() {
@@ -113,54 +120,64 @@
       }, OnStart() {
         this.videoEnd = false;
       },
+      updateVideoTime(){
+        let Video = this.$refs.videoRef;
+        let VideoDuration = this.$refs.videoRef.duration - this.storyLine[this.ProgressStatus].Overlay;
+        let CurrentTime = this.$refs.videoRef.currentTime;
+        let VideoType = this.storyLine[this.ProgressStatus].type;
+        console.log(VideoType);
+        if (VideoType === "question"){
+          if (VideoDuration < CurrentTime){
+            console.log("Start Event");
+            this.videoEnd = true;
+          }
+        }else {
+          if (Video.duration === CurrentTime){
+            this.videoEnd = true;
+          }
+        }
+        this.VideoCurrentTime = this.$refs.videoRef.currentTime;
+      },
       // Next Step Story Line
       nextProgress(val) {
-        if (this.storyLine[val].infectedMultiplier !== undefined && this.storyLine[val].deadMultiplier !== undefined) {
-          console.log("multiplier Change");
-          this.$store.dispatch("handleChangeInfectedMultiplier", this.storyLine[val].infectedMultiplier);
-          this.$store.dispatch("handleChangeDeadMultiplier", this.storyLine[val].deadMultiplier);
-          console.log(this.storyLine[val].infectedMultiplier);
-        }
-        if (this.storyLine[val].infectedInterval !== undefined && this.storyLine[val].deadInterval !== undefined) {
-          console.log("multiplier Change");
-          this.$store.dispatch("handleChangeInfectedInterval", this.storyLine[val].infectedInterval);
-          this.$store.dispatch("handleChangeDeadInterval", this.storyLine[val].deadInterval);
-          console.log(this.storyLine[val].infectedInterval);
-        }
 
         setTimeout(() => {
           this.ProgressStatus = val;
           this.VideoSource = this.storyLine[val].video;
           this.$refs.videoRef.load();
           this.videoEnd = false;
-        }, 500)
+        }, 500);
+        console.log(this.storyLine[val].InfectedDelay);
+        if (this.storyLine[val].InfectedDelay){
+          console.log("If");
+          setTimeout(()=>{
+            this.CalculateInfectionAndDead(val);
+
+          },this.storyLine[val].InfectedDelay);
+        } else {
+          console.log("else");
+          this.CalculateInfectionAndDead(val);
+        }
+
+
       },
-      //  Start Timer for Infection and Dead People
-      startInfectionTimer() {
-        let interval = this.$store.getters.getInfectedInterval; // Infected Interval Timer
-        this.InfectedInterval = setInterval(() => {
-          let inf = this.$store.getters.getInfected;  // Summe of all Infected People during the Game
-          let multi = this.$store.getters.getInfectedMultiplier; // Infected Multiplier
-          let z = Math.round(inf * multi); // Summe of Infected People * Multiplier
-          let OptionOne = inf + 1; // Option One if the Value is smaller than 1
-          let OptionTwo = inf + z; // Option Two Value is 1 or more
-          (z < 1) ? this.$store.dispatch('handleChangeInfectedValue', OptionOne) : this.$store.dispatch('handleChangeInfectedValue', OptionTwo);
-        }, interval);
+
+      // Calcutlate Infected People and Dead People Base of Min/Max Values
+      CalculateInfectionAndDead(val){
+        let inf = this.storyLine[val].MinMaxInfected;
+        let dead =  this.storyLine[val].MinMaxDead;
+        let InfectedPeople = this.RandomMinMaxNumber(inf[0],inf[1]);
+        let DeadPeople = this.RandomMinMaxNumber(dead[0],dead[1]);
+        this.$store.dispatch('handleChangeInfectedValue', InfectedPeople);
+        this.$store.dispatch('handleChangeDeadValue', DeadPeople);
       },
-      startDeadTimer() {
-        let interval = this.$store.getters.getDeadInterval; // Dead Interval Timer
-        console.log('Dead Interval ' + interval);
-        this.DeadInterval = setInterval(() => {
-          let inf = this.$store.getters.getInfected;  // Summe of all Infected People during the Game
-          let dead = this.$store.getters.getDead;  // Summe of all Infected People during the Game
-          let multi = this.$store.getters.getInfectedMultiplier; // Infected Multiplier
-          let z = Math.round((inf * multi) / 3); // Summe of Infected People * Multiplier
-          let OptionOne = dead + 1; // Option One if the Value is smaller than 1
-          let OptionTwo = dead + z; // Option Two Value is 1 or more
-          console.log(OptionOne, ' <-1   2-> ', OptionTwo);
-          (z < 1) ? this.$store.dispatch('handleChangeDeadValue', OptionOne) : this.$store.dispatch('handleChangeDeadValue', OptionTwo);
-        }, interval);
+
+      RandomMinMaxNumber(min, max) { // min and max included
+        let x = Math.floor(Math.random() * (max - min + 1) + min);
+        return x;
       },
+
+
       Submit_Player() {
 
         if (this.PlayerName !== null) {
@@ -188,7 +205,6 @@
       }
     },
     destroyed() {
-      //clear Game
       this.$store.dispatch('handleChangeInfectedValue', 0);
       this.$store.dispatch('handleChangeDeadValue', 0);
       clearInterval(this.InfectedInterval);

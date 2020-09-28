@@ -1,13 +1,13 @@
 const state = {
   // infected people and infected pointer
-  infected: 4,
-  infectedMultiplier: 0.01,
-  infectedInterval: 5000,
+  infected: 0,
+  // infectedMultiplier: 0.01,
+  // infectedInterval: 5000,
 
   // dead people and dead pointer
   dead: 0,
-  deadMultiplier: 0.1,
-  deadInterval: 25000,
+  // deadMultiplier: 0.1,
+  // deadInterval: 25000,
 
   // time spend
   elapsedTime: 0,

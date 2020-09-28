@@ -13,7 +13,7 @@
         </div>
         <div class="dead">
 
-            <v-gauge name="Tote:" :number="Dead"></v-gauge>
+            <v-gauge name="Tote:" :number="Dead" :degSkala="[5,10,20]"></v-gauge>
 
         </div>
     </div>
@@ -23,7 +23,12 @@
   import {scoreMixins} from '../../utility/mixins'
   import gauge from './gauge'
   export default {
-    name: "score",
+    name: "score", data() {
+      return {
+        InfectedSkala:[],
+        DeadSkala:[],
+      }
+    },
     mixins: [scoreMixins],
     computed: {
       Infected() {
