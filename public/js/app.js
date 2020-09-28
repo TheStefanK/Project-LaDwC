@@ -17738,7 +17738,7 @@ var state = {
       next: '3.2.2',
       response: 'Nein'
     },
-    MinMaxInfected: [33000, 3500],
+    MinMaxInfected: [33000, 35000],
     MinMaxDead: [650, 660],
     Overlay: 22
   },
@@ -17783,7 +17783,7 @@ var state = {
       response: 'Ja'
     },
     MinMaxInfected: [42000000, 430000000],
-    MinMaxDead: [26000, 260600]
+    MinMaxDead: [260000, 260600]
   },
   '3.2.2.1': {
     video: VideoPath + '3.2.2.1' + VideoType,
