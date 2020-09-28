@@ -3,7 +3,7 @@
 // Video Settings
 const VideoPath = '/video/';
 const VideoType = '.mp4';
-const OverlayTime = 22;
+const OverlayTime = 22; // Sek
 
 const state = {
 

@@ -17512,7 +17512,8 @@ __webpack_require__.r(__webpack_exports__);
 // Video Settings
 var VideoPath = '/video/';
 var VideoType = '.mp4';
-var OverlayTime = 22;
+var OverlayTime = 22; // Sek
+
 var state = {
   '1': {
     video: VideoPath + 'Akt_01' + VideoType,
