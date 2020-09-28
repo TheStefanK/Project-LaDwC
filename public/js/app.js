@@ -17352,11 +17352,11 @@ var home = function home() {
 };
 
 var game = function game() {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ../../views/Game/index */ "./resources/js/views/Game/index.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(6), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ../../views/Game/index */ "./resources/js/views/Game/index.vue"));
 };
 
 var leaderboard = function leaderboard() {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ../../views/Leaderboard/index.vue */ "./resources/js/views/Leaderboard/index.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(6), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ../../views/Leaderboard/index.vue */ "./resources/js/views/Leaderboard/index.vue"));
 }; // import start from '../../components/start/index'
 
 
@@ -17432,18 +17432,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var state = {
-  // infected people and infected pointer
   infected: 0,
-  // infectedMultiplier: 0.01,
-  // infectedInterval: 5000,
-  // dead people and dead pointer
   dead: 0,
-  // deadMultiplier: 0.1,
-  // deadInterval: 25000,
   // time spend
   elapsedTime: 0,
-  timer: undefined //multiplier
-
+  timer: undefined,
+  //  AKW
+  akw: 0
 };
 var getters = {
   // All Stats
@@ -17454,9 +17449,6 @@ var getters = {
   getInfected: function getInfected(state) {
     return state.infected;
   },
-  getInfectedPointer: function getInfectedPointer(state) {
-    return state.infectedPointer;
-  },
   getInfectedCalc: function getInfectedCalc(state) {
     return state.infected - state.dead;
   },
@@ -17464,22 +17456,9 @@ var getters = {
   getDead: function getDead(state) {
     return state.dead;
   },
-  getDeadPointer: function getDeadPointer(state) {
-    return state.deadPointer;
-  },
-  // Interval timer
-  getInfectedInterval: function getInfectedInterval(state) {
-    return state.infectedInterval;
-  },
-  getDeadInterval: function getDeadInterval(state) {
-    return state.deadInterval;
-  },
-  // Multiplier Getters
-  getInfectedMultiplier: function getInfectedMultiplier(state) {
-    return state.infectedMultiplier;
-  },
-  getDeadMultiplier: function getDeadMultiplier(state) {
-    return state.deadMultiplier;
+  //  Akw
+  getAkwDead: function getAkwDead(state) {
+    return state.akw;
   }
 };
 var mutations = {
@@ -17491,26 +17470,9 @@ var mutations = {
   setDeadValue: function setDeadValue(state, value) {
     state.dead = value;
   },
-  // set the new Interval timer
-  setInfectedInterval: function setInfectedInterval(state, value) {
-    state.infectedInterval = value;
-  },
-  setDeadInterval: function setDeadInterval(state, value) {
-    state.deadInterval = value;
-  },
-  // Set Multiplier value
-  setInfectedMultiplier: function setInfectedMultiplier(state, value) {
-    state.infectedMultiplier = value;
-  },
-  setDeadMultiplier: function setDeadMultiplier(state, value) {
-    state.deadMultiplier = value;
-  },
-  // Set Pointer value
-  setInfectedPointer: function setInfectedPointer(state, value) {
-    state.infectedPointer = value;
-  },
-  setDeadPointer: function setDeadPointer(state, value) {
-    state.deadPointer = value;
+  // Set the new dead value
+  setAkwValue: function setAkwValue(state, value) {
+    state.akw = value;
   }
 };
 var actions = {
@@ -17523,31 +17485,9 @@ var actions = {
     var commit = _ref2.commit;
     commit('setDeadValue', payload);
   },
-  // Handle changes of infected / dead value
-  handleChangeInfectedMultiplier: function handleChangeInfectedMultiplier(_ref3, payload) {
+  handleChangeAkwValue: function handleChangeAkwValue(_ref3, payload) {
     var commit = _ref3.commit;
-    commit('setInfectedMultiplier', payload);
-  },
-  handleChangeDeadMultiplier: function handleChangeDeadMultiplier(_ref4, payload) {
-    var commit = _ref4.commit;
-    commit('setDeadMultiplier', payload);
-  },
-  handleChangeInfectedInterval: function handleChangeInfectedInterval(_ref5, payload) {
-    var commit = _ref5.commit;
-    commit('setInfectedInterval', payload);
-  },
-  handleChangeDeadInterval: function handleChangeDeadInterval(_ref6, payload) {
-    var commit = _ref6.commit;
-    commit('setDeadInterval', payload);
-  },
-  // Handle changes of Pointer value
-  handleChangeInfectedPointer: function handleChangeInfectedPointer(_ref7, payload) {
-    var commit = _ref7.commit;
-    commit('setInfectedPointer', payload);
-  },
-  handleChangeDeadPointer: function handleChangeDeadPointer(_ref8, payload) {
-    var commit = _ref8.commit;
-    commit('setDeadPointer', payload);
+    commit('setAkwValue', payload);
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -17572,6 +17512,7 @@ __webpack_require__.r(__webpack_exports__);
 // Video Settings
 var VideoPath = '/video/';
 var VideoType = '.mp4';
+var OverlayTime = 22;
 var state = {
   '1': {
     video: VideoPath + 'Akt_01' + VideoType,
@@ -17587,7 +17528,7 @@ var state = {
     },
     MinMaxInfected: [0, 0],
     MinMaxDead: [0, 0],
-    Overlay: 22
+    Overlay: OverlayTime
   },
   '1.1': {
     video: VideoPath + 'Akt_01_1' + VideoType,
@@ -17607,7 +17548,8 @@ var state = {
       response: 'Weiter'
     },
     MinMaxInfected: [0, 0],
-    MinMaxDead: [0, 0]
+    MinMaxDead: [0, 0] // AKW: [1500000,2500000]
+
   },
   // Progress Number 2
   '2': {
@@ -17626,7 +17568,7 @@ var state = {
     MinMaxInfected: [1, 1],
     MinMaxDead: [0, 0],
     InfectedDelay: 20000,
-    Overlay: 22
+    Overlay: OverlayTime
   },
   '2.1': {
     video: VideoPath + 'Akt_02_Ja' + VideoType,
@@ -17663,7 +17605,7 @@ var state = {
     },
     MinMaxInfected: [12000, 13000],
     MinMaxDead: [90, 110],
-    Overlay: 22
+    Overlay: OverlayTime
   },
   '3.1.1': {
     video: VideoPath + '3.1.1' + VideoType,
@@ -17680,7 +17622,7 @@ var state = {
     // Setting for Score
     MinMaxInfected: [13000, 14000],
     MinMaxDead: [200, 220],
-    Overlay: 22
+    Overlay: OverlayTime
   },
   // End from 3.1.1.X
   '3.1.1.1': {
@@ -17710,7 +17652,7 @@ var state = {
     },
     MinMaxInfected: [2850, 2950],
     MinMaxDead: [390, 410],
-    Overlay: 22
+    Overlay: OverlayTime
   },
   //End from 3.1.2.X
   '3.1.2.1': {
@@ -17740,7 +17682,7 @@ var state = {
     },
     MinMaxInfected: [33000, 35000],
     MinMaxDead: [650, 660],
-    Overlay: 22
+    Overlay: OverlayTime
   },
   '3.2.1': {
     video: VideoPath + '4.1' + VideoType,
@@ -17790,7 +17732,7 @@ var state = {
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [3000000, 31450000],
-    AKW: 0
+    AKW: [1500000, 1550000]
   },
   '3.2.2.2': {
     video: VideoPath + '4.2.1' + VideoType,

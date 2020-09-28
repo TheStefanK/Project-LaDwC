@@ -211,3 +211,18 @@ img {
 //    transform: rotate(360deg);
 //  }
 //}
+
+// #### AKW
+.akw-box{
+  img{
+    max-width: 120px;
+    max-height: 120px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+  }
+  span{
+    margin: 2px 0 0 0;
+    text-align: center;
+  }
+}

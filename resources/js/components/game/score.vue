@@ -1,15 +1,11 @@
 <template>
     <div class="score-board">
         <div class="infected">
-
-        <v-gauge name="Infizierte" :number="Infected" :degSkala="[5,10,20]">
-
-        </v-gauge>
+            <v-gauge name="Infizierte" :number="Infected" :degSkala="[5,10,20]">
+            </v-gauge>
         </div>
         <div class="statistics">
-            <!--                <span>Zeit: {{formattedElapsedTime}}</span>-->
-            <!--            <span>{{formattedElapsedTime(timer)}}</span>-->
-
+            <v-akw></v-akw>
         </div>
         <div class="dead">
 
@@ -22,11 +18,13 @@
 <script>
   import {scoreMixins} from '../../utility/mixins'
   import gauge from './gauge'
+  import akw from './akw'
+
   export default {
     name: "score", data() {
       return {
-        InfectedSkala:[],
-        DeadSkala:[],
+        InfectedSkala: [],
+        DeadSkala: [],
       }
     },
     mixins: [scoreMixins],
@@ -37,13 +35,15 @@
       Dead() {
         return this.$store.getters.getDead;
       },
+      AkwDead() {
+        return this.$store.getters.getAkwDead;
       },
-    components:{
-      "v-gauge":gauge,
     },
-    watch: {
-
-    }, methods: {
+    components: {
+      "v-gauge": gauge,
+      "v-akw": akw,
+    },
+    methods: {
       startTimer() {
         this.timer = setInterval(() => {
           this.elapsedTime += 1000;
@@ -55,8 +55,6 @@
       resetTimer() {
         this.elapsedTime = 0;
       },
-    }, destroyed() {
-      clearInterval(this.startInfection);
-    }
+    },
   }
 </script>

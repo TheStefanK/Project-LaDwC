@@ -1,5 +1,72 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/game/akw.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/game/akw.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utility_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utility/mixins */ "./resources/js/utility/mixins.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "akw",
+  mixins: [_utility_mixins__WEBPACK_IMPORTED_MODULE_0__["scoreMixins"]],
+  computed: {
+    AkwDead: function AkwDead() {
+      return this.$store.getters.getAkwDead;
+    }
+  },
+  data: function data() {
+    return {
+      CounterNumber: 0
+    };
+  },
+  watch: {
+    AkwDead: function AkwDead(newValue, oldValue) {
+      console.log("AFK CHNAGE", newValue, oldValue);
+      this.counter(oldValue, newValue);
+    }
+  },
+  methods: {
+    counter: function counter(start, end) {
+      var _this = this;
+
+      console.log("AFK START COUNTER");
+      var current = start;
+      var timer = setInterval(function () {
+        console.log("+1 AKW");
+        current += _this.RandomMinMaxNumber(1, 1000);
+        _this.CounterNumber = current;
+        console.log(_this.CounterNumber);
+
+        if (current === end || current >= end) {
+          clearInterval(timer);
+          _this.CounterNumber = end;
+        }
+      }, 100);
+    },
+    RandomMinMaxNumber: function RandomMinMaxNumber(min, max) {
+      // min and max included
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/game/gauge.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/game/gauge.vue?vue&type=script&lang=js& ***!
@@ -121,6 +188,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utility_mixins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utility/mixins */ "./resources/js/utility/mixins.js");
 /* harmony import */ var _gauge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gauge */ "./resources/js/components/game/gauge.vue");
+/* harmony import */ var _akw__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./akw */ "./resources/js/components/game/akw.vue");
 //
 //
 //
@@ -138,10 +206,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -159,12 +224,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     Dead: function Dead() {
       return this.$store.getters.getDead;
+    },
+    AkwDead: function AkwDead() {
+      return this.$store.getters.getAkwDead;
     }
   },
   components: {
-    "v-gauge": _gauge__WEBPACK_IMPORTED_MODULE_1__["default"]
+    "v-gauge": _gauge__WEBPACK_IMPORTED_MODULE_1__["default"],
+    "v-akw": _akw__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  watch: {},
   methods: {
     startTimer: function startTimer() {
       var _this = this;
@@ -179,9 +247,6 @@ __webpack_require__.r(__webpack_exports__);
     resetTimer: function resetTimer() {
       this.elapsedTime = 0;
     }
-  },
-  destroyed: function destroyed() {
-    clearInterval(this.startInfection);
   }
 });
 
@@ -330,8 +395,6 @@ __webpack_require__.r(__webpack_exports__);
       videoPause: false,
       ProgressStatus: "1",
       VideoSource: '/video/vid_1.mp4',
-      InfectedInterval: null,
-      DeadInterval: null,
       PlayerName: null,
       VideoCurrentTime: null
     };
@@ -365,11 +428,10 @@ __webpack_require__.r(__webpack_exports__);
       var VideoDuration = this.$refs.videoRef.duration - this.storyLine[this.ProgressStatus].Overlay;
       var CurrentTime = this.$refs.videoRef.currentTime;
       var VideoType = this.storyLine[this.ProgressStatus].type;
-      console.log(VideoType);
 
       if (VideoType === "question") {
         if (VideoDuration < CurrentTime) {
-          console.log("Start Event");
+          // console.log("Start Event");
           this.videoEnd = true;
         }
       } else {
@@ -391,17 +453,21 @@ __webpack_require__.r(__webpack_exports__);
         _this.$refs.videoRef.load();
 
         _this.videoEnd = false;
-      }, 500);
-      console.log(this.storyLine[val].InfectedDelay);
+      }, 500); // console.log(this.storyLine[val].InfectedDelay);
 
       if (this.storyLine[val].InfectedDelay) {
-        console.log("If");
+        // console.log("If");
         setTimeout(function () {
           _this.CalculateInfectionAndDead(val);
         }, this.storyLine[val].InfectedDelay);
       } else {
-        console.log("else");
+        // console.log("else");
         this.CalculateInfectionAndDead(val);
+      }
+
+      if (this.storyLine[val].AKW) {
+        console.log("AKW AKTIVE");
+        this.CalculateAKW(val);
       }
     },
     // Calcutlate Infected People and Dead People Base of Min/Max Values
@@ -413,10 +479,15 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.dispatch('handleChangeInfectedValue', InfectedPeople);
       this.$store.dispatch('handleChangeDeadValue', DeadPeople);
     },
+    CalculateAKW: function CalculateAKW(val) {
+      // console.log("AKW CALC");
+      var AKW = this.storyLine[val].AKW;
+      var AKWPeople = this.RandomMinMaxNumber(AKW[0], AKW[1]);
+      this.$store.dispatch('handleChangeAkwValue', AKWPeople); // console.log("AKW END", AKWPeople);
+    },
     RandomMinMaxNumber: function RandomMinMaxNumber(min, max) {
       // min and max included
-      var x = Math.floor(Math.random() * (max - min + 1) + min);
-      return x;
+      return Math.floor(Math.random() * (max - min + 1) + min);
     },
     Submit_Player: function Submit_Player() {
       var _this2 = this;
@@ -450,10 +521,42 @@ __webpack_require__.r(__webpack_exports__);
   destroyed: function destroyed() {
     this.$store.dispatch('handleChangeInfectedValue', 0);
     this.$store.dispatch('handleChangeDeadValue', 0);
-    clearInterval(this.InfectedInterval);
-    clearInterval(this.DeadInterval);
+    this.$store.dispatch('handleChangeAkwValue', 0);
   }
 });
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/game/akw.vue?vue&type=template&id=1eadb98a&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/game/akw.vue?vue&type=template&id=1eadb98a& ***!
+  \***********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.AkwDead !== 0
+    ? _c("div", { staticClass: "akw-box" }, [
+        _c("img", {
+          staticClass: "akw-symbole",
+          attrs: { src: "images/akw.png", alt: "AKW", width: "300px" }
+        }),
+        _vm._v(" "),
+        _c("span", [_vm._v(" " + _vm._s(_vm.numberWithDot(_vm.CounterNumber)))])
+      ])
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
 
 /***/ }),
 
@@ -535,7 +638,7 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "statistics" }),
+    _c("div", { staticClass: "statistics" }, [_c("v-akw")], 1),
     _vm._v(" "),
     _c(
       "div",
@@ -895,6 +998,75 @@ var render = function() {
 }
 var staticRenderFns = []
 render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/game/akw.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/components/game/akw.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _akw_vue_vue_type_template_id_1eadb98a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./akw.vue?vue&type=template&id=1eadb98a& */ "./resources/js/components/game/akw.vue?vue&type=template&id=1eadb98a&");
+/* harmony import */ var _akw_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./akw.vue?vue&type=script&lang=js& */ "./resources/js/components/game/akw.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _akw_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _akw_vue_vue_type_template_id_1eadb98a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _akw_vue_vue_type_template_id_1eadb98a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/game/akw.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/game/akw.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/game/akw.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_akw_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./akw.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/game/akw.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_akw_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/game/akw.vue?vue&type=template&id=1eadb98a&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/game/akw.vue?vue&type=template&id=1eadb98a& ***!
+  \*****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_akw_vue_vue_type_template_id_1eadb98a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./akw.vue?vue&type=template&id=1eadb98a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/game/akw.vue?vue&type=template&id=1eadb98a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_akw_vue_vue_type_template_id_1eadb98a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_akw_vue_vue_type_template_id_1eadb98a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

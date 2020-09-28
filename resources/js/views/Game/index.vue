@@ -92,8 +92,6 @@
         videoPause: false,
         ProgressStatus: "1",
         VideoSource: '/video/vid_1.mp4',
-        InfectedInterval: null,
-        DeadInterval: null,
         PlayerName: null,
         VideoCurrentTime: null,
           }
@@ -106,7 +104,6 @@
     }),
     watch: {
       VideoCurrentTime(newValue, oldValue) {
-
         // console.log(newValue,oldValue);
       }
     },created(){
@@ -125,10 +122,9 @@
         let VideoDuration = this.$refs.videoRef.duration - this.storyLine[this.ProgressStatus].Overlay;
         let CurrentTime = this.$refs.videoRef.currentTime;
         let VideoType = this.storyLine[this.ProgressStatus].type;
-        console.log(VideoType);
         if (VideoType === "question"){
           if (VideoDuration < CurrentTime){
-            console.log("Start Event");
+            // console.log("Start Event");
             this.videoEnd = true;
           }
         }else {
@@ -140,26 +136,26 @@
       },
       // Next Step Story Line
       nextProgress(val) {
-
         setTimeout(() => {
           this.ProgressStatus = val;
           this.VideoSource = this.storyLine[val].video;
           this.$refs.videoRef.load();
           this.videoEnd = false;
         }, 500);
-        console.log(this.storyLine[val].InfectedDelay);
+        // console.log(this.storyLine[val].InfectedDelay);
         if (this.storyLine[val].InfectedDelay){
-          console.log("If");
+          // console.log("If");
           setTimeout(()=>{
             this.CalculateInfectionAndDead(val);
-
           },this.storyLine[val].InfectedDelay);
         } else {
-          console.log("else");
+          // console.log("else");
           this.CalculateInfectionAndDead(val);
         }
-
-
+        if (this.storyLine[val].AKW){
+          console.log("AKW AKTIVE");
+          this.CalculateAKW(val);
+        }
       },
 
       // Calcutlate Infected People and Dead People Base of Min/Max Values
@@ -171,15 +167,18 @@
         this.$store.dispatch('handleChangeInfectedValue', InfectedPeople);
         this.$store.dispatch('handleChangeDeadValue', DeadPeople);
       },
-
-      RandomMinMaxNumber(min, max) { // min and max included
-        let x = Math.floor(Math.random() * (max - min + 1) + min);
-        return x;
+      CalculateAKW(val){
+        // console.log("AKW CALC");
+        let AKW =  this.storyLine[val].AKW;
+        let AKWPeople = this.RandomMinMaxNumber(AKW[0],AKW[1]);
+        this.$store.dispatch('handleChangeAkwValue', AKWPeople);
+        // console.log("AKW END", AKWPeople);
       },
 
-
+      RandomMinMaxNumber(min, max) { // min and max included
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      },
       Submit_Player() {
-
         if (this.PlayerName !== null) {
           console.log("Name OK");
           let data = {
@@ -198,7 +197,6 @@
         }else {
           console.error("Name not OK")
         }
-
       },
       Cheat() {
         this.videoEnd = true;
@@ -207,8 +205,7 @@
     destroyed() {
       this.$store.dispatch('handleChangeInfectedValue', 0);
       this.$store.dispatch('handleChangeDeadValue', 0);
-      clearInterval(this.InfectedInterval);
-      clearInterval(this.DeadInterval);
+      this.$store.dispatch('handleChangeAkwValue', 0);
     }
   }
 </script>

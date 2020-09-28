@@ -20,8 +20,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "index"
 });
@@ -51,14 +49,12 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("footer", { staticClass: "site-footer" }, [
-      _c("div", { staticClass: "social-media-box" }),
+      _c("div", { staticClass: "box" }, [
+        _vm._v("\n        © 2020 Life and Death with Corona\n    ")
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "info-box" }, [
-        _c("ul", [
-          _c("li", [_vm._v("© 2020 Life and Death with Corona")]),
-          _vm._v(" "),
-          _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Impressum")])])
-        ])
+        _c("a", { attrs: { href: "#" } }, [_vm._v("Impressum")])
       ])
     ])
   }
