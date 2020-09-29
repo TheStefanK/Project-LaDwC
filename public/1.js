@@ -113,8 +113,12 @@ __webpack_require__.r(__webpack_exports__);
         RotateValue = -95;
       }
 
+      if (newValue <= 2) {
+        RotateValue = -93;
+      }
+
       if (newValue < this.degSkala[0]) {
-        RotateValue = -90;
+        RotateValue = -93;
       }
 
       if (newValue >= this.degSkala[1]) {
@@ -123,6 +127,10 @@ __webpack_require__.r(__webpack_exports__);
 
       if (newValue >= this.degSkala[2]) {
         RotateValue = 0;
+      }
+
+      if (newValue >= 260000) {
+        RotateValue = 94;
       }
 
       this.counter(oldValue, newValue, 3); //250000 Max = 90
@@ -164,11 +172,12 @@ __webpack_require__.r(__webpack_exports__);
       console.log('Steps', step);
       var timer = setInterval(function () {
         current += increment;
-        _this.CounterNumber = current;
 
         if (current === end || current >= end) {
           clearInterval(timer);
           _this.CounterNumber = end;
+        } else {
+          _this.CounterNumber = current;
         }
       }, step);
     }
@@ -214,7 +223,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       InfectedSkala: [],
-      DeadSkala: []
+      DeadSkala: [5, 15, 100, 250, 500, 750, 1000, 1250, 1500, 1750]
     };
   },
   mixins: [_utility_mixins__WEBPACK_IMPORTED_MODULE_0__["scoreMixins"]],
@@ -796,11 +805,7 @@ var render = function() {
         _c(
           "div",
           { staticClass: "top" },
-          [
-            _vm.videoEnd ? _c("app-header") : _vm._e(),
-            _vm._v(" "),
-            _c("button", { on: { click: _vm.Cheat } }, [_vm._v("Cheat")])
-          ],
+          [_vm.videoEnd ? _c("app-header") : _vm._e()],
           1
         ),
         _vm._v(" "),
@@ -835,12 +840,12 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                    " +
+                                      "\n                                        " +
                                         _vm._s(
                                           _vm.storyLine[this.ProgressStatus]
                                             .firstOption.response
                                         ) +
-                                        "\n                                    "
+                                        "\n                                        "
                                     ),
                                     _c("span", { staticClass: "line-1" }),
                                     _vm._v(" "),
@@ -874,12 +879,12 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                    " +
+                                      "\n                                        " +
                                         _vm._s(
                                           _vm.storyLine[this.ProgressStatus]
                                             .secondOption.response
                                         ) +
-                                        "\n                                    "
+                                        "\n                                        "
                                     ),
                                     _c("span", { staticClass: "line-1" }),
                                     _vm._v(" "),
@@ -916,12 +921,12 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                        " +
+                            "\n                            " +
                               _vm._s(
                                 _vm.storyLine[this.ProgressStatus].continueStory
                                   .response
                               ) +
-                              "\n                        "
+                              "\n                            "
                           ),
                           _c("span", { staticClass: "line-1" }),
                           _vm._v(" "),
@@ -975,7 +980,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                    Senden\n                    "
+                          "\n                        Senden\n                        "
                         ),
                         _c("span", { staticClass: "line-1" }),
                         _vm._v(" "),

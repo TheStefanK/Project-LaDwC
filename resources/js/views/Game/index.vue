@@ -8,7 +8,7 @@
         <div :class="{'video-container-grid-end':videoEnd, 'video-container-grid':!videoEnd}">
             <div class="top">
                 <app-header v-if="videoEnd"></app-header>
-                <button @click="Cheat">Cheat</button>
+<!--                <button @click="Cheat">Cheat</button>-->
             </div>
             <div class="middle" v-if="videoEnd">
                 <div class="story-line_question" v-if="storyLine[ProgressStatus].type === 'question'">

@@ -24,7 +24,8 @@
     name: "score", data() {
       return {
         InfectedSkala: [],
-        DeadSkala: [],
+        DeadSkala: [5,15,100,250,500,750,1000,1250,1500,1750,],
+
       }
     },
     mixins: [scoreMixins],

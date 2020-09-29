@@ -17352,11 +17352,11 @@ var home = function home() {
 };
 
 var game = function game() {
-  return Promise.all(/*! import() */[__webpack_require__.e(6), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ../../views/Game/index */ "./resources/js/views/Game/index.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ../../views/Game/index */ "./resources/js/views/Game/index.vue"));
 };
 
 var leaderboard = function leaderboard() {
-  return Promise.all(/*! import() */[__webpack_require__.e(6), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ../../views/Leaderboard/index.vue */ "./resources/js/views/Leaderboard/index.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ../../views/Leaderboard/index.vue */ "./resources/js/views/Leaderboard/index.vue"));
 }; // import start from '../../components/start/index'
 
 
@@ -17514,6 +17514,7 @@ var VideoPath = '/video/';
 var VideoType = '.mp4';
 var OverlayTime = 22; // Sek
 
+var Placeholder = "placeholder";
 var state = {
   '1': {
     video: VideoPath + 'Akt_01' + VideoType,
@@ -17542,7 +17543,7 @@ var state = {
     MinMaxDead: [0, 0]
   },
   '1.2': {
-    video: VideoPath + '1.2' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "continue",
     continueStory: {
       next: '2',
@@ -17593,7 +17594,7 @@ var state = {
   },
   // Progress Number 3
   '3.1': {
-    video: VideoPath + '3.1' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "question",
     question: 'Wie lange sollen die Geschäfte noch geschlossen bleiben?',
     firstOption: {
@@ -17609,7 +17610,7 @@ var state = {
     Overlay: OverlayTime
   },
   '3.1.1': {
-    video: VideoPath + '3.1.1' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "question",
     question: 'Hilfpaket für Unternehmmerinnen und Unternehmer',
     firstOption: {
@@ -17627,20 +17628,20 @@ var state = {
   },
   // End from 3.1.1.X
   '3.1.1.1': {
-    video: VideoPath + '3.1.1.1' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [384, 400]
   },
   '3.1.1.2': {
-    video: VideoPath + '3.1.1.1' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [640, 660]
   },
   // Next Story
   '3.1.2': {
-    video: VideoPath + '3.2' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "question",
     question: 'Illegale Demostrationen auflösen? Zur not mit Gewalt?',
     firstOption: {
@@ -17657,7 +17658,7 @@ var state = {
   },
   //End from 3.1.2.X
   '3.1.2.1': {
-    video: VideoPath + '3.2.1' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [650, 660]
@@ -17670,7 +17671,7 @@ var state = {
   },
   //  Progress Number 4
   '3.2': {
-    video: VideoPath + '3.2' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "question",
     question: 'Soll eine Ausgangssperre über die Risikogruppe und die Hauptüberträger verhängt werden?',
     firstOption: {
@@ -17686,7 +17687,7 @@ var state = {
     Overlay: OverlayTime
   },
   '3.2.1': {
-    video: VideoPath + '4.1' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "question",
     question: 'Hilfspaket für UnternehmerInnen',
     firstOption: {
@@ -17702,19 +17703,19 @@ var state = {
   },
   //End from 3.2.1.X
   '3.2.1.1': {
-    video: VideoPath + '3.2.1.1' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [1580, 1700]
   },
   '3.2.1.2': {
-    video: VideoPath + '4.1.2' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [1580, 1760]
   },
   '3.2.2': {
-    video: VideoPath + '4.2' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "question",
     question: 'Soll eine Ausgangsspeere über die Risikogruppe und die Hauptüberträger verhängt werden?',
     firstOption: {
@@ -17729,14 +17730,14 @@ var state = {
     MinMaxDead: [260000, 260600]
   },
   '3.2.2.1': {
-    video: VideoPath + '3.2.2.1' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [3000000, 31450000],
     AKW: [1500000, 1550000]
   },
   '3.2.2.2': {
-    video: VideoPath + '4.2.1' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "question",
     question: 'Hilfspaket für UnternehmerInnen',
     firstOption: {
@@ -17751,13 +17752,13 @@ var state = {
     MinMaxDead: [380000, 388500]
   },
   '3.2.2.2.1': {
-    video: VideoPath + '4.2.1.2' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [400000, 430500]
   },
   '3.2.2.2.2': {
-    video: VideoPath + '4.2.2' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [400000, 430500]

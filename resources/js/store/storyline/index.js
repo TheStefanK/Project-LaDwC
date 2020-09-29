@@ -4,6 +4,7 @@
 const VideoPath = '/video/';
 const VideoType = '.mp4';
 const OverlayTime = 22; // Sek
+const Placeholder = "placeholder"
 
 const state = {
 
@@ -34,7 +35,7 @@ const state = {
     MinMaxDead: [0, 0]
   },
   '1.2': {
-    video: VideoPath + '1.2' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "continue",
     continueStory: {
       next: '2',
@@ -85,7 +86,7 @@ const state = {
   },
 // Progress Number 3
   '3.1': {
-    video: VideoPath + '3.1' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "question",
     question: 'Wie lange sollen die Geschäfte noch geschlossen bleiben?',
     firstOption: {
@@ -101,7 +102,7 @@ const state = {
     Overlay: OverlayTime,
   },
   '3.1.1': {
-    video: VideoPath + '3.1.1' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "question",
     question: 'Hilfpaket für Unternehmmerinnen und Unternehmer',
     firstOption: {
@@ -120,13 +121,13 @@ const state = {
 
   // End from 3.1.1.X
   '3.1.1.1': {
-    video: VideoPath + '3.1.1.1' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [384, 400]
 
   }, '3.1.1.2': {
-    video: VideoPath + '3.1.1.1' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [640, 660]
@@ -135,7 +136,7 @@ const state = {
 
   // Next Story
   '3.1.2': {
-    video: VideoPath + '3.2' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "question",
     question: 'Illegale Demostrationen auflösen? Zur not mit Gewalt?',
     firstOption: {
@@ -152,7 +153,7 @@ const state = {
   },
   //End from 3.1.2.X
   '3.1.2.1': {
-    video: VideoPath + '3.2.1' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [650, 660]
@@ -165,7 +166,7 @@ const state = {
   },
 //  Progress Number 4
   '3.2': {
-    video: VideoPath + '3.2' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "question",
     question: 'Soll eine Ausgangssperre über die Risikogruppe und die Hauptüberträger verhängt werden?',
     firstOption: {
@@ -181,7 +182,7 @@ const state = {
     Overlay: OverlayTime,
   },
   '3.2.1': {
-    video: VideoPath + '4.1' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "question",
     question: 'Hilfspaket für UnternehmerInnen',
     firstOption: {
@@ -197,20 +198,20 @@ const state = {
   },
   //End from 3.2.1.X
   '3.2.1.1': {
-    video: VideoPath + '3.2.1.1' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [1580, 1700]
   },
   '3.2.1.2': {
-    video: VideoPath + '4.1.2' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [1580, 1760]
   },
 
   '3.2.2': {
-    video: VideoPath + '4.2' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "question",
     question: 'Soll eine Ausgangsspeere über die Risikogruppe und die Hauptüberträger verhängt werden?',
     firstOption: {
@@ -226,7 +227,7 @@ const state = {
   },
 
   '3.2.2.1': {
-    video: VideoPath + '3.2.2.1' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [3000000, 31450000],
@@ -234,7 +235,7 @@ const state = {
   },
 
   '3.2.2.2': {
-    video: VideoPath + '4.2.1' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "question",
     question: 'Hilfspaket für UnternehmerInnen',
     firstOption: {
@@ -250,13 +251,13 @@ const state = {
   },
 
   '3.2.2.2.1': {
-    video: VideoPath + '4.2.1.2' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [400000, 430500],
   },
   '3.2.2.2.2': {
-    video: VideoPath + '4.2.2' + VideoType,
+    video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [400000, 430500],

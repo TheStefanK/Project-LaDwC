@@ -33,14 +33,20 @@
         if (newValue <= 0) {
           RotateValue = -95;
         }
+        if (newValue <= 2) {
+          RotateValue = -93;
+        }
         if (newValue < this.degSkala[0]) {
-          RotateValue = -90;
+          RotateValue = -93;
         }
         if (newValue >= this.degSkala[1]) {
           RotateValue = -45;
         }
         if (newValue >= this.degSkala[2]) {
           RotateValue = 0;
+        }
+        if(newValue >= 260000){
+          RotateValue = 94;
         }
         this.counter(oldValue,newValue,3);
 
@@ -74,10 +80,11 @@
         console.log('Steps',step);
         let timer = setInterval(() => {
           current += increment;
-         this.CounterNumber = current;
           if (current === end || current >= end) {
             clearInterval(timer);
             this.CounterNumber = end;
+          } else {
+            this.CounterNumber = current;
           }
         }, step);
       }
