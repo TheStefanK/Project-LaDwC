@@ -87,6 +87,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "gauge",
@@ -104,36 +107,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     number: function number(newValue, oldValue) {
-      // console.log(this.number + typeof (this.number) + ' Number Gauge')
-      // console.log(this.degSkala[0]);
-      // console.log(newValue, oldValue);
-      var RotateValue;
+      console.log(newValue, oldValue); // Pointer Up or Down
 
-      if (newValue <= 0) {
-        RotateValue = -95;
-      }
+      var Pointer = this.HandleUpOrDown(newValue, oldValue); // Rotate Value
 
-      if (newValue <= 2) {
-        RotateValue = -93;
-      }
+      var RotateValue = this.HandleRotate(newValue); // Counter
 
-      if (newValue < this.degSkala[0]) {
-        RotateValue = -93;
-      }
-
-      if (newValue >= this.degSkala[1]) {
-        RotateValue = -45;
-      }
-
-      if (newValue >= this.degSkala[2]) {
-        RotateValue = 0;
-      }
-
-      if (newValue >= 260000) {
-        RotateValue = 94;
-      }
-
-      this.counter(oldValue, newValue, 3); //250000 Max = 90
+      this.counter(oldValue, newValue, 3, Pointer); // Set Style to Pointer
 
       this.style = " transform: rotate(" + RotateValue + "deg);";
     }
@@ -144,42 +124,100 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    counter: function counter(start, end, duration) {
+    counter: function counter(start, end, duration, pointer) {
       var _this = this;
 
       var current = start;
       var range = end - start;
-      var increment = end > start ? 1 : -1;
+      range = range < 0 ? range * -1 : range;
+      console.log(range);
+      var increment = 1;
 
       if (range > 1000) {
-        increment = end > start ? 11 : -11;
+        increment = this.RandomMinMaxNumber(100, 120);
       }
 
       if (range > 10000) {
-        increment = end > start ? 111 : -111;
+        increment = this.RandomMinMaxNumber(1000, 2000);
       }
 
       if (range > 100000) {
-        increment = end > start ? 1111 : -1111;
+        increment = this.RandomMinMaxNumber(9000, 10000);
       }
 
       if (range > 1000000) {
-        increment = end > start ? 111111 : -111111;
+        increment = this.RandomMinMaxNumber(90000, 100000);
       }
 
-      console.log('range', range);
-      var step = Math.abs(Math.floor(duration / range));
-      console.log('Steps', step);
       var timer = setInterval(function () {
-        current += increment;
+        if (pointer === "up") {
+          current += increment;
 
-        if (current === end || current >= end) {
-          clearInterval(timer);
-          _this.CounterNumber = end;
-        } else {
-          _this.CounterNumber = current;
+          if (current === end || current >= end) {
+            clearInterval(timer);
+            _this.CounterNumber = end;
+          } else {
+            _this.CounterNumber = current;
+          }
         }
-      }, step);
+
+        if (pointer === "down") {
+          current -= increment;
+
+          if (current === end || current <= end) {
+            clearInterval(timer);
+            _this.CounterNumber = end;
+          } else {
+            _this.CounterNumber = current;
+          }
+        }
+      }, 250);
+    },
+    RandomMinMaxNumber: function RandomMinMaxNumber(min, max) {
+      // min and max included
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    },
+    HandleRotate: function HandleRotate(val) {
+      var RotateValue;
+
+      if (val <= 0) {
+        RotateValue = -95;
+      }
+
+      if (val <= 2) {
+        RotateValue = -93;
+      }
+
+      if (val < this.degSkala[0]) {
+        RotateValue = -93;
+      }
+
+      if (val >= this.degSkala[1]) {
+        RotateValue = -45;
+      }
+
+      if (val >= this.degSkala[2]) {
+        RotateValue = 0;
+      }
+
+      if (val >= 260000) {
+        RotateValue = 94;
+      }
+
+      return RotateValue;
+    },
+    HandleUpOrDown: function HandleUpOrDown(newValue, oldValue) {
+      var Pointer;
+
+      if (newValue > oldValue) {
+        Pointer = "up";
+      }
+
+      if (newValue < oldValue) {
+        Pointer = "down";
+      }
+
+      return Pointer;
     }
   }
 });
@@ -390,6 +428,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -405,7 +456,9 @@ __webpack_require__.r(__webpack_exports__);
       ProgressStatus: "1",
       VideoSource: '/video/vid_1.mp4',
       PlayerName: null,
-      VideoCurrentTime: null
+      PlayerNameError: false,
+      VideoCurrentTime: null,
+      GameTimer: null
     };
   },
   components: {
@@ -413,7 +466,9 @@ __webpack_require__.r(__webpack_exports__);
     'app-header': _components_layout_header_index__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
-    storyLine: 'getStoryLineList'
+    storyLine: 'getStoryLineList',
+    Timer: 'getTimer',
+    elapsedTime: 'getElapsedTime'
   }),
   watch: {
     VideoCurrentTime: function VideoCurrentTime(newValue, oldValue) {// console.log(newValue,oldValue);
@@ -421,6 +476,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.VideoSource = this.storyLine[this.ProgressStatus].video;
+    this.GameTimerStart();
   },
   methods: {
     OnEnd: function OnEnd() {
@@ -431,6 +487,27 @@ __webpack_require__.r(__webpack_exports__);
     },
     OnStart: function OnStart() {
       this.videoEnd = false;
+    },
+    GameTimerStart: function GameTimerStart() {
+      var _this = this;
+
+      this.GameTimerStart = setInterval(function () {
+        var Time = _this.$store.getters.getTimer;
+        Time += 1;
+
+        _this.$store.dispatch("handleChangeTimer", Time);
+
+        var elapsedTime = _this.formattedElapsedTime(Time);
+
+        _this.$store.dispatch("handleChangeElapsedTime", elapsedTime);
+      }, 1000);
+    },
+    formattedElapsedTime: function formattedElapsedTime(time) {
+      console.log("ElapsedTune");
+      var date = new Date(null);
+      date.setSeconds(time / 1);
+      var utc = date.toUTCString();
+      return utc.substr(utc.indexOf(":") - 2, 8);
     },
     updateVideoTime: function updateVideoTime() {
       var Video = this.$refs.videoRef;
@@ -453,21 +530,21 @@ __webpack_require__.r(__webpack_exports__);
     },
     // Next Step Story Line
     nextProgress: function nextProgress(val) {
-      var _this = this;
+      var _this2 = this;
 
       setTimeout(function () {
-        _this.ProgressStatus = val;
-        _this.VideoSource = _this.storyLine[val].video;
+        _this2.ProgressStatus = val;
+        _this2.VideoSource = _this2.storyLine[val].video;
 
-        _this.$refs.videoRef.load();
+        _this2.$refs.videoRef.load();
 
-        _this.videoEnd = false;
+        _this2.videoEnd = false;
       }, 500); // console.log(this.storyLine[val].InfectedDelay);
 
       if (this.storyLine[val].InfectedDelay) {
         // console.log("If");
         setTimeout(function () {
-          _this.CalculateInfectionAndDead(val);
+          _this2.CalculateInfectionAndDead(val);
         }, this.storyLine[val].InfectedDelay);
       } else {
         // console.log("else");
@@ -498,29 +575,56 @@ __webpack_require__.r(__webpack_exports__);
       // min and max included
       return Math.floor(Math.random() * (max - min + 1) + min);
     },
-    Submit_Player: function Submit_Player() {
-      var _this2 = this;
+    Player_Name_Check: function Player_Name_Check() {
+      var errorCounter = [];
+      var reg = "([A-Za-z0-9])\\w+";
 
       if (this.PlayerName !== null) {
-        console.log("Name OK");
-        var data = {
-          "name": this.PlayerName,
-          "infected": this.$store.getters.getInfected,
-          "deceased": this.$store.getters.getDead
-        };
+        errorCounter.push("null");
+      }
+
+      if (!this.PlayerName.match(reg)) {
+        errorCounter.push("regex");
+      }
+
+      if (this.PlayerName.length > 15) {
+        errorCounter.push("lenght");
+      }
+
+      console.log("Player Error Counter", errorCounter);
+      return errorCounter;
+    },
+    Submit_Player: function Submit_Player() {
+      var _this3 = this;
+
+      var errors = this.Player_Name_Check;
+      var sec = this.$store.getters.getTimer;
+      var dead = this.$store.getters.getDead;
+      var rang = Math.round(sec / dead * 100000000);
+      var data = {
+        "name": this.PlayerName,
+        "infected": this.$store.getters.getInfected,
+        "deceased": this.$store.getters.getDead,
+        "time": this.$store.getters.getElapsedTime,
+        "rang": rang
+      };
+      console.log(errors.length);
+
+      if (errors.length === 0) {
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("api/score/create", data).then(function (response) {
           console.log(response);
 
           if (response.status === 200) {
-            _this2.$router.push({
+            _this3.$router.push({
               name: "leaderboard"
             });
           }
         })["catch"](function (error) {
           console.error(error);
+          _this3.PlayerNameError = true;
         });
       } else {
-        console.error("Name not OK");
+        this.PlayerNameError = true;
       }
     },
     Cheat: function Cheat() {
@@ -531,6 +635,7 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch('handleChangeInfectedValue', 0);
     this.$store.dispatch('handleChangeDeadValue', 0);
     this.$store.dispatch('handleChangeAkwValue', 0);
+    this.$store.dispatch('handleChangeTimer', 0);
   }
 });
 
@@ -588,7 +693,11 @@ var render = function() {
     _c("div", { staticClass: "fuel" }, [
       _c("img", {
         staticClass: "fuel-scala",
-        attrs: { src: "images/score/bg_fuel2.svg", alt: "Demo", width: "300px" }
+        attrs: {
+          src: "images/score/gauge_filter.png",
+          alt: "Demo",
+          width: "300px"
+        }
       }),
       _vm._v(" "),
       _c("img", {
@@ -598,14 +707,12 @@ var render = function() {
       })
     ]),
     _vm._v(" "),
-    _c("span", [
-      _vm._v(
-        " " +
-          _vm._s(_vm.name) +
-          " " +
-          _vm._s(_vm.numberWithDot(_vm.CounterNumber)) +
-          " "
-      )
+    _c("div", { staticClass: "fuel-counter" }, [
+      _c("span", [_vm._v(" " + _vm._s(_vm.name))]),
+      _vm._v(" "),
+      _c("span", [
+        _vm._v(" " + _vm._s(_vm.numberWithDot(_vm.CounterNumber)) + " ")
+      ])
     ])
   ])
 }
@@ -638,7 +745,7 @@ var render = function() {
       [
         _c("v-gauge", {
           attrs: {
-            name: "Infizierte",
+            name: "Infizierte:",
             number: _vm.Infected,
             degSkala: [5, 10, 20]
           }
@@ -802,12 +909,34 @@ var render = function() {
         }
       },
       [
-        _c(
-          "div",
-          { staticClass: "top" },
-          [_vm.videoEnd ? _c("app-header") : _vm._e()],
-          1
-        ),
+        _c("div", { staticClass: "top" }, [
+          _c(
+            "div",
+            { staticClass: "left" },
+            [
+              _vm.videoEnd
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass: "exit-button",
+                      attrs: { to: { name: "home" } }
+                    },
+                    [
+                      _c("i", { staticClass: "icon-exit" }),
+                      _vm._v("\n                    Exit\n                ")
+                    ]
+                  )
+                : _vm._e()
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "right" }, [
+            _c("span", [_vm._v(_vm._s(_vm.elapsedTime))]),
+            _vm._v(" "),
+            _c("button", { on: { click: _vm.Cheat } }, [_vm._v("Cheat")])
+          ])
+        ]),
         _vm._v(" "),
         _vm.videoEnd
           ? _c("div", { staticClass: "middle" }, [
@@ -840,12 +969,12 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                        " +
+                                      "\n                                    " +
                                         _vm._s(
                                           _vm.storyLine[this.ProgressStatus]
                                             .firstOption.response
                                         ) +
-                                        "\n                                        "
+                                        "\n                                    "
                                     ),
                                     _c("span", { staticClass: "line-1" }),
                                     _vm._v(" "),
@@ -879,12 +1008,12 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                        " +
+                                      "\n                                    " +
                                         _vm._s(
                                           _vm.storyLine[this.ProgressStatus]
                                             .secondOption.response
                                         ) +
-                                        "\n                                        "
+                                        "\n                                    "
                                     ),
                                     _c("span", { staticClass: "line-1" }),
                                     _vm._v(" "),
@@ -921,12 +1050,12 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                            " +
+                            "\n                        " +
                               _vm._s(
                                 _vm.storyLine[this.ProgressStatus].continueStory
                                   .response
                               ) +
-                              "\n                            "
+                              "\n                        "
                           ),
                           _c("span", { staticClass: "line-1" }),
                           _vm._v(" "),
@@ -980,7 +1109,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                        Senden\n                        "
+                          "\n                    Senden\n                    "
                         ),
                         _c("span", { staticClass: "line-1" }),
                         _vm._v(" "),
@@ -990,7 +1119,15 @@ var render = function() {
                         _vm._v(" "),
                         _c("span", { staticClass: "line-4" })
                       ]
-                    )
+                    ),
+                    _vm._v(" "),
+                    _vm.PlayerNameError
+                      ? _c("span", { staticClass: "error-msg" }, [
+                          _vm._v(
+                            "Der Name darf nur aus Buchstaben und Zahlen bestehen! (A-Z,a-z,0-9) "
+                          )
+                        ])
+                      : _vm._e()
                   ])
                 : _vm._e()
             ])

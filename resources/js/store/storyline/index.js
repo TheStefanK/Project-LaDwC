@@ -9,7 +9,7 @@ const Placeholder = "placeholder"
 const state = {
 
   '1': {
-    video: VideoPath + 'Akt_01' + VideoType,
+    video: VideoPath + 'Akt_1' + VideoType,
     type: "question",
     question: 'Soll die Regierung Vorsichtsmaßnahmen treffen oder abwarten?',
     firstOption: {
@@ -25,7 +25,7 @@ const state = {
     Overlay: OverlayTime,
   },
   '1.1': {
-    video: VideoPath + 'Akt_01_1' + VideoType,
+    video: VideoPath + 'Akt_1_1' + VideoType,
     type: "continue",
     continueStory: {
       next: '2',
@@ -47,7 +47,7 @@ const state = {
   },
 // Progress Number 2
   '2': {
-    video: VideoPath + 'Akt_02' + VideoType,
+    video: VideoPath + 'Akt_2' + VideoType,
     type: "question",
     question: 'Alle Geschäfte des nicht alltäglichen Gebrauchs schließen und Ausgangsbeschänkungen?',
     firstOption: {
@@ -65,7 +65,7 @@ const state = {
     Overlay: OverlayTime,
   },
   '2.1': {
-    video: VideoPath + 'Akt_02_Ja' + VideoType,
+    video: VideoPath + 'Akt_2_1' + VideoType,
     type: "continue",
     continueStory: {
       next: '3.1',
@@ -75,7 +75,7 @@ const state = {
     MinMaxDead: [3, 5]
   },
   '2.2': {
-    video: VideoPath + 'Akt_02_Nein' + VideoType,
+    video: VideoPath + 'Akt_2_2' + VideoType,
     type: "continue",
     continueStory: {
       next: '3.2',
@@ -102,7 +102,7 @@ const state = {
     Overlay: OverlayTime,
   },
   '3.1.1': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_3_1_1" + VideoType,
     type: "question",
     question: 'Hilfpaket für Unternehmmerinnen und Unternehmer',
     firstOption: {
@@ -121,13 +121,13 @@ const state = {
 
   // End from 3.1.1.X
   '3.1.1.1': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_3_1_1_1" + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [384, 400]
 
   }, '3.1.1.2': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_3_1_1_2" + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [640, 660]
@@ -222,7 +222,7 @@ const state = {
       next: '3.2.2.2',
       response: 'Ja'
     },
-    MinMaxInfected: [42000000, 430000000],
+    MinMaxInfected: [4200000, 43000000],
     MinMaxDead: [260000, 260600]
   },
 
@@ -230,7 +230,7 @@ const state = {
     video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
-    MinMaxDead: [3000000, 31450000],
+    MinMaxDead: [3000000, 3145000],
     AKW: [1500000,1550000],
   },
 

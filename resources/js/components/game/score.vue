@@ -1,7 +1,7 @@
 <template>
     <div class="score-board">
         <div class="infected">
-            <v-gauge name="Infizierte" :number="Infected" :degSkala="[5,10,20]">
+            <v-gauge name="Infizierte:" :number="Infected" :degSkala="[5,10,20]">
             </v-gauge>
         </div>
         <div class="statistics">

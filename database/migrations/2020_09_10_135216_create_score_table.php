@@ -17,8 +17,10 @@ class CreateScoreTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->float("infected", 11,0);
+            $table->float("rang", 11,0);
             $table->float("deceased", 11,0);
+            $table->string("time");
+//            $table->string("share");
         });
     }
 

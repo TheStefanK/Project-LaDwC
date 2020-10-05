@@ -11,7 +11,7 @@ class ScoreController extends Controller
 
     public function index()
     {
-        $score = Score::query()->orderBy("deceased")->paginate(5);
+        $score = Score::query()->orderBy("rang","DESC")->paginate(5);
         return response()->json($score, 200);
     }
 
@@ -19,8 +19,9 @@ class ScoreController extends Controller
     public function create(Request $request)
     {
         $val = $request->validate([
-            'name' => ['required', 'string', 'max:100'],
-            'infected' => ['required', 'numeric'],
+            'name' => ['required', 'string', 'max:20'],
+            'time' => ['required', 'string', 'max:100'],
+            'rang' => ['required', 'numeric'],
             'deceased' => ['required', 'numeric'],
         ]);
 
@@ -28,8 +29,10 @@ class ScoreController extends Controller
 
         $Player = new Score();
         $Player->name = $request->get("name");
-        $Player->infected = $request->get("infected");
+        $Player->time = $request->get("time");
+        $Player->rang = $request->get("rang");
         $Player->deceased = $request->get("deceased");
+
         $Player->save();
 
 

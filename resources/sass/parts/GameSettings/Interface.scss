@@ -30,6 +30,38 @@ img {
 
 .top {
   grid-area: top;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  .left {
+
+  }
+
+  .right {
+    text-align: right;
+  }
+
+  .exit-button {
+    border: 1px solid $white;
+    padding: 5px 10px;
+    margin: 5px;
+    color: white;
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-gap: 8px;
+    font-size: 16px;
+    width: max-content;
+    align-items: center;
+    text-decoration: none;
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .exit-button:hover{
+    color: $red;
+    border-color: $red;
+  }
 }
 
 .middle {
@@ -89,8 +121,10 @@ img {
 
 }
 
-.fuel-scala {
-
+.fuel-counter{
+  display: flex;
+  justify-content: space-between;
+  background: #222;
 }
 
 .fuel-needle {
@@ -177,6 +211,7 @@ img {
 
 // Story Line End .. Submit Name
 .story-line_end {
+  width: 522px;
   label {
     display: block;
     text-align: center;
@@ -187,8 +222,15 @@ img {
     padding: 20px;
     display: block;
     margin: 10px;
-    width: 400px;
+    width: 100%;
     font-size: 20px;
+    text-align: center;
+  }
+  .error-msg{
+    color: red;
+    margin-top: 5px;
+    text-align: center;
+    display: block;
   }
 
   .responseBtn {

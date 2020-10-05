@@ -5,7 +5,7 @@
             <tr>
                 <th>Platz</th>
                 <th>Name</th>
-                <th>Infizierte</th>
+                <th>Zeit</th>
                 <th>Todesfälle</th>
             </tr>
             <tr v-for="(x,index) in players.data">

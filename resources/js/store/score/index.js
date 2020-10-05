@@ -2,8 +2,8 @@ const state = {
   infected: 0,
   dead: 0,
   // time spend
-  elapsedTime: 0,
-  timer: undefined,
+  elapsedTime: "00:00:00",
+  timer: 0,
 //  AKW
   akw: 0,
 };
@@ -28,6 +28,12 @@ const getters = {
   getAkwDead: state => {
     return state.akw;
   },
+  getTimer: state =>{
+    return state.timer;
+  },
+  getElapsedTime: state =>{
+    return state.elapsedTime;
+  }
 };
 
 const mutations = {
@@ -43,7 +49,12 @@ const mutations = {
   setAkwValue: (state, value) => {
     state.akw = value;
   },
-
+  setTimer:(state,value)=>{
+    state.timer = value;
+  },
+  setElapsedTime:(state,value)=>{
+    state.elapsedTime = value;
+  }
 };
 
 const actions = {
@@ -57,6 +68,12 @@ const actions = {
   handleChangeAkwValue({commit}, payload) {
     commit('setAkwValue', payload);
   },
+  handleChangeTimer({commit},payload){
+    commit('setTimer', payload);
+  },
+  handleChangeElapsedTime({commit},payload){
+    commit('setElapsedTime', payload);
+  }
 };
 
 export default {

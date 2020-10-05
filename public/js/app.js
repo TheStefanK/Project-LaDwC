@@ -17352,11 +17352,12 @@ var home = function home() {
 };
 
 var game = function game() {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ../../views/Game/index */ "./resources/js/views/Game/index.vue"));
-};
+  return Promise.all(/*! import() */[__webpack_require__.e(6), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ../../views/Game/index */ "./resources/js/views/Game/index.vue"));
+}; // const leaderboard = () => import('../../views/Leaderboard/index.vue');
+
 
 var leaderboard = function leaderboard() {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ../../views/Leaderboard/index.vue */ "./resources/js/views/Leaderboard/index.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(6), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ../../views/Leaderboard/newLeaderboard.vue */ "./resources/js/views/Leaderboard/newLeaderboard.vue"));
 }; // import start from '../../components/start/index'
 
 
@@ -17435,8 +17436,8 @@ var state = {
   infected: 0,
   dead: 0,
   // time spend
-  elapsedTime: 0,
-  timer: undefined,
+  elapsedTime: "00:00:00",
+  timer: 0,
   //  AKW
   akw: 0
 };
@@ -17459,6 +17460,12 @@ var getters = {
   //  Akw
   getAkwDead: function getAkwDead(state) {
     return state.akw;
+  },
+  getTimer: function getTimer(state) {
+    return state.timer;
+  },
+  getElapsedTime: function getElapsedTime(state) {
+    return state.elapsedTime;
   }
 };
 var mutations = {
@@ -17473,6 +17480,12 @@ var mutations = {
   // Set the new dead value
   setAkwValue: function setAkwValue(state, value) {
     state.akw = value;
+  },
+  setTimer: function setTimer(state, value) {
+    state.timer = value;
+  },
+  setElapsedTime: function setElapsedTime(state, value) {
+    state.elapsedTime = value;
   }
 };
 var actions = {
@@ -17488,6 +17501,14 @@ var actions = {
   handleChangeAkwValue: function handleChangeAkwValue(_ref3, payload) {
     var commit = _ref3.commit;
     commit('setAkwValue', payload);
+  },
+  handleChangeTimer: function handleChangeTimer(_ref4, payload) {
+    var commit = _ref4.commit;
+    commit('setTimer', payload);
+  },
+  handleChangeElapsedTime: function handleChangeElapsedTime(_ref5, payload) {
+    var commit = _ref5.commit;
+    commit('setElapsedTime', payload);
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -17517,7 +17538,7 @@ var OverlayTime = 22; // Sek
 var Placeholder = "placeholder";
 var state = {
   '1': {
-    video: VideoPath + 'Akt_01' + VideoType,
+    video: VideoPath + 'Akt_1' + VideoType,
     type: "question",
     question: 'Soll die Regierung Vorsichtsmaßnahmen treffen oder abwarten?',
     firstOption: {
@@ -17533,7 +17554,7 @@ var state = {
     Overlay: OverlayTime
   },
   '1.1': {
-    video: VideoPath + 'Akt_01_1' + VideoType,
+    video: VideoPath + 'Akt_1_1' + VideoType,
     type: "continue",
     continueStory: {
       next: '2',
@@ -17555,7 +17576,7 @@ var state = {
   },
   // Progress Number 2
   '2': {
-    video: VideoPath + 'Akt_02' + VideoType,
+    video: VideoPath + 'Akt_2' + VideoType,
     type: "question",
     question: 'Alle Geschäfte des nicht alltäglichen Gebrauchs schließen und Ausgangsbeschänkungen?',
     firstOption: {
@@ -17573,7 +17594,7 @@ var state = {
     Overlay: OverlayTime
   },
   '2.1': {
-    video: VideoPath + 'Akt_02_Ja' + VideoType,
+    video: VideoPath + 'Akt_2_1' + VideoType,
     type: "continue",
     continueStory: {
       next: '3.1',
@@ -17583,7 +17604,7 @@ var state = {
     MinMaxDead: [3, 5]
   },
   '2.2': {
-    video: VideoPath + 'Akt_02_Nein' + VideoType,
+    video: VideoPath + 'Akt_2_2' + VideoType,
     type: "continue",
     continueStory: {
       next: '3.2',
@@ -17610,7 +17631,7 @@ var state = {
     Overlay: OverlayTime
   },
   '3.1.1': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_3_1_1" + VideoType,
     type: "question",
     question: 'Hilfpaket für Unternehmmerinnen und Unternehmer',
     firstOption: {
@@ -17628,13 +17649,13 @@ var state = {
   },
   // End from 3.1.1.X
   '3.1.1.1': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_3_1_1_1" + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [384, 400]
   },
   '3.1.1.2': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_3_1_1_2" + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [640, 660]
@@ -17726,14 +17747,14 @@ var state = {
       next: '3.2.2.2',
       response: 'Ja'
     },
-    MinMaxInfected: [42000000, 430000000],
+    MinMaxInfected: [4200000, 43000000],
     MinMaxDead: [260000, 260600]
   },
   '3.2.2.1': {
     video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
-    MinMaxDead: [3000000, 31450000],
+    MinMaxDead: [3000000, 3145000],
     AKW: [1500000, 1550000]
   },
   '3.2.2.2': {

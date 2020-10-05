@@ -6,7 +6,8 @@ const footer = () => import('../../components/layout/footer/index');
 
 const home = () => import('../../views/Home/index');
 const game = () => import('../../views/Game/index');
-const leaderboard = () => import('../../views/Leaderboard/index.vue');
+// const leaderboard = () => import('../../views/Leaderboard/index.vue');
+const leaderboard = () => import('../../views/Leaderboard/newLeaderboard.vue');
 
 // import start from '../../components/start/index'
 export default [
