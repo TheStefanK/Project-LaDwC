@@ -1,0 +1,37 @@
+//Gauge
+.fuel {
+  position: relative;
+  //border-bottom: 10px solid black;
+}
+.fuel-counter{
+  display: flex;
+  justify-content: space-between;
+  background: #050505;
+}
+.fuel-scala{
+  width: 300px;
+}
+.fuel-needle {
+  position: absolute;
+  bottom: 0;
+  left: 45%;
+  margin: 0;
+  padding: 0;
+  display: block;
+  transition: 5s;
+  animation-name: needle;
+  animation-duration: 3s;
+  transform-origin: center 125.25px;
+  height: 140px;
+}
+
+.gauge-bottem {
+  background: red;
+  width: 45px;
+  height: 45px;
+  position: absolute;
+  border-radius: 50px;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%);
+}

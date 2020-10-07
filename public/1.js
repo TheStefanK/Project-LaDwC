@@ -579,6 +579,10 @@ __webpack_require__.r(__webpack_exports__);
         if (VideoDuration < CurrentTime) {
           this.videoEnd = true;
         }
+      } else if (VideoType === "continue" && Video.duration === CurrentTime) {
+        var next = this.storyLine[this.ProgressStatus].continueStory.next;
+        console.log("Continue Video", next);
+        this.nextProgress(next);
       } else {
         if (Video.duration === CurrentTime) {
           this.videoEnd = true;
@@ -750,17 +754,13 @@ var render = function() {
     _c("div", { staticClass: "fuel" }, [
       _c("img", {
         staticClass: "fuel-scala",
-        attrs: {
-          src: "images/score/gauge_filter.png",
-          alt: "Demo",
-          width: "300px"
-        }
+        attrs: { src: "images/score/gauge_filter.png", alt: "Gauge" }
       }),
       _vm._v(" "),
       _c("img", {
         staticClass: "fuel-needle",
         style: _vm.style,
-        attrs: { src: "images/score/zeiger.svg", alt: "Demo", height: "130px" }
+        attrs: { src: "images/score/zeiger.svg", alt: "Pointer" }
       })
     ]),
     _vm._v(" "),

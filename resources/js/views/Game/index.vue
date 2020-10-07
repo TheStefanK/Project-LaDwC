@@ -167,6 +167,11 @@
           if (VideoDuration < CurrentTime) {
             this.videoEnd = true;
           }
+        } else if (VideoType === "continue" && Video.duration === CurrentTime) {
+          let next = this.storyLine[this.ProgressStatus].continueStory.next;
+          console.log("Continue Video", next);
+          this.nextProgress(next);
+
         } else {
           if (Video.duration === CurrentTime) {
             this.videoEnd = true;

@@ -250,7 +250,7 @@ const state = {
   },
 
   '3.2.2.2.1': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_3_2_2_2_1" + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [400000, 440000],

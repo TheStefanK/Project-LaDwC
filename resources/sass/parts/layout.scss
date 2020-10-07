@@ -53,32 +53,3 @@
     padding: 0 12px;
   }
 }
-
-
-//Footer
-.site-footer {
-  background-color: #000000;
-  color: white;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  position: fixed;
-  bottom: 0px;
-  width: 100%;
-  .info-box{
-    text-align: right;
-  }
-  ul{
-    list-style: none;
-  }
-  a{
-    color: white;
-  }
-}
-
-.container{
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-bottom: 20px;
-}
-

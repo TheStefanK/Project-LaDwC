@@ -113,40 +113,7 @@ img {
 
 }
 
-//Gauge
 
-.fuel {
-  position: relative;
-  //border-bottom: 10px solid black;
-
-}
-
-.fuel-counter{
-  display: flex;
-  justify-content: space-between;
-  background: #050505;
-}
-
-.fuel-needle {
-  position: absolute;
-  bottom: 0;
-  left: 45%;
-  margin: 0;
-  padding: 0;
-  display: block;
-  transition: 5s;
-}
-
-.gauge-bottem {
-  background: red;
-  width: 45px;
-  height: 45px;
-  position: absolute;
-  border-radius: 50px;
-  left: 50%;
-  bottom: 0;
-  transform: translate(-50%);
-}
 
 // Story Line Questions
 
@@ -239,11 +206,6 @@ img {
   }
 }
 
-.fuel-needle {
-  animation-name: needle;
-  animation-duration: 3s;
-  transform-origin: center 115.25px;
-}
 
 //@keyframes needle {
 //  0% {

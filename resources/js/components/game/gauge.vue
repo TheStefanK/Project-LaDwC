@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="fuel">
-            <img class="fuel-scala" src="images/score/gauge_filter.png" alt="Demo" width="300px">
-            <img class="fuel-needle" src="images/score/zeiger.svg" alt="Demo" height="130px" :style="style">
+            <img class="fuel-scala" src="images/score/gauge_filter.png" alt="Gauge">
+            <img class="fuel-needle" src="images/score/zeiger.svg" alt="Pointer" :style="style">
         </div>
         <div class="fuel-counter">
             <span> {{name}}</span> <span> {{numberWithDot(CounterNumber)}} </span>

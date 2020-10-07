@@ -17356,12 +17356,12 @@ var game = function game() {
 };
 
 var impressum = function impressum() {
-  return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../../views/Impressum/index */ "./resources/js/views/Impressum/index.vue"));
+  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../../views/Impressum/index */ "./resources/js/views/Impressum/index.vue"));
 }; // const leaderboard = () => import('../../views/Leaderboard/index.vue');
 
 
 var leaderboard = function leaderboard() {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ../../views/Leaderboard/newLeaderboard.vue */ "./resources/js/views/Leaderboard/newLeaderboard.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ../../views/Leaderboard/newLeaderboard.vue */ "./resources/js/views/Leaderboard/newLeaderboard.vue"));
 }; // import start from '../../components/start/index'
 
 
@@ -17785,7 +17785,7 @@ var state = {
     MinMaxDead: [328500, 400000]
   },
   '3.2.2.2.1': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_3_2_2_2_1" + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [400000, 440000]
@@ -17824,15 +17824,27 @@ var actions = {};
 
 /***/ }),
 
+/***/ "./resources/sass/mobile.scss":
+/*!************************************!*\
+  !*** ./resources/sass/mobile.scss ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/*!******************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/mobile.scss ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! D:\100_Development\Project-LaDwC\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\100_Development\Project-LaDwC\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\100_Development\Project-LaDwC\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! D:\100_Development\Project-LaDwC\resources\sass\mobile.scss */"./resources/sass/mobile.scss");
 
 
 /***/ })

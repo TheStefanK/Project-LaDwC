@@ -11,7 +11,7 @@ class ScoreController extends Controller
 
     public function index()
     {
-        $score = Score::query()->orderBy("rang","DESC")->paginate(5);
+        $score = Score::query()->orderBy("deceased")->paginate(5);
         return response()->json($score, 200);
     }
 
