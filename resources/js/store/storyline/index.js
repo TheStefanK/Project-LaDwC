@@ -4,7 +4,7 @@
 const VideoPath = '/video/';
 const VideoType = '.mp4';
 const OverlayTime = 22; // Sek
-const Placeholder = "placeholder"
+const Placeholder = "placeholder";
 
 const state = {
 
@@ -71,8 +71,8 @@ const state = {
       next: '3.1',
       response: 'Weiter'
     },
-    MinMaxInfected: [4500, 5500],
-    MinMaxDead: [3, 5]
+    MinMaxInfected: [4000, 6000],
+    MinMaxDead: [3, 8]
   },
   '2.2': {
     video: VideoPath + 'Akt_2_2' + VideoType,
@@ -97,7 +97,7 @@ const state = {
       next: '3.2',
       response: 'Solange bis ein Impfmittel erhältlich ist'
     },
-    MinMaxInfected: [12000, 13000],
+    MinMaxInfected: [10000 , 12000],
     MinMaxDead: [90, 110],
     Overlay: OverlayTime,
   },
@@ -114,8 +114,8 @@ const state = {
       response: 'Nein'
     },
     // Setting for Score
-    MinMaxInfected: [13000, 14000],
-    MinMaxDead: [200, 220],
+    MinMaxInfected: [13000, 16000],
+    MinMaxDead: [200, 300],
     Overlay: OverlayTime,
   },
 
@@ -124,14 +124,13 @@ const state = {
     video: VideoPath + "Akt_3_1_1_1" + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
-    MinMaxDead: [384, 400]
+    MinMaxDead: [400, 600]
 
   }, '3.1.1.2': {
     video: VideoPath + "Akt_3_1_1_2" + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
-    MinMaxDead: [640, 660]
-
+    MinMaxDead: [600, 800]
   },
 
   // Next Story
@@ -147,8 +146,8 @@ const state = {
       next: '3.2.2',
       response: 'Polizeieinsatz'
     },
-    MinMaxInfected: [2850, 2950],
-    MinMaxDead: [390, 410],
+    MinMaxInfected: [2500, 3000],
+    MinMaxDead: [350, 450],
     Overlay: OverlayTime,
   },
   //End from 3.1.2.X
@@ -156,13 +155,13 @@ const state = {
     video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
-    MinMaxDead: [650, 660]
+    MinMaxDead: [700, 900]
   },
   '3.1.2.2': {
     video: VideoPath + '3.2.2' + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
-    MinMaxDead: [650, 660]
+    MinMaxDead: [800, 1000]
   },
 //  Progress Number 4
   '3.2': {
@@ -177,8 +176,8 @@ const state = {
       next: '3.2.2',
       response: 'Nein'
     },
-    MinMaxInfected: [33000, 35000],
-    MinMaxDead: [650, 660],
+    MinMaxInfected: [30600, 37400],
+    MinMaxDead: [580, 720],
     Overlay: OverlayTime,
   },
   '3.2.1': {
@@ -193,21 +192,21 @@ const state = {
       next: '3.2.1.2',
       response: 'Nein'
     },
-    MinMaxInfected: [56000, 57000],
-    MinMaxDead: [1150, 1250]
+    MinMaxInfected: [50650,62000],
+    MinMaxDead: [1050, 1300]
   },
   //End from 3.2.1.X
   '3.2.1.1': {
     video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
-    MinMaxDead: [1580, 1700]
+    MinMaxDead: [1500, 1700]
   },
   '3.2.1.2': {
     video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
-    MinMaxDead: [1580, 1760]
+    MinMaxDead: [1500, 1760]
   },
 
   '3.2.2': {
@@ -222,7 +221,7 @@ const state = {
       next: '3.2.2.2',
       response: 'Ja'
     },
-    MinMaxInfected: [4200000, 43000000],
+    MinMaxInfected: [4200000, 4300000],
     MinMaxDead: [260000, 260600]
   },
 
@@ -246,21 +245,21 @@ const state = {
       next: '3.2.2.2.2',
       response: 'Nein'
     },
-    MinMaxInfected: [7000000, 7010000],
-    MinMaxDead: [380000, 388500],
+    MinMaxInfected: [6250000, 7600000],
+    MinMaxDead: [328500, 400000],
   },
 
   '3.2.2.2.1': {
     video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
-    MinMaxDead: [400000, 430500],
+    MinMaxDead: [400000, 440000],
   },
   '3.2.2.2.2': {
     video: VideoPath + Placeholder + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
-    MinMaxDead: [400000, 430500],
+    MinMaxDead: [400000, 440000],
   },
 };
 

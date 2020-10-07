@@ -48,7 +48,7 @@ __webpack_require__.r(__webpack_exports__);
       var current = start;
       var timer = setInterval(function () {
         console.log("+1 AKW");
-        current += _this.RandomMinMaxNumber(1, 1000);
+        current += _this.RandomMinMaxNumber(100000, 150000);
         _this.CounterNumber = current;
         console.log(_this.CounterNumber);
 
@@ -130,26 +130,10 @@ __webpack_require__.r(__webpack_exports__);
       var current = start;
       var range = end - start;
       range = range < 0 ? range * -1 : range;
-      console.log(range);
       var increment = 1;
-
-      if (range > 1000) {
-        increment = this.RandomMinMaxNumber(100, 120);
-      }
-
-      if (range > 10000) {
-        increment = this.RandomMinMaxNumber(1000, 2000);
-      }
-
-      if (range > 100000) {
-        increment = this.RandomMinMaxNumber(9000, 10000);
-      }
-
-      if (range > 1000000) {
-        increment = this.RandomMinMaxNumber(90000, 100000);
-      }
-
       var timer = setInterval(function () {
+        increment = _this.HandleIncrement(start, end);
+
         if (pointer === "up") {
           current += increment;
 
@@ -171,7 +155,7 @@ __webpack_require__.r(__webpack_exports__);
             _this.CounterNumber = current;
           }
         }
-      }, 250);
+      }, 100);
     },
     RandomMinMaxNumber: function RandomMinMaxNumber(min, max) {
       // min and max included
@@ -180,28 +164,80 @@ __webpack_require__.r(__webpack_exports__);
     HandleRotate: function HandleRotate(val) {
       var RotateValue;
 
-      if (val <= 0) {
+      if (val < 1) {
         RotateValue = -95;
       }
 
-      if (val <= 2) {
+      if (val === 1) {
         RotateValue = -93;
       }
 
-      if (val < this.degSkala[0]) {
-        RotateValue = -93;
+      if (val >= 1) {
+        RotateValue = -90;
       }
 
-      if (val >= this.degSkala[1]) {
-        RotateValue = -45;
+      if (val >= 10) {
+        RotateValue = -88;
       }
 
-      if (val >= this.degSkala[2]) {
+      if (val >= 50) {
+        RotateValue = -87;
+      }
+
+      if (val >= 100) {
+        RotateValue = -86;
+      }
+
+      if (val >= 300) {
+        RotateValue = -84;
+      }
+
+      if (val >= 600) {
+        RotateValue = -82;
+      }
+
+      if (val >= 800) {
+        RotateValue = -80;
+      }
+
+      if (val >= 1000) {
+        RotateValue = -70;
+      }
+
+      if (val >= 1500) {
+        RotateValue = -60;
+      }
+
+      if (val >= 3000) {
+        RotateValue = -40;
+      }
+
+      if (val >= 6000) {
+        RotateValue = -20;
+      }
+
+      if (val >= 10000) {
         RotateValue = 0;
       }
 
-      if (val >= 260000) {
-        RotateValue = 94;
+      if (val >= 20000) {
+        RotateValue = 10;
+      }
+
+      if (val >= 50000) {
+        RotateValue = 40;
+      }
+
+      if (val >= 200000) {
+        RotateValue = 60;
+      }
+
+      if (val >= 400000) {
+        RotateValue = 80;
+      }
+
+      if (val >= 2000000) {
+        RotateValue = 90;
       }
 
       return RotateValue;
@@ -218,6 +254,24 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return Pointer;
+    },
+    HandleIncrement: function HandleIncrement(startValue, endValue) {
+      var range = endValue - startValue;
+      range = range < 0 ? range * -1 : range;
+      var increment = 1;
+
+      if (range <= 30) {
+        increment = 1;
+      }
+
+      if (range > 30) {
+        var x = range / 30; // calculation increment
+
+        increment = Math.round(x);
+      }
+
+      console.log(increment);
+      return increment;
     }
   }
 });
@@ -441,6 +495,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -471,14 +528,15 @@ __webpack_require__.r(__webpack_exports__);
     elapsedTime: 'getElapsedTime'
   }),
   watch: {
-    VideoCurrentTime: function VideoCurrentTime(newValue, oldValue) {// console.log(newValue,oldValue);
-    }
+    VideoCurrentTime: function VideoCurrentTime(newValue, oldValue) {}
   },
   created: function created() {
+    // Create The Game
     this.VideoSource = this.storyLine[this.ProgressStatus].video;
     this.GameTimerStart();
   },
   methods: {
+    // Show Option Interface
     OnEnd: function OnEnd() {
       this.videoEnd = true;
     },
@@ -488,6 +546,7 @@ __webpack_require__.r(__webpack_exports__);
     OnStart: function OnStart() {
       this.videoEnd = false;
     },
+    // Start Game Timer
     GameTimerStart: function GameTimerStart() {
       var _this = this;
 
@@ -502,13 +561,14 @@ __webpack_require__.r(__webpack_exports__);
         _this.$store.dispatch("handleChangeElapsedTime", elapsedTime);
       }, 1000);
     },
+    // Format Timer to hh:mm:ss
     formattedElapsedTime: function formattedElapsedTime(time) {
-      console.log("ElapsedTune");
       var date = new Date(null);
       date.setSeconds(time / 1);
       var utc = date.toUTCString();
       return utc.substr(utc.indexOf(":") - 2, 8);
     },
+    // Check Video time for Options
     updateVideoTime: function updateVideoTime() {
       var Video = this.$refs.videoRef;
       var VideoDuration = this.$refs.videoRef.duration - this.storyLine[this.ProgressStatus].Overlay;
@@ -517,7 +577,6 @@ __webpack_require__.r(__webpack_exports__);
 
       if (VideoType === "question") {
         if (VideoDuration < CurrentTime) {
-          // console.log("Start Event");
           this.videoEnd = true;
         }
       } else {
@@ -532,6 +591,7 @@ __webpack_require__.r(__webpack_exports__);
     nextProgress: function nextProgress(val) {
       var _this2 = this;
 
+      // Start Next Cutscene
       setTimeout(function () {
         _this2.ProgressStatus = val;
         _this2.VideoSource = _this2.storyLine[val].video;
@@ -539,24 +599,21 @@ __webpack_require__.r(__webpack_exports__);
         _this2.$refs.videoRef.load();
 
         _this2.videoEnd = false;
-      }, 500); // console.log(this.storyLine[val].InfectedDelay);
+      }, 500); // Check Delay Timer for Gauge
 
       if (this.storyLine[val].InfectedDelay) {
-        // console.log("If");
         setTimeout(function () {
           _this2.CalculateInfectionAndDead(val);
         }, this.storyLine[val].InfectedDelay);
       } else {
-        // console.log("else");
         this.CalculateInfectionAndDead(val);
       }
 
       if (this.storyLine[val].AKW) {
-        console.log("AKW AKTIVE");
         this.CalculateAKW(val);
       }
     },
-    // Calcutlate Infected People and Dead People Base of Min/Max Values
+    // Calculate Infected People and Dead People Base of Min/Max Values
     CalculateInfectionAndDead: function CalculateInfectionAndDead(val) {
       var inf = this.storyLine[val].MinMaxInfected;
       var dead = this.storyLine[val].MinMaxDead;
@@ -565,16 +622,17 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.dispatch('handleChangeInfectedValue', InfectedPeople);
       this.$store.dispatch('handleChangeDeadValue', DeadPeople);
     },
+    // Calculate AKW
     CalculateAKW: function CalculateAKW(val) {
-      // console.log("AKW CALC");
       var AKW = this.storyLine[val].AKW;
       var AKWPeople = this.RandomMinMaxNumber(AKW[0], AKW[1]);
-      this.$store.dispatch('handleChangeAkwValue', AKWPeople); // console.log("AKW END", AKWPeople);
+      this.$store.dispatch('handleChangeAkwValue', AKWPeople);
     },
     RandomMinMaxNumber: function RandomMinMaxNumber(min, max) {
       // min and max included
       return Math.floor(Math.random() * (max - min + 1) + min);
     },
+    // Check Player Name
     Player_Name_Check: function Player_Name_Check() {
       var errorCounter = [];
       var reg = "([A-Za-z0-9])\\w+";
@@ -591,7 +649,6 @@ __webpack_require__.r(__webpack_exports__);
         errorCounter.push("lenght");
       }
 
-      console.log("Player Error Counter", errorCounter);
       return errorCounter;
     },
     Submit_Player: function Submit_Player() {
@@ -608,12 +665,10 @@ __webpack_require__.r(__webpack_exports__);
         "time": this.$store.getters.getElapsedTime,
         "rang": rang
       };
-      console.log(errors.length);
 
       if (errors.length === 0) {
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("api/score/create", data).then(function (response) {
-          console.log(response);
-
+          // console.log(response);
           if (response.status === 200) {
             _this3.$router.push({
               name: "leaderboard"
@@ -628,10 +683,12 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     Cheat: function Cheat() {
+      // Cheat only for Testing
       this.videoEnd = true;
     }
   },
   destroyed: function destroyed() {
+    // Reset the Game
     this.$store.dispatch('handleChangeInfectedValue', 0);
     this.$store.dispatch('handleChangeDeadValue', 0);
     this.$store.dispatch('handleChangeAkwValue', 0);

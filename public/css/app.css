@@ -90,173 +90,173 @@ body {
 
 @-webkit-keyframes glitch-effect {
   0% {
-    clip: rect(27px, 9999px, 92px, 0);
+    clip: rect(10px, 9999px, 47px, 0);
   }
 
   5% {
-    clip: rect(37px, 9999px, 7px, 0);
+    clip: rect(47px, 9999px, 32px, 0);
   }
 
   10% {
-    clip: rect(12px, 9999px, 71px, 0);
+    clip: rect(19px, 9999px, 20px, 0);
   }
 
   15% {
-    clip: rect(3px, 9999px, 12px, 0);
+    clip: rect(92px, 9999px, 30px, 0);
   }
 
   20% {
-    clip: rect(66px, 9999px, 37px, 0);
+    clip: rect(45px, 9999px, 6px, 0);
   }
 
   25% {
-    clip: rect(57px, 9999px, 27px, 0);
+    clip: rect(56px, 9999px, 6px, 0);
   }
 
   30% {
-    clip: rect(96px, 9999px, 85px, 0);
+    clip: rect(11px, 9999px, 68px, 0);
   }
 
   35% {
-    clip: rect(34px, 9999px, 32px, 0);
+    clip: rect(8px, 9999px, 71px, 0);
   }
 
   40% {
-    clip: rect(82px, 9999px, 48px, 0);
+    clip: rect(89px, 9999px, 52px, 0);
   }
 
   45% {
-    clip: rect(71px, 9999px, 5px, 0);
+    clip: rect(71px, 9999px, 9px, 0);
   }
 
   50% {
-    clip: rect(12px, 9999px, 56px, 0);
+    clip: rect(88px, 9999px, 83px, 0);
   }
 
   55% {
-    clip: rect(10px, 9999px, 83px, 0);
+    clip: rect(40px, 9999px, 8px, 0);
   }
 
   60% {
-    clip: rect(18px, 9999px, 5px, 0);
+    clip: rect(94px, 9999px, 64px, 0);
   }
 
   65% {
-    clip: rect(80px, 9999px, 8px, 0);
+    clip: rect(31px, 9999px, 74px, 0);
   }
 
   70% {
-    clip: rect(36px, 9999px, 80px, 0);
+    clip: rect(48px, 9999px, 34px, 0);
   }
 
   75% {
-    clip: rect(33px, 9999px, 14px, 0);
+    clip: rect(19px, 9999px, 15px, 0);
   }
 
   80% {
-    clip: rect(8px, 9999px, 16px, 0);
-  }
-
-  85% {
-    clip: rect(40px, 9999px, 76px, 0);
-  }
-
-  90% {
-    clip: rect(81px, 9999px, 31px, 0);
-  }
-
-  95% {
     clip: rect(61px, 9999px, 76px, 0);
   }
 
+  85% {
+    clip: rect(46px, 9999px, 26px, 0);
+  }
+
+  90% {
+    clip: rect(12px, 9999px, 1px, 0);
+  }
+
+  95% {
+    clip: rect(4px, 9999px, 37px, 0);
+  }
+
   100% {
-    clip: rect(64px, 9999px, 55px, 0);
+    clip: rect(51px, 9999px, 98px, 0);
   }
 }
 
 @keyframes glitch-effect {
   0% {
-    clip: rect(27px, 9999px, 92px, 0);
+    clip: rect(10px, 9999px, 47px, 0);
   }
 
   5% {
-    clip: rect(37px, 9999px, 7px, 0);
+    clip: rect(47px, 9999px, 32px, 0);
   }
 
   10% {
-    clip: rect(12px, 9999px, 71px, 0);
+    clip: rect(19px, 9999px, 20px, 0);
   }
 
   15% {
-    clip: rect(3px, 9999px, 12px, 0);
+    clip: rect(92px, 9999px, 30px, 0);
   }
 
   20% {
-    clip: rect(66px, 9999px, 37px, 0);
+    clip: rect(45px, 9999px, 6px, 0);
   }
 
   25% {
-    clip: rect(57px, 9999px, 27px, 0);
+    clip: rect(56px, 9999px, 6px, 0);
   }
 
   30% {
-    clip: rect(96px, 9999px, 85px, 0);
+    clip: rect(11px, 9999px, 68px, 0);
   }
 
   35% {
-    clip: rect(34px, 9999px, 32px, 0);
+    clip: rect(8px, 9999px, 71px, 0);
   }
 
   40% {
-    clip: rect(82px, 9999px, 48px, 0);
+    clip: rect(89px, 9999px, 52px, 0);
   }
 
   45% {
-    clip: rect(71px, 9999px, 5px, 0);
+    clip: rect(71px, 9999px, 9px, 0);
   }
 
   50% {
-    clip: rect(12px, 9999px, 56px, 0);
+    clip: rect(88px, 9999px, 83px, 0);
   }
 
   55% {
-    clip: rect(10px, 9999px, 83px, 0);
+    clip: rect(40px, 9999px, 8px, 0);
   }
 
   60% {
-    clip: rect(18px, 9999px, 5px, 0);
+    clip: rect(94px, 9999px, 64px, 0);
   }
 
   65% {
-    clip: rect(80px, 9999px, 8px, 0);
+    clip: rect(31px, 9999px, 74px, 0);
   }
 
   70% {
-    clip: rect(36px, 9999px, 80px, 0);
+    clip: rect(48px, 9999px, 34px, 0);
   }
 
   75% {
-    clip: rect(33px, 9999px, 14px, 0);
+    clip: rect(19px, 9999px, 15px, 0);
   }
 
   80% {
-    clip: rect(8px, 9999px, 16px, 0);
-  }
-
-  85% {
-    clip: rect(40px, 9999px, 76px, 0);
-  }
-
-  90% {
-    clip: rect(81px, 9999px, 31px, 0);
-  }
-
-  95% {
     clip: rect(61px, 9999px, 76px, 0);
   }
 
+  85% {
+    clip: rect(46px, 9999px, 26px, 0);
+  }
+
+  90% {
+    clip: rect(12px, 9999px, 1px, 0);
+  }
+
+  95% {
+    clip: rect(4px, 9999px, 37px, 0);
+  }
+
   100% {
-    clip: rect(64px, 9999px, 55px, 0);
+    clip: rect(51px, 9999px, 98px, 0);
   }
 }
 
@@ -726,7 +726,7 @@ img {
 
 .score-board span {
   display: block;
-  background-color: #222;
+  background-color: #050505;
   padding: 5px 10px;
   margin: -2px 0 0;
 }
@@ -738,7 +738,7 @@ img {
 .fuel-counter {
   display: flex;
   justify-content: space-between;
-  background: #222;
+  background: #050505;
 }
 
 .fuel-needle {
@@ -851,8 +851,8 @@ img {
 .fuel-needle {
   -webkit-animation-name: needle;
           animation-name: needle;
-  -webkit-animation-duration: 15.5s;
-          animation-duration: 15.5s;
+  -webkit-animation-duration: 3s;
+          animation-duration: 3s;
   transform-origin: center 115.25px;
 }
 

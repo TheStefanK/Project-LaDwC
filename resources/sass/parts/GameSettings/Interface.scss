@@ -105,7 +105,7 @@ img {
 
   span {
     display: block;
-    background-color: #222;
+    background-color: #050505;
     padding: 5px 10px;
     margin: -2px 0 0;
 
@@ -124,7 +124,7 @@ img {
 .fuel-counter{
   display: flex;
   justify-content: space-between;
-  background: #222;
+  background: #050505;
 }
 
 .fuel-needle {
@@ -241,7 +241,7 @@ img {
 
 .fuel-needle {
   animation-name: needle;
-  animation-duration: 15.5s;
+  animation-duration: 3s;
   transform-origin: center 115.25px;
 }
 

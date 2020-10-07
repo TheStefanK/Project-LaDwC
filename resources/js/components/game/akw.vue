@@ -34,7 +34,7 @@
         let current = start;
         let timer = setInterval(() => {
           console.log("+1 AKW");
-          current += this.RandomMinMaxNumber(1,1000);
+          current += this.RandomMinMaxNumber(100000,150000);
           this.CounterNumber = current;
           console.log(this.CounterNumber);
           if (current === end || current >= end) {

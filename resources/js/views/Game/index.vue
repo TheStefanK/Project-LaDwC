@@ -7,22 +7,22 @@
         <input type="hidden" v-model="ProgressStatus">
         <div :class="{'video-container-grid-end':videoEnd, 'video-container-grid':!videoEnd}">
             <div class="top">
-                <!--                <app-header v-if="videoEnd"></app-header>-->
-
+                <!-- Exit Button -->
                 <div class="left">
                     <router-link :to="{name: 'home'}" class="exit-button" v-if="videoEnd">
                         <i class="icon-exit"></i>
                         Exit
                     </router-link>
                 </div>
+                <!-- Timer  -->
                 <div class="right">
                     <span>{{elapsedTime}}</span>
                     <button @click="Cheat">Cheat</button>
                 </div>
-
-
             </div>
+
             <div class="middle" v-if="videoEnd">
+                <!-- Question Interface-->
                 <div class="story-line_question" v-if="storyLine[ProgressStatus].type === 'question'">
                     <div>
                         <p class="question">{{this.storyLine[this.ProgressStatus].question}}</p>
@@ -57,6 +57,7 @@
                     </div>
 
                 </div>
+                <!-- Continue Interface -->
                 <div class="story-line_continue" v-if="storyLine[ProgressStatus].type === 'continue'">
                     <div>
                         <button class="responseBtn" @click="nextProgress(storyLine[ProgressStatus].continueStory.next)">
@@ -68,6 +69,7 @@
                         </button>
                     </div>
                 </div>
+                <!-- Game End Interface -->
                 <div class="story-line_end" v-if="storyLine[ProgressStatus].type === 'end'">
                     <label for="name">Name</label>
                     <input type="text" name="name" id="name" placeholder="Dein Name" class="input_end_name"
@@ -83,6 +85,7 @@
                 </div>
             </div>
             <div class="bottom">
+                <!-- Scoreboard Gauge and AKW-icon -->
                 <app-score></app-score>
             </div>
         </div>
@@ -108,7 +111,7 @@
         PlayerName: null,
         PlayerNameError: false,
         VideoCurrentTime: null,
-        GameTimer:null,
+        GameTimer: null,
 
       }
     },
@@ -122,13 +125,14 @@
     }),
     watch: {
       VideoCurrentTime(newValue, oldValue) {
-        // console.log(newValue,oldValue);
       }
     }, created() {
+      // Create The Game
       this.VideoSource = this.storyLine[this.ProgressStatus].video;
-        this.GameTimerStart();
+      this.GameTimerStart();
     },
     methods: {
+      // Show Option Interface
       OnEnd() {
         this.videoEnd = true;
       }, OnPause() {
@@ -136,22 +140,24 @@
       }, OnStart() {
         this.videoEnd = false;
       },
+      // Start Game Timer
       GameTimerStart() {
-        this.GameTimerStart = setInterval(()=>{
-          let Time =  this.$store.getters.getTimer;
+        this.GameTimerStart = setInterval(() => {
+          let Time = this.$store.getters.getTimer;
           Time += 1;
-          this.$store.dispatch("handleChangeTimer",Time);
+          this.$store.dispatch("handleChangeTimer", Time);
           let elapsedTime = this.formattedElapsedTime(Time);
-          this.$store.dispatch("handleChangeElapsedTime",elapsedTime)
-        },1000)
+          this.$store.dispatch("handleChangeElapsedTime", elapsedTime)
+        }, 1000)
       },
+      // Format Timer to hh:mm:ss
       formattedElapsedTime(time) {
-        console.log("ElapsedTune");
         const date = new Date(null);
         date.setSeconds(time / 1);
         const utc = date.toUTCString();
         return utc.substr(utc.indexOf(":") - 2, 8);
       },
+      // Check Video time for Options
       updateVideoTime() {
         let Video = this.$refs.videoRef;
         let VideoDuration = this.$refs.videoRef.duration - this.storyLine[this.ProgressStatus].Overlay;
@@ -159,7 +165,6 @@
         let VideoType = this.storyLine[this.ProgressStatus].type;
         if (VideoType === "question") {
           if (VideoDuration < CurrentTime) {
-            // console.log("Start Event");
             this.videoEnd = true;
           }
         } else {
@@ -171,29 +176,28 @@
       },
       // Next Step Story Line
       nextProgress(val) {
+        // Start Next Cutscene
         setTimeout(() => {
           this.ProgressStatus = val;
           this.VideoSource = this.storyLine[val].video;
           this.$refs.videoRef.load();
           this.videoEnd = false;
         }, 500);
-        // console.log(this.storyLine[val].InfectedDelay);
+
+        // Check Delay Timer for Gauge
         if (this.storyLine[val].InfectedDelay) {
-          // console.log("If");
           setTimeout(() => {
             this.CalculateInfectionAndDead(val);
           }, this.storyLine[val].InfectedDelay);
         } else {
-          // console.log("else");
           this.CalculateInfectionAndDead(val);
         }
         if (this.storyLine[val].AKW) {
-          console.log("AKW AKTIVE");
           this.CalculateAKW(val);
         }
       },
 
-      // Calcutlate Infected People and Dead People Base of Min/Max Values
+      // Calculate Infected People and Dead People Base of Min/Max Values
       CalculateInfectionAndDead(val) {
         let inf = this.storyLine[val].MinMaxInfected;
         let dead = this.storyLine[val].MinMaxDead;
@@ -202,41 +206,36 @@
         this.$store.dispatch('handleChangeInfectedValue', InfectedPeople);
         this.$store.dispatch('handleChangeDeadValue', DeadPeople);
       },
+      // Calculate AKW
       CalculateAKW(val) {
-        // console.log("AKW CALC");
         let AKW = this.storyLine[val].AKW;
         let AKWPeople = this.RandomMinMaxNumber(AKW[0], AKW[1]);
         this.$store.dispatch('handleChangeAkwValue', AKWPeople);
-        // console.log("AKW END", AKWPeople);
       },
-
       RandomMinMaxNumber(min, max) { // min and max included
         return Math.floor(Math.random() * (max - min + 1) + min);
       },
-      Player_Name_Check(){
-        let errorCounter = [] ;
+      // Check Player Name
+      Player_Name_Check() {
+        let errorCounter = [];
         let reg = "([A-Za-z0-9])\\w+";
-        if (this.PlayerName !== null){
+        if (this.PlayerName !== null) {
           errorCounter.push("null");
         }
-        if (!this.PlayerName.match(reg)){
+        if (!this.PlayerName.match(reg)) {
           errorCounter.push("regex");
         }
-        if(this.PlayerName.length > 15){
+        if (this.PlayerName.length > 15) {
           errorCounter.push("lenght")
         }
-
-        console.log("Player Error Counter",errorCounter);
-
         return errorCounter;
-
       },
       Submit_Player() {
 
         let errors = this.Player_Name_Check;
         let sec = this.$store.getters.getTimer;
         let dead = this.$store.getters.getDead;
-        let rang = Math.round(((sec/dead) * 100000000));
+        let rang = Math.round(((sec / dead) * 100000000));
         let data = {
           "name": this.PlayerName,
           "infected": this.$store.getters.getInfected,
@@ -244,10 +243,10 @@
           "time": this.$store.getters.getElapsedTime,
           "rang": rang,
         };
-        console.log(errors.length);
-        if (errors.length === 0 ){
+
+        if (errors.length === 0) {
           axios.post("api/score/create", data).then(response => {
-            console.log(response);
+            // console.log(response);
             if (response.status === 200) {
               this.$router.push({name: "leaderboard"})
             }
@@ -256,14 +255,16 @@
             this.PlayerNameError = true;
           })
         } else {
-            this.PlayerNameError = true;
+          this.PlayerNameError = true;
         }
       },
       Cheat() {
+        // Cheat only for Testing
         this.videoEnd = true;
       }
     },
     destroyed() {
+      // Reset the Game
       this.$store.dispatch('handleChangeInfectedValue', 0);
       this.$store.dispatch('handleChangeDeadValue', 0);
       this.$store.dispatch('handleChangeAkwValue', 0);

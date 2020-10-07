@@ -50,24 +50,9 @@
         let current = start;
         let range = (end - start);
         range = (range < 0) ? range * -1 : range;
-        console.log(range);
         let increment = 1;
-        if (range > 1000) {
-          increment = this.RandomMinMaxNumber(100, 120);
-        }
-        if (range > 10000) {
-
-          increment = this.RandomMinMaxNumber(1000, 2000);
-        }
-        if (range > 100000) {
-
-          increment = this.RandomMinMaxNumber(9000, 10000);
-        }
-        if (range > 1000000) {
-
-          increment = this.RandomMinMaxNumber(90000, 100000);
-        }
         let timer = setInterval(() => {
+          increment = this.HandleIncrement(start,end);
           if (pointer === "up") {
             current += increment;
             if (current === end || current >= end) {
@@ -86,33 +71,74 @@
               this.CounterNumber = current;
             }
           }
-        }, 250);
+        }, 100);
       },
       RandomMinMaxNumber(min, max) { // min and max included
         return Math.floor(Math.random() * (max - min + 1) + min);
       },
       HandleRotate(val){
         let  RotateValue;
-        if (val <= 0) {
+        if (val < 1) {
           RotateValue = -95;
         }
-        if (val <= 2) {
+        if (val === 1) {
           RotateValue = -93;
         }
-        if (val < this.degSkala[0]) {
-          RotateValue = -93;
+        if (val >= 1) {
+          RotateValue = -90;
         }
-        if (val >= this.degSkala[1]) {
-          RotateValue = -45;
+        if (val >= 10) {
+          RotateValue = -88;
         }
-        if (val >= this.degSkala[2]) {
+        if (val >= 50) {
+          RotateValue = -87;
+        }
+        if (val >= 100) {
+          RotateValue = -86;
+        }
+        if (val >= 300) {
+          RotateValue = -84;
+        }
+        if (val >= 600) {
+          RotateValue = -82;
+        }
+        if (val >= 800) {
+          RotateValue = -80;
+        }
+        if (val >= 1000) {
+          RotateValue = -70;
+        }
+        if (val >= 1500) {
+          RotateValue = -60;
+        }
+        if (val >= 3000) {
+          RotateValue = -40;
+        }
+        if (val >= 6000) {
+          RotateValue = -20;
+        }
+        if (val >= 10000) {
           RotateValue = 0;
         }
-        if (val >= 260000) {
-          RotateValue = 94;
+        if (val >= 20000) {
+          RotateValue = 10;
+        }
+        if (val >= 50000) {
+          RotateValue = 40;
+        }
+
+        if (val >= 200000) {
+          RotateValue = 60;
+        }
+        if (val >= 400000) {
+          RotateValue = 80;
+        }
+        if (val >= 2000000) {
+          RotateValue = 90;
         }
         return RotateValue;
       },
+
       HandleUpOrDown(newValue, oldValue){
         let Pointer;
         if (newValue > oldValue) {
@@ -123,6 +149,23 @@
         }
         return Pointer;
       },
+
+      HandleIncrement(startValue,endValue){
+        let range = (endValue - startValue);
+        range = (range < 0) ? range * -1 : range;
+
+        let increment = 1;
+        if(range <= 30){
+           increment = 1;
+        }
+        if(range > 30){
+          let x = range/30  // calculation increment
+          increment = Math.round(x)
+        }
+        console.log(increment);
+
+        return increment;
+      }
 
     },
   };
