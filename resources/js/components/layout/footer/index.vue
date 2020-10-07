@@ -4,7 +4,7 @@
             &copy; 2020 Life and Death with Corona
         </div>
         <div class="info-box">
-            <a href="#">Impressum</a>
+            <router-link :to="{name:'impressum'}" >Impressum</router-link>
         </div>
     </footer>
 </template>

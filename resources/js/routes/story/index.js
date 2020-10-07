@@ -6,6 +6,7 @@ const footer = () => import('../../components/layout/footer/index');
 
 const home = () => import('../../views/Home/index');
 const game = () => import('../../views/Game/index');
+const impressum = () => import('../../views/Impressum/index');
 // const leaderboard = () => import('../../views/Leaderboard/index.vue');
 const leaderboard = () => import('../../views/Leaderboard/newLeaderboard.vue');
 
@@ -33,6 +34,14 @@ export default [
     components: {
       header: header,
       content: leaderboard,
+      footer: footer,
+    },
+  }, {
+    name: 'impressum',
+    path: '/impressum',
+    components: {
+      header: header,
+      content: impressum,
       footer: footer,
     },
   }

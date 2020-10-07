@@ -17353,6 +17353,10 @@ var home = function home() {
 
 var game = function game() {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ../../views/Game/index */ "./resources/js/views/Game/index.vue"));
+};
+
+var impressum = function impressum() {
+  return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../../views/Impressum/index */ "./resources/js/views/Impressum/index.vue"));
 }; // const leaderboard = () => import('../../views/Leaderboard/index.vue');
 
 
@@ -17384,6 +17388,14 @@ var leaderboard = function leaderboard() {
   components: {
     header: header,
     content: leaderboard,
+    footer: footer
+  }
+}, {
+  name: 'impressum',
+  path: '/impressum',
+  components: {
+    header: header,
+    content: impressum,
     footer: footer
   }
 }]);
