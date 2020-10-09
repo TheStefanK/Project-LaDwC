@@ -36,7 +36,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     AkwDead: function AkwDead(newValue, oldValue) {
-      console.log("AFK CHNAGE", newValue, oldValue);
       this.counter(oldValue, newValue);
     }
   },
@@ -44,13 +43,10 @@ __webpack_require__.r(__webpack_exports__);
     counter: function counter(start, end) {
       var _this = this;
 
-      console.log("AFK START COUNTER");
       var current = start;
       var timer = setInterval(function () {
-        console.log("+1 AKW");
         current += _this.RandomMinMaxNumber(100000, 150000);
-        _this.CounterNumber = current;
-        console.log(_this.CounterNumber);
+        _this.CounterNumber = current; // console.log(this.CounterNumber);
 
         if (current === end || current >= end) {
           clearInterval(timer);
@@ -96,8 +92,7 @@ __webpack_require__.r(__webpack_exports__);
   mixins: [_utility_mixins__WEBPACK_IMPORTED_MODULE_0__["scoreMixins"]],
   props: {
     name: String,
-    number: Number,
-    degSkala: Array
+    number: Number
   },
   data: function data() {
     return {
@@ -107,8 +102,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     number: function number(newValue, oldValue) {
-      console.log(newValue, oldValue); // Pointer Up or Down
-
+      // console.log(newValue, oldValue);
+      // Pointer Up or Down
       var Pointer = this.HandleUpOrDown(newValue, oldValue); // Rotate Value
 
       var RotateValue = this.HandleRotate(newValue); // Counter
@@ -268,9 +263,9 @@ __webpack_require__.r(__webpack_exports__);
         var x = range / 30; // calculation increment
 
         increment = Math.round(x);
-      }
+      } // console.log(increment);
 
-      console.log(increment);
+
       return increment;
     }
   }
@@ -304,20 +299,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "score",
-  data: function data() {
-    return {
-      InfectedSkala: [],
-      DeadSkala: [5, 15, 100, 250, 500, 750, 1000, 1250, 1500, 1750]
-    };
-  },
   mixins: [_utility_mixins__WEBPACK_IMPORTED_MODULE_0__["scoreMixins"]],
   computed: {
     Infected: function Infected() {
@@ -333,21 +319,6 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     "v-gauge": _gauge__WEBPACK_IMPORTED_MODULE_1__["default"],
     "v-akw": _akw__WEBPACK_IMPORTED_MODULE_2__["default"]
-  },
-  methods: {
-    startTimer: function startTimer() {
-      var _this = this;
-
-      this.timer = setInterval(function () {
-        _this.elapsedTime += 1000;
-      }, 2000);
-    },
-    stopTimer: function stopTimer() {
-      clearInterval(this.timer);
-    },
-    resetTimer: function resetTimer() {
-      this.elapsedTime = 0;
-    }
   }
 });
 
@@ -404,6 +375,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _utility_mixins__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utility/mixins */ "./resources/js/utility/mixins.js");
+//
 //
 //
 //
@@ -574,14 +546,16 @@ __webpack_require__.r(__webpack_exports__);
       var VideoDuration = this.$refs.videoRef.duration - this.storyLine[this.ProgressStatus].Overlay;
       var CurrentTime = this.$refs.videoRef.currentTime;
       var VideoType = this.storyLine[this.ProgressStatus].type;
+      Video.volume = 1;
+      Video.muted = false;
 
       if (VideoType === "question") {
         if (VideoDuration < CurrentTime) {
           this.videoEnd = true;
         }
       } else if (VideoType === "continue" && Video.duration === CurrentTime) {
-        var next = this.storyLine[this.ProgressStatus].continueStory.next;
-        console.log("Continue Video", next);
+        var next = this.storyLine[this.ProgressStatus].continueStory.next; // console.log("Continue Video", next);
+
         this.nextProgress(next);
       } else {
         if (Video.duration === CurrentTime) {
@@ -697,6 +671,7 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch('handleChangeDeadValue', 0);
     this.$store.dispatch('handleChangeAkwValue', 0);
     this.$store.dispatch('handleChangeTimer', 0);
+    this.$store.dispatch("handleChangeElapsedTime", "00:00:00");
   }
 });
 
@@ -799,15 +774,7 @@ var render = function() {
     _c(
       "div",
       { staticClass: "infected" },
-      [
-        _c("v-gauge", {
-          attrs: {
-            name: "Infizierte:",
-            number: _vm.Infected,
-            degSkala: [5, 10, 20]
-          }
-        })
-      ],
+      [_c("v-gauge", { attrs: { name: "Infizierte:", number: _vm.Infected } })],
       1
     ),
     _vm._v(" "),
@@ -816,11 +783,7 @@ var render = function() {
     _c(
       "div",
       { staticClass: "dead" },
-      [
-        _c("v-gauge", {
-          attrs: { name: "Tote:", number: _vm.Dead, degSkala: [5, 10, 20] }
-        })
-      ],
+      [_c("v-gauge", { attrs: { name: "Tote:", number: _vm.Dead } })],
       1
     )
   ])
@@ -933,7 +896,15 @@ var render = function() {
           timeupdate: _vm.updateVideoTime
         }
       },
-      [_c("source", { attrs: { src: _vm.VideoSource } })]
+      [
+        _c("source", {
+          attrs: { src: _vm.VideoSource + "webm", type: "video/webm" }
+        }),
+        _vm._v(" "),
+        _c("source", {
+          attrs: { src: _vm.VideoSource + "mp4", type: "video/mp4" }
+        })
+      ]
     ),
     _vm._v(" "),
     _c("input", {
@@ -980,7 +951,9 @@ var render = function() {
                     },
                     [
                       _c("i", { staticClass: "icon-exit" }),
-                      _vm._v("\n                    Exit\n                ")
+                      _vm._v(
+                        "\n                        Exit\n                    "
+                      )
                     ]
                   )
                 : _vm._e()
@@ -989,7 +962,9 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("div", { staticClass: "right" }, [
-            _c("span", [_vm._v(_vm._s(_vm.elapsedTime))]),
+            _vm.videoEnd
+              ? _c("span", [_vm._v(_vm._s(_vm.elapsedTime))])
+              : _vm._e(),
             _vm._v(" "),
             _c("button", { on: { click: _vm.Cheat } }, [_vm._v("Cheat")])
           ])
@@ -1026,12 +1001,12 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                    " +
+                                      "\n                                        " +
                                         _vm._s(
                                           _vm.storyLine[this.ProgressStatus]
                                             .firstOption.response
                                         ) +
-                                        "\n                                    "
+                                        "\n                                        "
                                     ),
                                     _c("span", { staticClass: "line-1" }),
                                     _vm._v(" "),
@@ -1065,12 +1040,12 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                    " +
+                                      "\n                                        " +
                                         _vm._s(
                                           _vm.storyLine[this.ProgressStatus]
                                             .secondOption.response
                                         ) +
-                                        "\n                                    "
+                                        "\n                                        "
                                     ),
                                     _c("span", { staticClass: "line-1" }),
                                     _vm._v(" "),
@@ -1090,41 +1065,7 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               _vm.storyLine[_vm.ProgressStatus].type === "continue"
-                ? _c("div", { staticClass: "story-line_continue" }, [
-                    _c("div", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "responseBtn",
-                          on: {
-                            click: function($event) {
-                              return _vm.nextProgress(
-                                _vm.storyLine[_vm.ProgressStatus].continueStory
-                                  .next
-                              )
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(
-                                _vm.storyLine[this.ProgressStatus].continueStory
-                                  .response
-                              ) +
-                              "\n                        "
-                          ),
-                          _c("span", { staticClass: "line-1" }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "line-2" }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "line-3" }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "line-4" })
-                        ]
-                      )
-                    ])
-                  ])
+                ? _c("div", { staticClass: "story-line_continue" })
                 : _vm._e(),
               _vm._v(" "),
               _vm.storyLine[_vm.ProgressStatus].type === "end"
@@ -1166,7 +1107,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                    Senden\n                    "
+                          "\n                        Senden\n                        "
                         ),
                         _c("span", { staticClass: "line-1" }),
                         _vm._v(" "),

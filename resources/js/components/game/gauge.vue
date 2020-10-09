@@ -20,8 +20,8 @@
     props: {
       name: String,
       number: Number,
-      degSkala: Array,
-    }, data() {
+    },
+    data() {
       return {
         style: "",
         CounterNumber: 0,
@@ -29,7 +29,7 @@
     },
     watch: {
       number(newValue, oldValue) {
-        console.log(newValue, oldValue);
+        // console.log(newValue, oldValue);
         // Pointer Up or Down
         let Pointer = this.HandleUpOrDown(newValue,oldValue);
         // Rotate Value
@@ -159,10 +159,10 @@
            increment = 1;
         }
         if(range > 30){
-          let x = range/30  // calculation increment
+          let x = range/30;  // calculation increment
           increment = Math.round(x)
         }
-        console.log(increment);
+        // console.log(increment);
 
         return increment;
       }

@@ -2,7 +2,7 @@
 
 // Video Settings
 const VideoPath = '/video/';
-const VideoType = '.mp4';
+const VideoType = '.';
 const OverlayTime = 22; // Sek
 const Placeholder = "placeholder";
 
@@ -35,7 +35,7 @@ const state = {
     MinMaxDead: [0, 0]
   },
   '1.2': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_1_2" + VideoType,
     type: "continue",
     continueStory: {
       next: '2',
@@ -86,7 +86,7 @@ const state = {
   },
 // Progress Number 3
   '3.1': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_3_1" + VideoType,
     type: "question",
     question: 'Wie lange sollen die Geschäfte noch geschlossen bleiben?',
     firstOption: {
@@ -135,7 +135,7 @@ const state = {
 
   // Next Story
   '3.1.2': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_3_1_2" + VideoType,
     type: "question",
     question: 'Illegale Demostrationen auflösen? Zur not mit Gewalt?',
     firstOption: {
@@ -152,20 +152,20 @@ const state = {
   },
   //End from 3.1.2.X
   '3.1.2.1': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_3_1_2_1" + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [700, 900]
   },
   '3.1.2.2': {
-    video: VideoPath + '3.2.2' + VideoType,
+    video: VideoPath + "Akt_3_1_2_2" + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [800, 1000]
   },
 //  Progress Number 4
   '3.2': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_3_2" + VideoType,
     type: "question",
     question: 'Soll eine Ausgangssperre über die Risikogruppe und die Hauptüberträger verhängt werden?',
     firstOption: {
@@ -181,7 +181,7 @@ const state = {
     Overlay: OverlayTime,
   },
   '3.2.1': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_3_2_1" + VideoType,
     type: "question",
     question: 'Hilfspaket für UnternehmerInnen',
     firstOption: {
@@ -197,20 +197,20 @@ const state = {
   },
   //End from 3.2.1.X
   '3.2.1.1': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_3_2_1_1" + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [1500, 1700]
   },
   '3.2.1.2': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_3_2_1_2" + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [1500, 1760]
   },
 
   '3.2.2': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_3_2_2" + VideoType,
     type: "question",
     question: 'Soll eine Ausgangsspeere über die Risikogruppe und die Hauptüberträger verhängt werden?',
     firstOption: {
@@ -226,7 +226,7 @@ const state = {
   },
 
   '3.2.2.1': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_3_2_2_1" + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [3000000, 3145000],
@@ -234,7 +234,7 @@ const state = {
   },
 
   '3.2.2.2': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_3_2_2_2" + VideoType,
     type: "question",
     question: 'Hilfspaket für UnternehmerInnen',
     firstOption: {
@@ -256,7 +256,7 @@ const state = {
     MinMaxDead: [400000, 440000],
   },
   '3.2.2.2.2': {
-    video: VideoPath + Placeholder + VideoType,
+    video: VideoPath + "Akt_3_2_2_2_2" + VideoType,
     type: "end",
     MinMaxInfected: [0, 0],
     MinMaxDead: [400000, 440000],

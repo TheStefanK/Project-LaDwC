@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="wrapper">
         <h1>Impressum</h1>
         <h2>ANGABEN GEMÄSS § 5 TM </h2>
         <p>Florian Poiss</p>

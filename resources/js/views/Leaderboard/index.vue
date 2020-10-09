@@ -34,10 +34,10 @@
       }
     },
     created() {
-      console.log("axios");
+      // console.log("axios");
       axios.get("/api/score/index")
         .then(response => {
-          console.log(response.data);
+          // console.log(response.data);
           this.players = response.data;
         }).catch(error => {
         console.error(error)
@@ -47,14 +47,12 @@
       NextPage() {
         axios.get(this.players.next_page_url)
           .then(response => {
-            console.log(response.data);
+            // console.log(response.data);
             if (response.data.current_page === 1) {
               this.Rankstart = 0;
             }else {
-              console.log("Test");
               let newRankstart = this.players.per_page * this.players.current_page;
               this.Rankstart = newRankstart;
-              console.log(newRankstart)
             }
             this.players = response.data;
           }).catch(error => {
@@ -68,12 +66,12 @@
               if (response.data.current_page === 1) {
                 this.Rankstart = 0;
               }else {
-                console.log("Test");
+
                 let newRankstart = this.players.per_page * this.players.current_page;
                 this.Rankstart = newRankstart;
-                console.log(newRankstart)
+
               }
-              console.log(response.data);
+
               this.players = response.data;
             }).catch(error => {
             console.error(error)

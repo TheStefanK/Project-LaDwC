@@ -1,16 +1,13 @@
 <template>
     <div class="score-board">
         <div class="infected">
-            <v-gauge name="Infizierte:" :number="Infected" :degSkala="[5,10,20]">
-            </v-gauge>
+            <v-gauge name="Infizierte:" :number="Infected"></v-gauge>
         </div>
         <div class="statistics">
             <v-akw></v-akw>
         </div>
         <div class="dead">
-
-            <v-gauge name="Tote:" :number="Dead" :degSkala="[5,10,20]"></v-gauge>
-
+            <v-gauge name="Tote:" :number="Dead"></v-gauge>
         </div>
     </div>
 </template>
@@ -21,13 +18,7 @@
   import akw from './akw'
 
   export default {
-    name: "score", data() {
-      return {
-        InfectedSkala: [],
-        DeadSkala: [5,15,100,250,500,750,1000,1250,1500,1750,],
-
-      }
-    },
+    name: "score",
     mixins: [scoreMixins],
     computed: {
       Infected() {
@@ -43,19 +34,6 @@
     components: {
       "v-gauge": gauge,
       "v-akw": akw,
-    },
-    methods: {
-      startTimer() {
-        this.timer = setInterval(() => {
-          this.elapsedTime += 1000;
-        }, 2000);
-      },
-      stopTimer() {
-        clearInterval(this.timer);
-      },
-      resetTimer() {
-        this.elapsedTime = 0;
-      },
     },
   }
 </script>

@@ -18,25 +18,21 @@
       AkwDead() {
         return this.$store.getters.getAkwDead;
       },
-    },
-    data() {
+    }, data() {
       return {
         CounterNumber: 0,
       }
     }, watch: {
       AkwDead(newValue, oldValue) {
-        console.log("AFK CHNAGE",newValue,oldValue);
-        this.counter(oldValue,newValue)
+        this.counter(oldValue, newValue)
       }
     }, methods: {
       counter(start, end) {
-        console.log("AFK START COUNTER");
         let current = start;
         let timer = setInterval(() => {
-          console.log("+1 AKW");
-          current += this.RandomMinMaxNumber(100000,150000);
+          current += this.RandomMinMaxNumber(100000, 150000);
           this.CounterNumber = current;
-          console.log(this.CounterNumber);
+          // console.log(this.CounterNumber);
           if (current === end || current >= end) {
             clearInterval(timer);
             this.CounterNumber = end;

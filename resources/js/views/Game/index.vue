@@ -2,7 +2,8 @@
     <div class="container-video">
         <video id="Story-Line_Video" ref="videoRef" autoplay @ended="OnEnd()" @pause="OnPause"
                @play="OnStart" :class="{'end-video': videoEnd}" @timeupdate="updateVideoTime">
-            <source :src="VideoSource">
+            <source :src="VideoSource+'webm'" type="video/webm">
+            <source :src="VideoSource+'mp4'" type="video/mp4">
         </video>
         <input type="hidden" v-model="ProgressStatus">
         <div :class="{'video-container-grid-end':videoEnd, 'video-container-grid':!videoEnd}">
@@ -15,9 +16,9 @@
                     </router-link>
                 </div>
                 <!-- Timer  -->
-                <div class="right">
-                    <span>{{elapsedTime}}</span>
-                    <button @click="Cheat">Cheat</button>
+                <div class="right" >
+                    <span v-if="videoEnd">{{elapsedTime}}</span>
+<!--                    <button @click="Cheat">Cheat</button>-->
                 </div>
             </div>
 
@@ -59,15 +60,15 @@
                 </div>
                 <!-- Continue Interface -->
                 <div class="story-line_continue" v-if="storyLine[ProgressStatus].type === 'continue'">
-                    <div>
-                        <button class="responseBtn" @click="nextProgress(storyLine[ProgressStatus].continueStory.next)">
-                            {{storyLine[this.ProgressStatus].continueStory.response}}
-                            <span class="line-1"></span>
-                            <span class="line-2"></span>
-                            <span class="line-3"></span>
-                            <span class="line-4"></span>
-                        </button>
-                    </div>
+<!--                    <div>-->
+<!--                        <button class="responseBtn" @click="nextProgress(storyLine[ProgressStatus].continueStory.next)">-->
+<!--                            {{storyLine[this.ProgressStatus].continueStory.response}}-->
+<!--                            <span class="line-1"></span>-->
+<!--                            <span class="line-2"></span>-->
+<!--                            <span class="line-3"></span>-->
+<!--                            <span class="line-4"></span>-->
+<!--                        </button>-->
+<!--                    </div>-->
                 </div>
                 <!-- Game End Interface -->
                 <div class="story-line_end" v-if="storyLine[ProgressStatus].type === 'end'">
@@ -163,15 +164,16 @@
         let VideoDuration = this.$refs.videoRef.duration - this.storyLine[this.ProgressStatus].Overlay;
         let CurrentTime = this.$refs.videoRef.currentTime;
         let VideoType = this.storyLine[this.ProgressStatus].type;
+        Video.volume = 1;
+        Video.muted = false;
         if (VideoType === "question") {
           if (VideoDuration < CurrentTime) {
             this.videoEnd = true;
           }
         } else if (VideoType === "continue" && Video.duration === CurrentTime) {
           let next = this.storyLine[this.ProgressStatus].continueStory.next;
-          console.log("Continue Video", next);
+          // console.log("Continue Video", next);
           this.nextProgress(next);
-
         } else {
           if (Video.duration === CurrentTime) {
             this.videoEnd = true;
@@ -274,6 +276,7 @@
       this.$store.dispatch('handleChangeDeadValue', 0);
       this.$store.dispatch('handleChangeAkwValue', 0);
       this.$store.dispatch('handleChangeTimer', 0);
+      this.$store.dispatch("handleChangeElapsedTime", "00:00:00")
     }
   }
 </script>
