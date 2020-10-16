@@ -31,7 +31,7 @@ const state = {
       response: 'Weiter'
     },
     MinMaxInfected: [0, 0],
-    MinMaxDead: [0, 0]
+    MinMaxDead: [0, 0],
   },
   '1.2': {
     video: VideoPath + "Akt_1_2" + VideoType,
@@ -93,7 +93,7 @@ const state = {
       response: 'Bis Ostern (ca. 2 Wochen)'
     },
     secondOption: {
-      next: '3.2',
+      next: '3.1.2',
       response: 'Solange bis ein Impfmittel erhältlich ist'
     },
     MinMaxInfected: [10000 , 12000],
@@ -138,11 +138,11 @@ const state = {
     type: "question",
     question: 'Illegale Demonstrationen auflösen? Zur Not mit Gewalt?',
     firstOption: {
-      next: '3.2.1',
+      next: '3.1.2.1',
       response: 'Abwarten und Deeskalieren'
     },
     secondOption: {
-      next: '3.2.2',
+      next: '3.1.2.2',
       response: 'Polizeieinsatz'
     },
     MinMaxInfected: [2500, 3000],
