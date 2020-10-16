@@ -8,8 +8,8 @@ Vue.use(Vuex);
 
 
 // console.log('JavaScript on');
-Vue.config.devtools = false;
-Vue.config.debug = false;
+// Vue.config.devtools = false;
+// Vue.config.debug = false;
 
  new Vue({
    store,router,

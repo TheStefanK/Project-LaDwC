@@ -3,8 +3,7 @@
 // Video Settings
 const VideoPath = '/video/';
 const VideoType = '.';
-const OverlayTime = 22; // Sek
-const Placeholder = "placeholder";
+const OverlayTime = 0; // Sek
 
 const state = {
 
@@ -49,7 +48,7 @@ const state = {
   '2': {
     video: VideoPath + 'Akt_2' + VideoType,
     type: "question",
-    question: 'Alle Geschäfte des nicht alltäglichen Gebrauchs schließen und Ausgangsbeschänkungen?',
+    question: 'Alle Geschäfte des nicht alltäglichen Gebrauchs schließen und Ausgangsbeschränkungen?',
     firstOption: {
       next: '2.1',
       response: 'Ja'
@@ -104,7 +103,7 @@ const state = {
   '3.1.1': {
     video: VideoPath + "Akt_3_1_1" + VideoType,
     type: "question",
-    question: 'Hilfpaket für Unternehmmerinnen und Unternehmer',
+    question: 'Hilfspaket für Unternehmerinnen und Unternehmer?',
     firstOption: {
       next: '3.1.1.1',
       response: 'Ja'
@@ -137,7 +136,7 @@ const state = {
   '3.1.2': {
     video: VideoPath + "Akt_3_1_2" + VideoType,
     type: "question",
-    question: 'Illegale Demostrationen auflösen? Zur not mit Gewalt?',
+    question: 'Illegale Demonstrationen auflösen? Zur Not mit Gewalt?',
     firstOption: {
       next: '3.2.1',
       response: 'Abwarten und Deeskalieren'
@@ -183,7 +182,7 @@ const state = {
   '3.2.1': {
     video: VideoPath + "Akt_3_2_1" + VideoType,
     type: "question",
-    question: 'Hilfspaket für UnternehmerInnen',
+    question: 'Hilfspaket für UnternehmerInnen?',
     firstOption: {
       next: '3.2.1.1',
       response: 'Ja'
@@ -236,7 +235,7 @@ const state = {
   '3.2.2.2': {
     video: VideoPath + "Akt_3_2_2_2" + VideoType,
     type: "question",
-    question: 'Hilfspaket für UnternehmerInnen',
+    question: 'Hilfspaket für UnternehmerInnen?',
     firstOption: {
       next: '3.2.2.2.1',
       response: 'Ja'

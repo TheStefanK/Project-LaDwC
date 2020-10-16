@@ -1,9 +1,6 @@
 // Score component Mixins
 export const scoreMixins = {
   methods: {
-    helloWorld(value) {
-      return value
-    },
     numberWithDot(value) {
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
@@ -18,8 +15,6 @@ export const scoreMixins = {
     randomIntFromInterval(min, max) { // min and max included
       return Math.floor(Math.random() * (max - min + 1) + min);
     }
-
-
   }
 };
 

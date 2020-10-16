@@ -1,7 +1,7 @@
 <template>
     <div class="container-video">
         <video id="Story-Line_Video" ref="videoRef" autoplay @ended="OnEnd()" @pause="OnPause"
-               @play="OnStart" :class="{'end-video': videoEnd}" @timeupdate="updateVideoTime">
+               @play="OnStart" :class="{'videoEnd': videoEnd}" @timeupdate="updateVideoTime">
             <source :src="VideoSource+'webm'" type="video/webm">
             <source :src="VideoSource+'mp4'" type="video/mp4">
         </video>
@@ -17,7 +17,8 @@
                 </div>
                 <!-- Timer  -->
                 <div class="right" >
-                    <span v-if="videoEnd">{{elapsedTime}}</span>
+                    <audio src="/audio/question_sound.mp3" ref="audioRef"></audio>
+<!--                    <span v-if="videoEnd">{{elapsedTime}}</span>-->
 <!--                    <button @click="Cheat">Cheat</button>-->
                 </div>
             </div>
@@ -149,7 +150,7 @@
           this.$store.dispatch("handleChangeTimer", Time);
           let elapsedTime = this.formattedElapsedTime(Time);
           this.$store.dispatch("handleChangeElapsedTime", elapsedTime)
-        }, 1000)
+        }, 1100)
       },
       // Format Timer to hh:mm:ss
       formattedElapsedTime(time) {
@@ -166,9 +167,15 @@
         let VideoType = this.storyLine[this.ProgressStatus].type;
         Video.volume = 1;
         Video.muted = false;
+
         if (VideoType === "question") {
-          if (VideoDuration < CurrentTime) {
+          // console.log("question", VideoDuration + ' / ' + CurrentTime);
+          if (VideoDuration <= CurrentTime) {
+            // console.log("question 2 -- " + VideoDuration + '--' +CurrentTime);
             this.videoEnd = true;
+            this.$refs.audioRef.muted = false;
+            this.$refs.audioRef.volume = 1;
+            this.$refs.audioRef.play();
           }
         } else if (VideoType === "continue" && Video.duration === CurrentTime) {
           let next = this.storyLine[this.ProgressStatus].continueStory.next;
@@ -184,6 +191,8 @@
       // Next Step Story Line
       nextProgress(val) {
         // Start Next Cutscene
+        this.$refs.audioRef.pause();
+        this.$refs.audioRef.currentTime = 0;
         setTimeout(() => {
           this.ProgressStatus = val;
           this.VideoSource = this.storyLine[val].video;
@@ -241,12 +250,12 @@
 
         let errors = this.Player_Name_Check;
         let sec = this.$store.getters.getTimer;
-        let dead = this.$store.getters.getDead;
+        let dead = this.$store.getters.getDead + this.$store.getters.getAkwDead;
         let rang = Math.round(((sec / dead) * 100000000));
         let data = {
           "name": this.PlayerName,
           "infected": this.$store.getters.getInfected,
-          "deceased": this.$store.getters.getDead,
+          "deceased": dead,
           "time": this.$store.getters.getElapsedTime,
           "rang": rang,
         };

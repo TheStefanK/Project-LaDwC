@@ -4,10 +4,9 @@
             <div class="intro">
                 <router-link :to="{name:'game'}"  class="glitch" data-text="PLAY">PLAY</router-link>
                 <span>Life and Death</span>
-                    <audio src="/audio/SCORE_II.wav" autoplay loop></audio>
+                    <audio src="/audio/intro_sound.mp3" autoplay loop></audio>
             </div>
         </div>
-
     </div>
 </template>
 

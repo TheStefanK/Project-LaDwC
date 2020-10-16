@@ -5,9 +5,8 @@
             <img class="fuel-needle" src="images/score/zeiger.svg" alt="Pointer" :style="style">
         </div>
         <div class="fuel-counter">
-            <span> {{name}}</span> <span> {{numberWithDot(CounterNumber)}} </span>
+            <span class="sil-text">{{name}}</span> <span class="number"> {{numberWithDot(CounterNumber)}} </span>
         </div>
-
     </div>
 </template>
 

@@ -1,11 +1,10 @@
 <template>
-
-    <div class="akw-box" v-if="AkwDead !== 0">
-        <img class="akw-symbole" src="images/akw.png" alt="AKW" width="300px">
-
-
-        <span> {{numberWithDot(CounterNumber)}}</span>
-    </div>
+    <transition name="fade">
+        <div class="akw-box" v-if="AkwDead !== 0">
+            <img class="akw-symbole" src="images/akw.png" alt="AKW">
+            <span> AKW-Tote: {{numberWithDot(CounterNumber)}}</span>
+        </div>
+    </transition>
 </template>
 
 <script>
@@ -24,13 +23,19 @@
       }
     }, watch: {
       AkwDead(newValue, oldValue) {
-        this.counter(oldValue, newValue)
+        setTimeout(()=>{
+          this.counter(oldValue, newValue)
+        },5000);
       }
     }, methods: {
       counter(start, end) {
+
         let current = start;
+        let increment = Math.round(end/80);
         let timer = setInterval(() => {
-          current += this.RandomMinMaxNumber(100000, 150000);
+          // current += this.RandomMinMaxNumber(100000, 150000);
+          current += increment;
+          // console.log(increment);
           this.CounterNumber = current;
           // console.log(this.CounterNumber);
           if (current === end || current >= end) {

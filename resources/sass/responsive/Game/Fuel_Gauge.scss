@@ -7,7 +7,12 @@
   display: flex;
   justify-content: space-between;
   background: #050505;
-  font-size: 12px;
+  //font-size: 12px;
+}
+.sil-text{
+  font-family: "Shadows Into Light", cursive;
+  letter-spacing: 3px;
+
 }
 .fuel-scala{
   width: 150px;
@@ -31,7 +36,7 @@
     width: 300px;
   }
   .fuel-counter{
-    font-size: 16px;
+    //font-size: 18px;
   }
   .fuel-scala{
     width: 300px;
