@@ -114,7 +114,6 @@
         PlayerNameError: false,
         VideoCurrentTime: null,
         GameTimer: null,
-
       }
     },
     components: {
