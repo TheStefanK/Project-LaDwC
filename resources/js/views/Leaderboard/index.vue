@@ -58,11 +58,6 @@
         }).catch(error => {
         console.error(error)
       });
-
-    },
-    mounted(){
-      this.$refs.leaderboardSound.volume = 1;
-      this.$refs.leaderboardSound.play();
     },
     methods: {
       NextPage() {

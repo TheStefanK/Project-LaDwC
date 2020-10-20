@@ -14,12 +14,6 @@
 
   export default {
     name: "Home",
-    mounted() {
-      setTimeout(()=>{
-        this.$refs.introSound.volume = 1;
-        this.$refs.introSound.play();
-      },800)
-    }
   }
 </script>
 

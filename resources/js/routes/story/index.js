@@ -10,6 +10,7 @@ const impressum = () => import('../../views/Impressum/index');
 const leaderboard = () => import('../../views/Leaderboard/index.vue');
 
 
+
 // import start from '../../components/start/index'
 export default [
   {
