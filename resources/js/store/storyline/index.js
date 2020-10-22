@@ -211,7 +211,7 @@ const state = {
   '3.2.2': {
     video: VideoPath + "Akt_3_2_2" + VideoType,
     type: "question",
-    question: 'Soll eine Ausgangsspeere über die Risikogruppe und die Hauptüberträger verhängt werden?',
+    question: 'Soll eine Ausgangssperre über die Risikogruppe und die Hauptüberträger verhängt werden?',
     firstOption: {
       next: '3.2.2.1',
       response: 'Nein'
